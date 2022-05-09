@@ -4,35 +4,32 @@ An **expression** is syntactic construct which can be evaluated into a **value**
 
 ```grammar
 Expr ::=
-  | [Name]         # Variable reference
-  | [Path]         # Item reference
-  | [Value]        # Value literal
-  | "(" [[BinOp]] ")"    # Binary operator reference
-  | "_"            # Placeholder
-  | [[Query]]        # Query expression
-  | [[Constructor]]  # Constructor expression
-  | [[Operation]]    # Operation expression
-  | [[ControlFlow]]  # Control flow expression
-  | [[DataFlow]]     # Dataflow expression
-
-Constructor ::=
-  | "#{" ([Name] ":" [Expr])","* "}"          # Record-construction
-  | "(" [Expr]","+ ")"                    # Tuple-construction
-  | "[" [Expr]","* "]"                    # Array-construction
-  | [Expr]? ".." ("="? [Expr])?           # Range-construction
-  | "fun" [Params] (":" [Type])? "=" [Expr]   # Lambda-function construction
-  | "task" [Params]? ":" [Params] "=" [Expr]  # Lambda-task construction
-  | [Path] "(" [Expr] ")"                 # Enum-variant construction
-
-Operation ::=
+  | [Name]                # Variable reference
+  | [Path] ("::" [TypeArgs])  # Item reference
+  | [Value]               # Value literal
+  | [Query]               # Queries
+  | "_"                   # Placeholder
+  | "new" [Name] (":" [Expr])?             # Variant-construction
+  | "{" [[ExprRecordField]]","* ("|" [Expr])? "}"  # Record-construction
+  | "dyn" "{" [[ExprRecordField]]","* ("|" [Expr])? "}"  # Dynamically-typed record
+  | "[" [Expr]","* ("|" [Expr])? "]"           # Array-construction
+  | [Expr]? ".." ("="? [Expr])?            # Range-construction
+  | "fun" [Params] (":" [Type])? "=" [Expr]    # Lambda-function construction
   | [Expr] [[BinOp]] [Expr]   # Binary operation
   | [Expr] [[UnOp]]         # Unary operator
   | [Expr] "(" [Expr]","* ")"   # Function call
   | [Expr] "." [Name]       # Field projection
   | [Expr] "." [0-9]+     # Index projection
-  | [Expr] "as" [Type]      # Type cast
-  | [Expr] "in" [Expr]      # Contains
-  | [Expr] "not" "in" [Expr]  # Does not contain
+  | [Expr] "." "{" [Name]","+ "}" # Fields projection
+  | [Expr] "." "(" ([0-9]+)","+ ")" # Indexes projection
+  | [Expr] ":" [Type]      # Type annotated
+  | "if" [Expr] [Block] ("else" [Block])?            # If-else-expression
+  | "match" [Expr] [Arms]                        # Match-expression
+  | "for" [Pattern] "in" [Expr] [Block]              # For-loop
+  | "while" [Expr] [Block]                       # While-loop
+  | "loop" [Block]                             # Infinite loop
+  | "break" [Expr]? | "continue" | "return" [Expr]?  # Jumps
+  | "try" [Expr] "catch" [Arms] ("finally" [Expr])?    # Exceptions
 
 UnOp ::=
   | "-"    # Arithmetic negation
@@ -42,32 +39,12 @@ BinOp ::=
   | "+"   | "-"  | "*"   | "/"    | "**"  | "%"     # Arithmetic
   | "=="  | "!=" | "<"   | ">"    | "<="  | ">="    # Equality and comparison
   | "and" | "or" | "xor" | "band" | "bor" | "bxor"  # Logical and bitwise
+  | "in"  | "not" "in"                              # Contains
 
-ControlFlow ::=
-  | "if" [Expr] [Block] ("else" [Block])?                         # If-else-expression
-  | "match" [Expr] "{" ([Pattern] ("if" [Expr])? "=>" [Expr])","+ "}"       # Match-expression
-  | "for" [Pattern] "in" [Expr] "{" [Expr] "}"                        # For-loop
-  | "while" [Expr] [Block]                                    # While-loop
-  | "loop" [Block]                                          # Infinite loop
-  | "break" | "continue" | "return" [Expr]?                     # Jumps
-  | "try" [Expr] "catch" ([Pattern] "=>" [Expr])","+ ("finally" [Expr])?  # Exceptions
-  | "[" [Expr] "for" [Pattern] "in" [Expr] ("if" [Expr])* "]"             # Comprehension
-
-DataFlow ::=
-  | "receive" [Expr]                        # Selective receive
-  | "on" "{" ([Pattern] "in" [Expr] "=>" [Expr])","+ "}"  # Non-selective receive
-  | [Expr] "!" [Expr]                         # Emit event
-
-Query ::= "from" ([Pattern] "in" [Expr])","+ [[QueryStmt]]+
-
-QueryStmt ::=
-  | "yield" [Expr]                            # Select
-  | "where" [Expr]                            # Filter
-  | "join" [Expr] ("on" [Expr])?                  # Join
-  | "keyby" (([Name] "=")? [Expr])","*              # Partition
-  | "compute" ([Name] "=")? [Expr] ("of" [Expr])?     # Aggregation
-  | "sort" [Expr] "desc"?                       # Sort
-  | "window" [Expr] ("every" [Expr])? ("at" [Expr])?  # Sliding or tumbling window
+ExprRecordField ::=
+  | [Name] ":" [Expr]
+  | [Expr]
+  | [Expr] "." [Name]
 ```
 
 ## Operators
@@ -76,19 +53,19 @@ Operators are defined as follows, with precedence from highest to lowest:
 
 | Operator                                       | Arity   | Affix   | Associativity | Overloadable? |
 | ---------------------------------------------- | -----   | -----   | ------------- | ------------  |
-| `return` `break`                               | Unary   | Prefix* |               | No            |
-| `fun` `task` `on`                              | Unary   | Prefix  |               | No            |
+| **`return` `break`**                           | Unary   | Prefix* |               | No            |
+| **`fun` `task` `on`**                          | Unary   | Prefix  |               | No            |
 | `=` `!` `+=` `-=` `%=` `*=` `/=` `**=`         | Binary  | Infix   | None          | No            |
 | `in` `not in`                                  | Binary  | Infix   | Left          | No            |
 | `..` `..=`                                     | Binary  | Infix   | None          | No            |
-| `and` `or` `xor` `bor` `band` `bxor`           | Binary  | Infix   | Left          | Yes           |
+| **`and` `or` `xor` `bor` `band` `bxor`**       | Binary  | Infix   | Left          | Yes           |
 | `==` `!=`                                      | Binary  | Infix   | None          | No            |
 | `<` `>` `<=` `>=`                              | Binary  | Infix   | None          | No            |
 | `-` `+` `%`                                    | Binary  | Infix   | Left          | Yes           |
 | `*` `/`                                        | Binary  | Infix   | Left          | Yes           |
 | `**`                                           | Binary  | Infix   | Right         | Yes           |
-| `not` `-`                                      | Unary   | Prefix  |               | Yes           |
-| `as`                                           | Binary  | Infix   | Left          | No            |
+| **`not`** `-`                                  | Unary   | Prefix  |               | Yes           |
+| **`as`**                                       | Binary  | Infix   | Left          | No            |
 | `(exprs)` `[exprs]`                            | Unary   | Postfix |               | No            |
 | `.index` `.name` `.name(exprs)` `.name[exprs]` | Unary   | Postfix |               | No            |
 | Primary expressions                            | Nullary |         |               | No            |
@@ -123,13 +100,9 @@ The builtin functions of Arc-Lang are listed here.
 {{#include ../../../arc-lang/examples/binops.arc:example}}
 ```
 
-### Comprehensions
-
-```arc-lang
-{{#include ../../../arc-lang/examples/comprehensions.arc:example}}
-```
-
 ### Placeholders
+
+An expression-argument such as `_ + _` desugars into a lambda function `fun(x0, x1): x0 + x1`
 
 ```arc-lang
 {{#include ../../../arc-lang/examples/placeholder.arc:example}}
@@ -137,23 +110,22 @@ The builtin functions of Arc-Lang are listed here.
 
 ### Binary operator lifting
 
+Binary operators can be lifted into functions.
+
 ```arc-lang
 {{#include ../../../arc-lang/examples/binopref.arc:example}}
 ```
 
 ### String interpolation
 
+String interpolation is supported using the `$` and `${}` syntax.
+
+
 ```arc-lang
 {{#include ../../../arc-lang/examples/interpolate.arc:example}}
 ```
 
-### Query (with explicit variables)
-
-```arc-lang
-{{#include ../../../arc-lang/examples/query.arc:explicit}}
-```
-
-### Query (with implicit variables)
+### Query
 
 ```arc-lang
 {{#include ../../../arc-lang/examples/query.arc:implicit}}

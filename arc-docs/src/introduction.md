@@ -1,6 +1,6 @@
 ## Introduction
 
-Data analytics pipelines are becoming increasingly more complicated due to the growing number of requirements imposed by data science. Not only must data be processed and analyzed scalably with respect to its volume and velocity, but also intricately by involving many different types of data. **Arc-Lang** is a programming language for data analytics that supports parallel operations over multiple data types including datastreams and dataframes. As an example, a basic word-count application can be implemented as follows in Arc-Lang:
+Arc-Lang is a programming language for continuous analytics. Continuous analytics is about analyzing data as soon as it is produced and possibly using the results for critical decision-making. Data is generally unstructured (e.g., images, audio, text) or semi-structured (e.g., JSON, XML, CSV), and is produced at a high velocity. Programs for continuous analytics must be able to scale-out their compute and storage while simultaneously execute forever with fault-tolerance.
 
 ```arc-lang
 {{#include ../../arc-lang/examples/wordcount.arc:example}}
@@ -16,7 +16,6 @@ To cope with the requirements of batch and stream data management, a runtime sys
 
 ![](images/DSL-Hierarchy.jpg)
 
-
 ### Approach
 
 In contrast to other DSLs, Arc-Lang is a standalone compiled DSL implemented in OCaml. The idea of Arc-Lang's is to combine general purpose imperative and functional programming over *small data* with declarative programming over *big data*. As an example, it should be possible to perform both fine-grained processing over individual data items of a datastream, while also being able to compose pipelines of relational operations through SQL-style queries. Arc-Lang is statically typed for the purpose of performance and safety, but at the same time also inferred and polymorphic to enable ease of use and reuse.
@@ -25,7 +24,7 @@ The approach of implementing the language as a standalone DSL allows for more cr
 
 To address the issue of optimisation, we are using the [MLIR](https://mlir.llvm.org/) compiler framework to implement Arc-MLIR - an intermediate language - which Arc-Lang programs translate into for optimisations. MLIR defines a universal intermediate language which can be extended with custom dialects. A dialect includes a set of operations, types, type rules, analyses, rewrite rules (to the same dialect), and lowerings (to other dialects). All dialects adhere to the same meta-syntax and meta-semantics which allows them to be interweaved in the same program code. The MLIR framework handles parsing, type checking, line information tracking among other things. Additionally, MLIR provides tooling for testing, parallel compilation, documentation, CLI usage, etc. The plan is to extend Arc-MLIR with custom domain-specific optimisations for the declarative part of Arc-Lang and to capitalize on MLIR's ability to derive general-purpose optimisations such as constant propagation for Arc-Lang's functional and imperative side.
 
-To address the shortcoming of libraries, Arc-Lang allows both types and functions to be defined externally (inside Rust) and imported into the language. Most of the external functionality is encapsulated inside a runtime library named Arc-Runtime. Arc-Runtime builds on the [kompact](https://github.com/kompics/kompact) Component-Actor framework to provide distributed abstractions.
+To address the shortcoming of libraries, Arc-Lang allows both types and functions to be defined externally (inside Rust) and imported into the language. Most of the external functionality is encapsulated inside a runtime library named Arc-Sys. Arc-Sys builds on the [kompact](https://github.com/kompics/kompact) Component-Actor framework to provide distributed abstractions.
 
 ## Summary
 
@@ -33,6 +32,6 @@ In summary, Arc-Lang as a whole consists of three parts:
 
 * **Arc-Lang**: A high-level programming language for big data analytics.
 * **Arc-MLIR**: An intermediate language for optimising Arc-Lang.
-* **Arc-Runtime**: A distributed runtime for executing Arc-Lang.
+* **Arc-Sys**: A distributed system for executing Arc-Lang.
 
 

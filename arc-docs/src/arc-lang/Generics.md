@@ -1,13 +1,11 @@
 # Generics
 
-Items can be parameterised by generic types. Generics can in addition be bounded by type class constraints.
+Items can be parameterised by generic types. Generics can in addition be bounded by type class constraints using a where clause.
 
 ```grammar
 Generics ::= "[" [[Generic]]","+ "]"
 
-Generic ::= [Name] [[Bounds]]?
-
-Bounds ::= ":" [Path]"&"+
+Generic ::= [Name]
 ```
 
 ## Examples

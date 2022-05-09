@@ -40,7 +40,7 @@ git submodule update --init --recursive
 ./build
 ```
 
-The build script installs the `arc` command-line utility along with the arc-runtime library.
+The build script installs the `arc` command-line utility along with the arc-sys library.
 
 ## Hello World
 

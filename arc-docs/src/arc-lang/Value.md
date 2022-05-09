@@ -4,7 +4,7 @@ A **value** is the result of evaluating an **expression**.
 
 ```grammar
 Value ::=
-  | "#{" ([Name] ":" [Value])","+ "}"              # Record-value
+  | "{" ([Name] ":" [Value])","+ "}"              # Record-value
   | "(" [Value]","+ ")"                        # Tuple-value
   | "fun" "(" ([Pattern] ":" [Type])","+ ")" ":" [Expr]  # Lambda-value
   | [Value]? ".." ("="? [Value])?              # Range-value
@@ -17,8 +17,8 @@ Literal ::=
   | "unit"                # Literal unit
   | "'"[^"'"]"'"              # Literal character
   | """[^"""]*"""             # Literal string
-  | ["1"-"9"]["0"-"9"]*         # Literal integer
-  | ["1"-"9"]["0"-"9"]*"."["0"-"9"]*  # Literal floating point
+  | ["1"-"9"]["0"-"9"]*[Name]?     # Literal integer with optional suffix
+  | ["1"-"9"]["0"-"9"]*"."["0"-"9"]*[Name]? # Literal floating point with optional suffix
   | [[DateTime]]
   | [[Duration]]
 

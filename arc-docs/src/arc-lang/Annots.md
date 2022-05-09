@@ -3,9 +3,9 @@
 Annotations can optionally be attached to items.
 
 ```grammar
-Annots ::= "@{" [[Annot]]","* "}"
+Annots ::= "@" "{" [[Annot]]","* "}"
 
-Annot ::= [Name] ":" [Value]
+Annot ::= [Name] (":" [Value])?
 ```
 
 ## Examples

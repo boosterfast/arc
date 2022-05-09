@@ -6,7 +6,7 @@ A **module** is a named unit of encapsulation which may contain items and other 
 Module ::= "mod" [Name] "{" [Item]* "}"
 ```
 
-Modules form a hierarchy through nesting. This hierarchy is in addition tied to the file system hierarchy (similar to Rust):
+A currently unsupported but planned feature is to allow modules to form a hierarchy through nesting. This hierarchy is in addition tied to the file system hierarchy (similar to Rust):
 
 ```text
 my-project/

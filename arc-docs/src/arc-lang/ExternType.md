@@ -3,7 +3,7 @@
 An **extern type** is an abstract data type with methods whose implementations are defined in Rust.
 
 ```grammar
-ExternType ::= "extern" "type" [Name] [Generics]? ";"
+ExternType ::= "extern" "type" [Name] [Generics]? [Where]? ";"
 ```
 
 ## Example

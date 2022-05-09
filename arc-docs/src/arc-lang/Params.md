@@ -1,11 +1,11 @@
 # Parameters
 
-Parameters are used in function and task definitions. In general, they do not need to be type annotated.
+Parameters are used in function and task definitions.
 
 ```grammar
 Params ::= "(" [Param]","+ ")"
 
-Param ::= [Pattern] (":" [Type] )?
+Param ::= [Pattern]
 ```
 
 ### Examples

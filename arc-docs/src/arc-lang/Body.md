@@ -2,7 +2,7 @@
 
 The body of a function or task can be written either inline using `=` syntax or directly as a block.
 
-```
+```grammar
 Body ::=
   | "=" [Expr] ";"
   | [Block]

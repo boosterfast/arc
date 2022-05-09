@@ -16,11 +16,13 @@ renderer = ["html"]
 after = ["links"]
 
 [preprocessor.bib]
-title = "References"
-bibliography = "references.bib"
+bibliography = "bibliography.bib"
+title = "Bibliography"
 
+# Convert all chapter files named README.md into index.md
 [preprocess.index]
 
+# Expands the {{ #playground }}, {{ #include }}, and {{ #rustdoc_include }}
 [preprocess.links]
 
 [output.html]
@@ -41,9 +43,10 @@ enable = true
 [output.linkcheck]
 follow-web-links = false
 warning-policy = "error"
+exclude = [ "bibliography" ]
 
 [output.html.fold]
-enable = false
+enable = true
 level = 0
 
 [output.html.print]

@@ -1,15 +1,16 @@
 # Patterns
 
-A **pattern** is a syntactic construct for deconstructing a **value** and binding its parts to variables.
+Patterns can be used to deconstruct values and bind their constituents with variables.
 
 ```grammar
 Pattern ::=
   | [Name]                       # Variable binding
   | [Value]                      # Value comparison
-  | "{" ([Name] (":" [Pattern])?)","+ "}"  # Record deconstruction
-  | "(" [Pattern]","+ ")"              # Tuple deconstruction
+  | [Pattern] ":" [Type]         # Type annotated
+  | "case" [Path] [Pattern]?         # Variant deconstruction
+  | "{" ([Name] (":" [Pattern])?)","* "}"  # Record deconstruction
+  | "(" [Pattern] "," [Pattern]","* ")"    # Tuple deconstruction
   | [Pattern]? ".." ("="? [Pattern])?  # Range deconstruction
-  | [Path] "(" [Pattern] ")"           # Variant deconstruction
   | [Pattern] "or" [Pattern]         # Alternation
 ```
 

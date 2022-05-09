@@ -3,7 +3,7 @@
 A **type alias** is a purely cosmetic alias of a type.
 
 ```grammar
-TypeAlias ::= "type" [Name] [Generics]? "=" [Type] ";"
+TypeAlias ::= "type" [Name] [Generics]? "=" [Type] [Where]? ";"
 ```
 
 ## Example

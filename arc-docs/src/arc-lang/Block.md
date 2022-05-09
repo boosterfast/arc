@@ -8,6 +8,8 @@ Block ::= "{" [Stmt]* [Expr]? "}"
 
 ## Examples
 
+Expression-blocks are represented by the `do` keyword.
+
 ```arc-lang
 {{#include ../../../arc-lang/examples/blocks.arc:example}}
 ```

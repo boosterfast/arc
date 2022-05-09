@@ -1,9 +1,12 @@
 # Tasks
 
-A **task** is an asynchronous function which can suspend its execution to wait for events. The `receive`, `on`, and `!` expressions can (for now) only be used inside tasks.
+A **task** is an asynchronous function which can suspend its execution to wait for events. Expressions with `async` effects can only be used within the context of a task.
 
 ```grammar
-Task ::= "task" [Name] [Generics]? [Params] ":" [Params] [Block]
+Task ::= "task" [Name] [Generics]? [Params] ":" [Sinks] [Where]? [Body]
+
+Sinks ::= "(" [Sink]","+ ")"
+Sink ::= [Name] (":" [Type])?
 ```
 
 ## Examples

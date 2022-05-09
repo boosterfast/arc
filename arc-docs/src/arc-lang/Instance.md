@@ -3,7 +3,7 @@
 Type class instances are written with the `instance` keyword.
 
 ```grammar
-TypeClass ::= "class" [Name] [Generics]? "{" [Def]","+ "}"
+Instance ::= "instance" [Generics] [Path] [TypeArgs]? [Where]? "{" [Def]","+ "}"
 ```
 
 ## Examples
