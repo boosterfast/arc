@@ -1,0 +1,57 @@
+# Run using:
+# $ docker swarm init
+# $ docker stack deploy arc-stack --compose-file docker-compose.yaml
+# $ docker service scale arc-stack_worker=N
+# Stop with
+# $ docker stack rm arc-stack
+#
+# or:
+#
+# $ docker compose build
+# $ docker compose up
+# $ docker service scale worker=N
+# Stop with
+# $ docker compose down
+version: "3.0"
+services:
+# -----------------------------------------------------------------------------
+  worker:
+    image: segeljakt/arc-worker
+    build:
+      context: ../
+      dockerfile: docker/Dockerfile.worker
+    deploy:
+      replicas: 0
+# -----------------------------------------------------------------------------
+  coordinator:
+    image: segeljakt/arc-coordinator
+    build:
+      context: ../
+      dockerfile: docker/Dockerfile.coordinator
+    ports:
+      - 8000:8000
+    hostname: coordinator
+# # -----------------------------------------------------------------------------
+#   zookeeper:
+#     image: confluentinc/cp-zookeeper:7.3.0
+#     container_name: zookeeper
+#     environment:
+#       ZOOKEEPER_CLIENT_PORT: 2181
+#       ZOOKEEPER_TICK_TIME: 2000
+# # -----------------------------------------------------------------------------
+#   broker:
+#     image: confluentinc/cp-kafka:7.3.0
+#     container_name: broker
+#     ports:
+#       - "9092:9092"
+#     depends_on:
+#       - zookeeper
+#     environment:
+#       KAFKA_BROKER_ID: 1
+#       KAFKA_ZOOKEEPER_CONNECT: 'zookeeper:2181'
+#       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_INTERNAL:PLAINTEXT
+#       KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092,PLAINTEXT_INTERNAL://broker:29092
+#       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+#       KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
+#       KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+# # -----------------------------------------------------------------------------

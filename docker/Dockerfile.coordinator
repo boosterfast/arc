@@ -1,0 +1,21 @@
+FROM ubuntu:22.04
+
+# Install system dependencies
+RUN apt update
+RUN apt upgrade
+RUN apt install -y curl build-essential
+
+# Install Rust
+RUN curl https://sh.rustup.rs -sSf | sh -s -- -y --default-toolchain nightly
+ENV PATH="/root/.cargo/bin:$PATH"
+# RUN cargo install cross
+
+WORKDIR /workspace
+COPY arc-sys/ arc-sys/
+# COPY arc-mlir/ arc-mlir/
+# COPY build build
+# RUN ./build
+WORKDIR /workspace/arc-sys
+RUN cargo build --package coordinator
+
+CMD ./target/debug/coordinator
