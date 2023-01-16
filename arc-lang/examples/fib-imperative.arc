@@ -11,7 +11,7 @@ def fib(n) {
     while a < n {
         a = b;
         b = a + b;
-    };
+    }
     return a;
 }
 # ANCHOR_END: example

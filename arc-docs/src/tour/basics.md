@@ -27,13 +27,13 @@ The declaration order of items is insignificant. A function can call another fun
 Enums (also known as disjoint or discriminated unions) are supported:
 
 ```arc-lang
-{{#include ../../../arc-lang/stdlib/stdlib.arc:option}}
+{{#include ../../../arc-lang/examples/enum.arc:example}}
 ```
 
 Three forms of polymorphism are supported. First, parametric polymorphism allows functions to behave equivalently for different types of parameters:
 
 ```arc-lang
-{{#include ../../../arc-lang/examples/identity-function.arc:example}}
+{{#include ../../../arc-lang/examples/generic-function.arc:example}}
 ```
 
 Second, overloading allows functions to behave differently for different types of parameters:
@@ -57,5 +57,5 @@ Finally, row polymorphism allows subtyping of records:
 While the language aims to be general, it also has its limits. Therefore it is also possible to import externally defined types and functions.
 
 ```arc-lang
-{{#include ../../../arc-lang/stdlib/stdlib.arc:string}}
+{{#include ../../../arc-lang/stdlib/std.arc:string}}
 ```

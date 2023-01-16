@@ -5,12 +5,12 @@
 def main() {
 # ANCHOR: example
 # Pattern matching on enums
-val a = Option::Some(3);
+val a = new Some(new Some(3));
 
 match a {
-    Option::Some(2) => 2,
-    Option::Some(x) => x,
-    Option::None(_) => 0
+    case Some(case Some(x)) => x,
+    case Some(case None) => 2,
+    case None => 1+1,
 };
 # ANCHOR_END: example
 }

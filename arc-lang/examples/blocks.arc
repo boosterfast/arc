@@ -3,10 +3,10 @@
 
 def main() {
 # ANCHOR: example
-val a = { { { { { 6 } } } } };
-val b = { 1; 2; 3; 4; 5; 6 };
-val c = { 1; { 2; { 3; { 4; { 5; { 6 } } } } } };
-val d = { { { { { { 1 }; 2 }; 3 }; 4 }; 5 }; 6 };
+val a = do { do { do { do { do { 6 } } } } };
+val b = do { 1; 2; 3; 4; 5; 6 };
+val c = do { 1; do { 2; do { 3; do { 4; do { 5; do { 6 } } } } } };
+val d = do { do { do { do { do { do { 1 }; 2 }; 3 }; 4 }; 5 }; 6 };
 val e = a + b + c + d;
 # ANCHOR_END: example
 }

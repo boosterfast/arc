@@ -7,9 +7,9 @@ class Monoid {
     def identity(): Self;
     def merge(Self, Self): Self;
 }
-impl Monoid for {sum:i32} {
-    def identity() = #{sum: 0}
-    def merge(a, b) = #{sum: a.sum + b.sum}
+instance Monoid for {sum: i32} {
+    def identity() = {sum: 0}
+    def merge(a, b) = {sum: a.sum + b.sum}
 }
 def main() = x.merge(y.merge(identity()))
 # ANCHOR_END: example

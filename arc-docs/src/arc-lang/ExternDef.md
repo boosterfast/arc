@@ -9,5 +9,5 @@ ExternDef ::= "extern" "def" [Name] [Generics]? "(" [Type]","* ")" ":" [Type] ("
 ## Examples
 
 ```arc-lang
-{{#include ../../../arc-lang/stdlib/stdlib.arc:string}}
+{{#include ../../../arc-lang/stdlib/std.arc:string}}
 ```

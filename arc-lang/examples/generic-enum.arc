@@ -3,21 +3,16 @@
 # RUN: arc -o %t-canon run %s -- -rustinclude %s.rust-tests -canonicalize
 
 # ANCHOR: example
-enum Option[T] {
-    Some(T),
-    None
-}
-
 def main() {
 
-    match Option::Some(5) {
-        Option::Some(x) => assert(x == 5),
-        Option::None => assert(false),
+    match new Some(5) {
+        case Some(x) => assert(x == 5),
+        case None => assert(false),
     };
 
-    match Option::Some(5.0) {
-        Option::Some(x) => assert(x == 5.0),
-        Option::None => assert(false),
+    match new Some(5.0) {
+        case Some(x) => assert(x == 5.0),
+        case None => assert(false),
     };
 
 }

@@ -77,7 +77,7 @@ Operators are defined as follows, with precedence from highest to lowest:
 The builtin functions of Arc-Lang are listed here.
 
 ```arc-lang
-{{#exec grep -F 'extern def' ../arc-lang/stdlib/stdlib.arc}}
+{{#exec grep -F 'extern def' ../arc-lang/stdlib/std.arc}}
 ```
 
 ## Examples

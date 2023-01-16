@@ -5,7 +5,7 @@
 def main() {
 # ANCHOR: example
 var a = 1;
-val b = #{x:1, y:2, c:3};
+val b = {x:1, y:2, c:3};
 val c = (1, 2, 3);
 val d = [1, 2, 3];
 

@@ -6,11 +6,11 @@
 def area(shape) = shape.x * shape.y
 
 def main() {
-    val line = #{x:5};
-    val rect = #{y:10|line};
-    val cube = #{z:20|rect};
+    val line = {x:5};
+    val rect = {y:10|line};
+    val cube = {z:20|rect};
 
-    area(line); # ERROR
+    # area(line); # ERROR
     area(rect); # OK
     area(cube); # OK
 }

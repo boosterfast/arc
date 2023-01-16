@@ -19,23 +19,23 @@ Pattern ::=
 ### Tuples
 
 ```arc-lang
-{{#include ../../../arc-lang/examples/tuple-patterns.arc:example}}
+{{#include ../../../arc-lang/examples/tuples.arc:patterns}}
 ```
 
 ### Records
 
 ```arc-lang
-{{#include ../../../arc-lang/examples/record-patterns.arc:example}}
+{{#include ../../../arc-lang/examples/records.arc:patterns}}
 ```
 
 ### Enums
 
 ```arc-lang
-{{#include ../../../arc-lang/examples/enum-patterns.arc:example}}
+{{#include ../../../arc-lang/examples/enums.arc:patterns}}
 ```
 
-### Enums
+### Arrays
 
 ```arc-lang
-{{#include ../../../arc-lang/examples/vector-patterns.arc:example}}
+{{#include ../../../arc-lang/examples/arrays.arc:patterns}}
 ```

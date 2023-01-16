@@ -11,5 +11,5 @@ ExternType ::= "extern" "type" [Name] [Generics]? [Where]? ";"
 The following code shows how to define an extern type `String` in arc-lang.
 
 ```arc-lang
-{{#include ../../../arc-lang/stdlib/stdlib.arc:array}}
+{{#include ../../../arc-lang/stdlib/std.arc:array}}
 ```

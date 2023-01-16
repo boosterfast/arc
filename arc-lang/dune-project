@@ -1,4 +1,14 @@
 (lang dune 2.7)
+(name arc_lang)
+(generate_opam_files true)
+(source (github cda-group/arc))
+(authors "Klas Segeljakt")
+(maintainers "Klas Segeljakt")
+(documentation "https://cda-group.github.io/arc/")
 (cram enable)
-(name arc_script_prototyping)
 (using menhir 2.0)
+
+(package
+  (name arc_lang)
+  (synopsis "Arc language")
+  (depends ocaml dune yojson menhir))

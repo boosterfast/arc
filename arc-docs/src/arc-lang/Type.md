@@ -23,10 +23,10 @@ Some examples of different types:
 
 # Standard types
 
-The following types are provided in the [standard library](https://github.com/cda-group/arc/blob/master/arc-lang/stdlib/stdlib.arc) of Arc-Lang:
+The following types are provided in the [standard library](https://github.com/cda-group/arc/blob/master/arc-lang/stdlib/std.arc) of Arc-Lang:
 
 ```arc-lang
-{{#exec grep -F 'extern type' ../arc-lang/stdlib/stdlib.arc}}
+{{#exec grep -F 'extern type' ../arc-lang/stdlib/std.arc}}
 ```
 
 # Nominal types

@@ -3,13 +3,11 @@ type token =
   | ParenR
   | BrackL
   | BrackR
-  | PoundBraceL
   | BraceL
   | BraceR
   | AngleL
   | AngleR
 (*= Operators ==============================================================*)
-  | Bang
   | Neq
   | Percent
   | Star
@@ -32,19 +30,13 @@ type token =
   | AtSign
   | Underscore
   | Bar
-(*= Float extensions =======================================================*)
-  | EqEqSuffix of string
-  | GeqSuffix of string
-  | GtSuffix of string
-  | LeqSuffix of string
-  | LtSuffix of string
-  | MinusSuffix of string
-  | NeqSuffix of string
-  | PercentSuffix of string
-  | PlusSuffix of string
-  | SlashSuffix of string
-  | StarSuffix of string
-  | StarStarSuffix of string
+  | PlusEq
+  | MinusEq
+  | StarEq
+  | SlashEq
+  | PercentEq
+  | Tilde
+  | Never
 (*= Keywords ================================================================*)
   | And
   | As
@@ -52,34 +44,46 @@ type token =
   | Band
   | Bor
   | Bxor
+  | Builtin
+  | Case
+  | Catch
   | Class
   | Continue
+  | Dict
   | Def
   | Desc
-  | Duration
+  | Do
+  | Dyn
   | Else
-  | Enum
   | Extern
+  | Finally
   | For
   | From
   | Fun
   | Group
   | If
   | In
+  | Infix
+  | Into
   | Instance
   | Join
+  | Length
   | Loop
   | Match
   | Mod
+  | New
   | Not
   | On
   | Or
   | Of
   | Order
   | Return
-  | Reduce
-  | Step
-  | Task
+  | Compute
+  | Set
+  | Select
+  | Repeat
+  | Throw
+  | Try
   | Type
   | Val
   | Var
@@ -88,27 +92,16 @@ type token =
   | While
   | Use
   | Xor
-  | Yield
 (*= Identifiers and Literals ================================================*)
   | Name of string
   | Int of int
-  | IntSuffix of (int * Ast.int_suffix)
-  | FloatSuffix of (float * Ast.float_suffix)
+  | IntSuffix of (int * string)
   | Float of float
+  | FloatSuffix of (float * string)
   | Bool of bool
   | Char of char
   | String of string
   | Unit
-(*   | DurationNs of int *)
-(*   | DurationUs of int *)
-(*   | DurationMs of int *)
-(*   | DurationS of int *)
-(*   | DurationM of int *)
-(*   | DurationH of int *)
-(*   | DurationD of int *)
-(*   | DurationW of int *)
-(*     LitDurationMo, *)
-(*     LitDurationY, *)
 (*   | Date of string *)
 (*   | DateTime of string *)
 (*   | DateTimeZone of string *)

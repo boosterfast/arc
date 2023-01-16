@@ -4,7 +4,7 @@
 - [Getting Started](getting-started.md)
 - [Tour of Arc-Lang](tour/mod.md)
   - [Basics](tour/basics.md)
-  - [Tasks and Channels](tour/tasks.md)
+  <!-- - [Tasks and Channels](tour/tasks.md) -->
   - [Queries](tour/queries.md)
 - [Examples](examples/mod.md)
   - [Word Count](examples/word-count.md)
@@ -28,7 +28,7 @@
   - [Items](arc-lang/Item.md)
     - [Globals](arc-lang/Global.md)
     - [Functions](arc-lang/Def.md)
-    - [Tasks](arc-lang/Task.md)
+    <!-- - [Tasks](arc-lang/Task.md) -->
     - [Type Aliases](arc-lang/TypeAlias.md)
     - [Type Classes](arc-lang/TypeClass.md)
     - [Type Class Instances](arc-lang/Instance.md)
@@ -63,4 +63,4 @@
       - [Functions](dev/arc-mlir/Func.md)
     - [Parameters](dev/arc-mlir/Params.md)
   - [Arc-Sys Reference](dev/arc-sys/mod.md)
-    - [Execution Model](dev/arc-runtime/execution-model.md)
+    - [Execution Model](dev/arc-sys/execution-model.md)

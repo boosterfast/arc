@@ -1,9 +1,9 @@
 (executable
  (name main)
  (public_name main)
- (libraries core str))
+ (libraries core str yojson))
 (ocamllex lexer)
 (menhir
  (merge_into parser)
- (modules tokens parser)
+ (modules tokens parser parser_utils)
  (flags --external-tokens Token))

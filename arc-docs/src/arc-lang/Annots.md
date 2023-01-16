@@ -11,5 +11,5 @@ Annot ::= [Name] (":" [Value])?
 ## Examples
 
 ```arc-lang
-{{#include ../../../arc-lang/stdlib/stdlib.arc:unit}}
+{{#include ../../../arc-lang/stdlib/std.arc:unit}}
 ```

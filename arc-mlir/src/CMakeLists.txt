@@ -35,9 +35,9 @@ get_filename_component(ARC_MLIR_SRC_DIR "../"
 add_custom_target(dune-build ALL
   WORKING_DIRECTORY ${ARC_LANG_SRC_DIR}
   COMMAND mkdir -p ${ARC_LANG_BUILD_DIR}
-  COMMAND ${ARC_LANG_SRC_DIR}/dune-wrapper build
-    --root ${ARC_LANG_SRC_DIR}
-    --build-dir ${ARC_LANG_BUILD_DIR} src/main.exe
+  COMMAND eval `opam env`
+  COMMAND opam install ${ARC_LANG_SRC_DIR} --deps-only --with-test --yes
+  COMMAND dune build --root ${ARC_LANG_SRC_DIR} --build-dir ${ARC_LANG_BUILD_DIR} src/main.exe
   COMMAND mv -f ${ARC_LANG_BUILD_DIR}/default/src/main.exe ${ARC_LANG_EXE}
 )
 

@@ -1,406 +1,436 @@
+%{
+  open Error
+  open Utils
+%}
+
 %start <Ast.ast> program
 %start <Ast.expr> expr
 %%
 
-expr: expr0 Eof { $1 }
+expr: expr0(expr17) Eof { $1 }
 program: items Eof { $1 }
 
-(* Utilities *)
-%inline paren(x): "(" x ")" { $2 }
-%inline brack(x): "[" x "]" { $2 }
-%inline brace(x): "{" x "}" { $2 }
-%inline angle(x): "<" x ">" { $2 }
+decorator: loption(snd("@", brace(seq(pair(name, snd(":", const)?))))) { $1 }
 
-%inline epsilon: {}
+items: llist(item) { $1 }
+item:
+  | decorator "from" sources clauses ";"
+    { Ast.IFrom (loc $loc, $1, $3, $4) }
+  | decorator abstract "def" def_name generics paren_seq(ty0) ty_annot? loption(ef_annot) where ";"
+    { Ast.IAbstractDef (loc $loc, $1, $2, $4, $5, $6, $7, $8, $9) }
+  | decorator "def" def_name generics params ty_annot? where body(expr0(expr16))
+    { Ast.IDef (loc $loc, $1, $3, $4, $5, $6, $7, $8) }
+  | decorator "type" name generics "=" ty0 where ";"
+    { Ast.IType (loc $loc, $1, $3, $4, $6, $7) }
+  | decorator abstract "type" name generics where ";"
+    { Ast.IAbstractType (loc $loc, $1, $2, $4, $5, $6) }
+  | decorator "class" name generics where brace(llist(decl)) ";"
+    { Ast.IClass (loc $loc, $1, $3, $4, $5, $6) }
+  | decorator "instance" generics path loption(brack(seq(ty0))) where brace(llist(def)) ";"
+    { Ast.IInstance (loc $loc, $1, $3, $4, $5, $6, $7) }
+  | decorator "mod" name brace(items) ";"
+    { Ast.IMod (loc $loc, $1, $3, $4) }
+  | decorator "use" path use_suffix? ";"
+    { Ast.IUse (loc $loc, $1, $3, $4) }
+  | decorator "val" name ty_annot? "=" expr0(expr16) ";"
+    { Ast.IVal (loc $loc, $1, $3, $4, $6) }
 
-%inline llist(x):
-  llist_rev(x) { $1 |> List.rev }
+abstract:
+  | "extern" { Ast.AExtern }
+  | "builtin" { Ast.ABuiltin }
 
-llist_rev(x):
-  | epsilon { [] }
-  | llist_rev(x) x { $2::$1 }
-
-%inline nonempty_llist(x):
-  nonempty_llist_rev(x) { $1 |> List.rev }
-
-nonempty_llist_rev(x): 
-  | x { [$1] }
-  | nonempty_llist_rev(x) x { $2::$1 }
-
-%inline separated_nonempty_llist(s, x):
-  separated_nonempty_llist_rev(s, x) { $1 |> List.rev }
-
-separated_nonempty_llist_rev(s, x): 
-  | x { [$1] }
-  | separated_nonempty_llist_rev(s, x) s x { $3::$1 }
-
-%inline separated_llist(s, x):
-  | epsilon { [] }
-  | separated_nonempty_llist(s, x) { $1 }
-
-%inline separated_llist_trailing(s, x):
-  | separated_llist(s, x) s? { $1 }
-
-%inline separated_nonempty_llist_trailing(s, x):
-  | separated_nonempty_llist(s, x) s? { $1 }
-
-(* The grammar *)
-
-%inline decorator: "@" brace(separated_llist_trailing(",", field(lit))) { $2 }
-
-%inline items: llist(item) { $1 }
-%inline item:
-  | loption(decorator) "extern" "def" defname loption(generics) paren(typarams) annot(ty0)? ";"
-    { Ast.IExternDef ($1, $4, $5, $6, $7) }
-  | loption(decorator) "type" name loption(generics) "=" ty0 ";"
-    { Ast.ITypeAlias ($1, $3, $4, $6) }
-  | loption(decorator) "extern" "type" name loption(generics) ";"
-    { Ast.IExternType ($1, $4, $5) }
-  | loption(decorator) "enum" name loption(generics) brace(variants)
-    { Ast.IEnum ($1, $3, $4, $5) }
-  | loption(decorator) "class" name loption(generics) brace(decls)
-    { Ast.IClass ($1, $3, $4, $5) }
-  | loption(decorator) "instance" loption(generics) path loption(brack(tys)) brace(defs)
-    { Ast.IInstance ($1, $3, $4, $5, $6) }
-  | loption(decorator) "def" defname loption(generics) params annot(ty0)? body?
-    { Ast.IDef ($1, $3, $4, $5, $6, $7) }
-  | loption(decorator) "mod" name brace(items)
-    { Ast.IMod ($1, $3, $4) }
-  | loption(decorator) "task" defname loption(generics) params ":" params body?
-    { Ast.ITask ($1, $3, $4, $5, $7, $8) }
-  | loption(decorator) "use" path alias(name)? ";"
-    { Ast.IUse ($1, $3, $4) }
-  | loption(decorator) "val" name annot(ty0)? "=" expr0 ";"
-    { Ast.IVal ($1, $3, $4, $6) }
-
-%inline typarams: separated_llist(",", ty0) { $1 }
-
-%inline decls: llist(decl) { $1 }
-%inline decl: "def" name loption(generics) params annot(ty0)?
-  { ($2, $3, $4, $5) }
-
-%inline defs: llist(def) { $1 }
-%inline def: "def" name loption(generics) params annot(ty0)? block
+decl: "def" name generics params ty_annot? where ";"
   { ($2, $3, $4, $5, $6) }
 
-%inline body:
-  | "=" expr1 { ([], Some $2) }
+def: "def" name generics params ty_annot? where body(expr0(expr16))
+  { ($2, $3, $4, $5, $6, $7) }
+
+body(expr):
+  | "=" expr { ([], Some $2) }
   | block { $1 }
 
-%inline annot(x): ":" x { $2 }
+ef: name { $1 }
 
-%inline params: paren(separated_llist_trailing(",", param)) { $1 }
-%inline param: pat0 annot(ty0)? { ($1, $2) }
+ef_annot: snd("~", brace(seq(ef))) { $1 }
+ty_annot: ":" ty0 { $2 }
 
-%inline generics: brack(separated_llist_trailing(",", generic)) { $1 }
-%inline generic: Name { $1 }
+params: paren_seq(param) { $1 }
+param: pat0 { $1 }
 
-%inline variants: separated_llist_trailing(",", variant) { $1 }
-%inline variant: name loption(paren(tys)) { ($1, $2) }
+generics: loption(brack(seq(generic))) { $1 }
+generic: name { $1 }
 
-%inline alias(x): "as" x { $2 }
+where: lopt(snd("where", seq(bound))) { $1 }
+bound: path brack(seq(ty0)) { ($1, $2) }
 
-%inline name: Name { $1 }
+name: Name { $1 }
 
-%inline binop:
-  | ".." { Ast.BRInc }
-  | "..=" { Ast.BRExc }
-  | "bor" { Ast.BBor }
-  | "band" { Ast.BBand }
-  | "bxor" { Ast.BBxor }
-  | "or" { Ast.BOr }
-  | "xor" { Ast.BXor }
-  | "and" { Ast.BAnd }
-  | "==" { Ast.BEq None }  | "==." { Ast.BEq (Some $1) }
-  | "!=" { Ast.BNeq None } | "!=." { Ast.BNeq (Some $1) }
-  | "<" { Ast.BLt None }   | "<."  { Ast.BLt (Some $1) }
-  | ">" { Ast.BGt None }   | ">."  { Ast.BGt (Some $1) }
-  | "<=" { Ast.BLeq None } | "<=." { Ast.BLeq (Some $1) }
-  | ">=" { Ast.BGeq None } | ">=." { Ast.BGeq (Some $1) }
-  | "+" { Ast.BAdd None }  | "+."  { Ast.BAdd (Some $1) }
-  | "-" { Ast.BSub None }  | "-."  { Ast.BSub (Some $1) }
-  | "%" { Ast.BMod None }  | "%."  { Ast.BMod (Some $1) }
-  | "*" { Ast.BMul None }  | "*."  { Ast.BMul (Some $1) }
-  | "/" { Ast.BDiv None }  | "/."  { Ast.BDiv (Some $1) }
-  | "**" { Ast.BPow None } | "**." { Ast.BPow (Some $1) }
+binop:
+  | op3 { $1 }
+  | op4 { $1 }
+  | op5 { $1 }
+  | op6 { $1 }
+  | op7 { $1 }
+  | op8 { $1 }
+  | op10 { $1 }
 
-%inline unop:
-  | "not" { Ast.UNot }
+unop:
+  | op9 { $1 }
 
-%inline defname:
+def_name:
   | name { Ast.DName $1 }
-  | unop { Ast.DUnOp $1 }
-  | binop { Ast.DBinOp $1 }
+  | unop lopt(qualify(seq(ty0))) { Ast.DUnOp ($1, $2) }
+  | "infix" binop lopt(qualify(seq(ty0))) { Ast.DBinOp ($2, $3) }
 
-%inline index: Int { $1 }
+index: Int { $1 }
 
-%inline path: separated_nonempty_llist("::", name) { $1 }
+%inline path:
+  | separated_nonempty_llist("::", name) { Ast.PRel $1 }
+  | "::" separated_nonempty_llist("::", name) { Ast.PAbs $2 }
+use_suffix:
+  | "*" { Ast.UGlob }
+  | snd("as", name) { Ast.UAlias $1 }
 
-%inline receivers: separated_nonempty_llist(",", receiver) { $1 }
-%inline receiver: pat0 "in" expr0 "=>" expr0 { ($1, $3, $5) }
+(* Note: This cannot be succeeded by a brace *)
+expr0(primary):
+  | "from" sources clauses { Ast.EFrom (loc $loc, $2, $3) }
+  | "return" expr1(primary)? { Ast.EReturn (loc $loc, $2) }
+  | "break" expr1(primary)? { Ast.EBreak (loc $loc, $2) }
+  | "continue" { Ast.EContinue (loc $loc) }
+  | "throw" expr1(primary) { Ast.EThrow (loc $loc, $2) }
+  | expr1(primary) { $1 }
 
-%inline handler:
-  | receiver { [$1] }
-  | brace(receivers) { $1 }
-
-expr0:
-  | "on" handler { Ast.EOn $2 }
-  | "return" expr1? { Ast.EReturn $2 }
-  | "break" expr1? { Ast.EBreak $2 }
-  | "continue" { Ast.EContinue }
-  | expr1 { $1 }
+(* Note: This cannot be succeeded by a brace *)
+expr1(primary):
+  | "fun" params ty_annot? body(expr1(expr17)) { Ast.EFunc (loc $loc, $2, $4) }
+  | expr2(primary) { $1 }
   
-expr1:
-  | "fun" params annot(ty0)? body { Ast.EFunc ($2, $4) }
-  | "task" ":" params body { Ast.ETask ($3, $4) }
-  | expr2 { $1 }
-  
-%inline op2:
+op2:
   | "=" { Ast.BMut }
+  | "+=" { Ast.BAdd }
+  | "-=" { Ast.BSub }
+  | "*=" { Ast.BMul }
+  | "/=" { Ast.BDiv }
+  | "%=" { Ast.BMod }
   | "in" { Ast.BIn }
   | "not" "in" { Ast.BNotIn }
-expr2:
-  | expr3 { $1 }
-  | expr2 "!" expr3 { Ast.EEmit ($1, $3) }
-  | expr2 op2 expr3 { Ast.EBinOp ($2, $1, $3)}
+expr2(primary):
+  | expr3(primary) { $1 }
+  | expr2(primary) op2 expr3(primary) { Ast.EBinOp (loc $loc, $2, [], $1, $3)}
 
-%inline op3:
-  | ".." { Ast.BRInc }
-  | "..=" { Ast.BRExc }
-expr3:
-  | expr4 { $1 }
-  | expr4 op3 expr4 { Ast.EBinOp ($2, $1, $3)}
+op3:
+  | ".." { Ast.BRExc }
+  | "..=" { Ast.BRInc }
+expr3(primary):
+  | expr4(primary) { $1 }
+  | expr4(primary) op3 lopt(qualify(seq(ty0))) expr4(primary) { Ast.EBinOp (loc $loc, $2, $3, $1, $4)}
   
-%inline op4:
+op4:
   | "bor" { Ast.BBor }
   | "band" { Ast.BBand }
   | "bxor" { Ast.BBxor }
   | "or" { Ast.BOr }
   | "xor" { Ast.BXor }
   | "and" { Ast.BAnd }
-expr4:
-  | expr5 { $1 }
-  | expr4 op4 expr5 { Ast.EBinOp ($2, $1, $3)}
-  
-%inline op5:
-  | "==" { Ast.BEq None } | "==." { Ast.BEq (Some $1) }
-  | "!=" { Ast.BNeq None } | "!=." { Ast.BNeq (Some $1) }
-expr5:
-  | expr6 { $1 }
-  | expr5 op5 expr6 { Ast.EBinOp ($2, $1, $3)}
+expr4(primary):
+  | expr5(primary) { $1 }
+  | expr4(primary) op4 lopt(qualify(seq(ty0))) expr5(primary) { Ast.EBinOp (loc $loc, $2, $3, $1, $4)}
 
-%inline op6:
-  | "<" { Ast.BLt None }   | "<." { Ast.BLt (Some $1) }
-  | ">" { Ast.BGt None }   | ">." { Ast.BGt (Some $1) }
-  | "<=" { Ast.BLeq None } | "<=." { Ast.BLeq (Some $1) }
-  | ">=" { Ast.BGeq None } | ">=." { Ast.BGeq (Some $1) }
-  
-expr6:
-  | expr7 { $1 }
-  | expr6 op6 expr7 { Ast.EBinOp ($2, $1, $3)}
+op5:
+  | "==" { Ast.BEq }
+  | "!=" { Ast.BNeq }
+expr5(primary):
+  | expr6(primary) { $1 }
+  | expr5(primary) op5 lopt(qualify(seq(ty0))) expr6(primary) { Ast.EBinOp (loc $loc, $2, $3, $1, $4)}
 
-%inline op7:
-  | "+" { Ast.BAdd None } | "+." { Ast.BAdd (Some $1) }
-  | "-" { Ast.BSub None } | "-." { Ast.BSub (Some $1) }
-  | "%" { Ast.BMod None } | "%." { Ast.BMod (Some $1) }
-expr7:
-  | expr8 { $1 }
-  | expr7 op7 expr8 { Ast.EBinOp ($2, $1, $3)}
-  
-%inline op8:
-  | "*" { Ast.BMul None } | "*." { Ast.BMul (Some $1) }
-  | "/" { Ast.BDiv None } | "/." { Ast.BDiv (Some $1) }
-expr8:
-  | expr9 { $1 }
-  | expr8 op8 expr9 { Ast.EBinOp ($2, $1, $3)}
+op6:
+  | "<" { Ast.BLt }
+  | ">" { Ast.BGt }
+  | "<=" { Ast.BLeq }
+  | ">=" { Ast.BGeq }
+expr6(primary):
+  | expr7(primary) { $1 }
+  | expr6(primary) op6 lopt(qualify(seq(ty0))) expr7(primary) { Ast.EBinOp (loc $loc, $2, $3, $1, $4)}
 
-%inline op9:
+op7:
+  | "+" { Ast.BAdd }
+  | "-" { Ast.BSub }
+  | "%" { Ast.BMod }
+expr7(primary):
+  | expr8(primary) { $1 }
+  | expr7(primary) op7 lopt(qualify(seq(ty0))) expr8(primary) { Ast.EBinOp (loc $loc, $2, $3, $1, $4)}
+  
+op8:
+  | "*" { Ast.BMul }
+  | "/" { Ast.BDiv }
+expr8(primary):
+  | expr9(primary) { $1 }
+  | expr8(primary) op8 lopt(qualify(seq(ty0))) expr9(primary) { Ast.EBinOp (loc $loc, $2, $3, $1, $4)}
+
+op9:
   | "not" { Ast.UNot }
-  | "-" { Ast.UNeg None } | "-." { Ast.UNeg (Some $1) }
-expr9:
-  | expr10 { $1 }
-  | op9 expr9 { Ast.EUnOp ($1, $2)}
+  | "-" { Ast.UNeg }
+expr9(primary):
+  | expr10(primary) { $1 }
+  | op9 lopt(qualify(seq(ty0))) expr9(primary) { Ast.EUnOp (loc $loc, $1, $2, $3)}
 
-%inline op10:
-  | "**" { Ast.BPow None } | "**." { Ast.BPow (Some $1) }
-expr10:
-  | expr11 { $1 }
-  | expr11 op10 expr10 { Ast.EBinOp ($2, $1, $3)}
+op10:
+  | "**" { Ast.BPow }
+expr10(primary):
+  | expr11(primary) { $1 }
+  | expr11(primary) op10 lopt(qualify(seq(ty0))) expr10(primary) { Ast.EBinOp (loc $loc, $2, $3, $1, $4)}
 
-expr11:
-  | expr12 { $1 }
-  | expr11 alias(ty1) { Ast.ECast ($1, $2) }
+expr11(primary):
+  | expr12(primary) { $1 }
+  | expr11(primary) ":" ty0 { Ast.EAnnot (loc $loc, $1, $3) }
 
-%inline expr12:
-  | expr13 { $1 }
-  | expr14 { $1 }
+expr12(primary):
+  | expr13(primary) { $1 }
+  | "new" variant(expr14(primary))
+    { Ast.EVariant (loc $loc, $2) }
 
-expr13:
-  | expr15 { $1 }
-  | expr15 paren(separated_llist_trailing(",", expr1))
-    { Ast.ECall ($1, $2) }
+expr13(primary):
+  | expr14(primary) { $1 }
+  | expr15(primary) { $1 }
 
-expr14:
-  | expr12 "." index
-    { Ast.EProject ($1, $3) }
-  | expr12 "." name
-    { Ast.EAccess ($1, $3) }
-  | expr12 brack(expr1)
-    { Ast.ESelect ($1, $2) }
-  | expr12 "." name paren(separated_llist_trailing(",", expr1))
-    { Ast.EInvoke ($1, $3, $4) }
-
-%inline expr15:
-  | paren(expr0)
+expr14(primary):
+  | primary
     { $1 }
-  | paren(binop)
-    { Ast.EBinOpRef ($1) }
-  | block
-    { Ast.EBlock $1 }
+  | primary paren_seq(expr1(expr16))
+    { Ast.ECall (loc $loc, $1, $2) }
+
+(* TODO: Named arguments *)
+(* arg: *)
+(*   | name ":" expr1(expr16) { Ast.ANamed ($1, $3) } *)
+(*   | expr1(expr16) { Ast.APos $1 } *)
+
+expr15(primary):
+  | expr13(primary) "." index
+    { Ast.EAccessTuple (loc $loc, $1, $3) }
+  | expr13(primary) "." name
+    { Ast.EAccessRecord (loc $loc, $1, $3) }
+  | expr13(primary) brack(seq(expr1(primary)))
+    { Ast.EAccessArray (loc $loc, $1, $2) }
+  | expr13(primary) "." brace(seq(name))
+    { Ast.EAccessRecordMulti (loc $loc, $1, $3) }
+  | expr13(primary) "." name paren_seq(expr1(expr16))
+    { Ast.ECallItem (loc $loc, $1, $3, $4) }
+
+%inline lopt(l): ioption(l) { match $1 with None -> [] | Some l -> l }
+
+// This could allow `if Foo { ... } else { ... }`
+// to be parsed as `if <Ident> { ... } else { ... }`
+expr16:
+  | expr16 "{" "}"
+    { todo () }
+  | expr17
+    { $1 }
+
+expr_record: brace(pair(seq(expr_field), tail(expr1(expr16))?)) { $1 }
+expr_field:
+  | name snd(":", expr1(expr16))?
+    { Ast.FName ($1, $2) }
+  | expr13(expr16) "." name
+    { Ast.FExpr ($1, $3) }
+
+dict(a, b): brace(seq_nonempty(pair(a, snd(":", b)))) { $1 }
+set(a): brace(seq_nonempty(a)) { $1 }
+
+ty_record: brace(pair(seq(ty_field), tail(ty0)?)) { $1 }
+ty_field: pair(name, snd(":", ty0)?) { $1 }
+
+pat_record: brace(pair(seq(pat_field), tail(pat0)?)) { $1 }
+pat_field: pair(name, snd(":", pat0)?) { $1 }
+
+expr_dyn_record: "dyn" brace(seq_nonempty(expr_dyn_record_item)) { $2 }
+expr_dyn_record_item: expr17 snd(":", expr1(expr16)) { ($1, $2) }
+
+expr17:
+  | paren(expr1(expr16))
+    { $1 }
   | lit
-    { Ast.ELit $1 }
-  | path loption(qualify(brack(tys)))
-    { Ast.EPath ($1, $2) }
-  | "[" separated_llist_trailing(",", expr0) tail(expr0)? "]"
-    { Ast.EArray ($2, $3) }
-  | "[" expr0 ";" for_generator ";" separated_llist(";", clause) "]"
-    { Ast.ECompr ($2, $4, $6) }
-  | tuple(expr0)
-    { Ast.ETuple $1 }
-  | record(expr0)
-    { Ast.ERecord $1 }
-  | "if" expr2 block else_block?
-    { Ast.EIf ($2, $3, $4) }
-  | "if" "val" pat0 "=" expr1 block else_block?
-    { Ast.EIfVal ($3, $5, $6, $7) }
-  | "match" expr1 brace(arms)
-    { Ast.EMatch ($2, $3) }
-  | "loop" block
-    { Ast.ELoop $2 }
-  | "while" expr1 block
-    { Ast.EWhile ($2, $3) }
-  | "while" "val" pat0 "=" expr1 block
-    { Ast.EWhileVal ($3, $5, $6) }
-  | "for" pat0 "in" expr1 block
-    { Ast.EFor ($2, $4, $5) }
-  | "from" separated_nonempty_llist(",", scan) brace(nonempty_llist(step))
-    { Ast.EFrom ($2, $3) }
+    { Ast.ELit (loc $loc, $1) }
+  | path loption(qualify(seq(ty0)))
+    { Ast.EPath (loc $loc, $1, $2) }
+  | array(expr1(expr16))
+    { Ast.EArray (loc $loc, fst $1, snd $1) }
+  | tuple(expr1(expr16))
+    { Ast.ETuple (loc $loc, $1) }
   | "_"
-    { Ast.EAnon }
+    { Ast.EAnon (loc $loc) }
+  | expr18
+    { $1 }
 
-%inline scan: pat0 scankind expr1 { ($1, $2, $3) }
-%inline scankind:
-  | "in" { Ast.ScIn }
-  | "=" { Ast.ScEq }
+expr18:
+  | "do" block
+    { Ast.EBlock (loc $loc, $2) }
+  | expr_record
+    { Ast.ERecord (loc $loc, $1) }
+  | "dict" dict(expr17, expr1(expr16))
+    { Ast.EDict (loc $loc, $2) }
+  | "set" set(expr1(expr16))
+    { Ast.ESet (loc $loc, $2) }
+  | expr_dyn_record
+    { Ast.EDynRecord (loc $loc, $1) }
+  | "if" expr2(expr17) block snd("else", block)?
+    { Ast.EIf (loc $loc, $2, $3, $4) }
+  | "if" "val" pat0 "=" expr2(expr17) block snd("else", block)?
+    { Ast.EIfVal (loc $loc, $3, $5, $6, $7) }
+  | "match" expr2(expr17) brace(arms)
+    { Ast.EMatch (loc $loc, $2, $3) }
+  | "loop" block
+    { Ast.ELoop (loc $loc, $2) }
+  | "while" expr2(expr17) block
+    { Ast.EWhile (loc $loc, $2, $3) }
+  | "while" "val" pat0 "=" expr2(expr17) block
+    { Ast.EWhileVal (loc $loc, $3, $5, $6) }
+  | "for" pat0 "in" expr2(expr17) block
+    { Ast.EFor (loc $loc, $2, $4, $5) }
+  | "try" block "catch" brace(arms) snd("finally", block)?
+    { Ast.ETry (loc $loc, $2, $4, $5) }
 
-%inline step:
-  | "where" expr1
-    { Ast.SWhere $2 }
-  | "join" scan join_on?
-    { Ast.SJoin ($2, $3) }
-  | "group" separated_nonempty_llist(",", expr1) window? loption(reduce)
-    { Ast.SGroup ($2, $3, $4) }
-  | "order" separated_nonempty_llist(",", pair(expr1, order))
-    { Ast.SOrder $2 }
-  | "yield" expr1
-    { Ast.SYield $2 }
+sources: separated_nonempty_llist(",", source) { $1 }
+source: pat0 source_kind expr1(expr17) { ($1, $2, $3) }
+source_kind:
+  | "in" { Ast.ScIn (loc $loc) }
+  | "=" { Ast.ScEq (loc $loc) }
 
-%inline window: "window" window_step? window_duration { ($2, $3) }
-%inline window_step: "step" expr1 { $2 }
-%inline window_duration: "duration" expr1 { $2 }
-%inline join_on: "on" expr1 { $2 }
-%inline reduce: "reduce" separated_nonempty_llist(",", agg) { $2 }
+clauses: nonempty_llist(clause) { $1 }
+clause:
+  | "where" e=expr1(expr16)
+    { Ast.SWhere {info=loc $loc; e} }
+  | "join"
+      args=seq(split(pat0, "in", expr1(expr17)))
+      e=snd("on", expr1(expr16))
+    { Ast.SJoin {info=loc $loc; args; e} }
+  | "group"
+      es=seq_nonempty(expr1(expr16))
+      alias=snd("as", name)
+    { Ast.SGroup {info=loc $loc; es; alias} }
+  | "window"
+      arg=expr1(expr16)
+      alias=snd("as", name)
+      "{"
+        length=snd("length", expr1(expr16))
+        repeat=snd("repeat", expr1(expr16))?
+        aggrs=snd("compute", aggrs)
+      "}"
+  { Ast.SWindow {info=loc $loc; arg; alias; length; repeat; aggrs} }
+  | "compute" aggrs=aggrs
+    { Ast.SCompute {info=loc $loc; aggrs} }
+  | "order" orders=seq_nonempty(pair(expr1(expr16), order))
+    { Ast.SOrder {info=loc $loc; orders} }
+  | "select" e=expr1(expr16)
+    { Ast.SSelect {info=loc $loc; e} }
+  | "into" e=expr1(expr16)
+    { Ast.SInto {info=loc $loc; e} }
 
-%inline order:
-  | { Ast.OAsc }
+aggrs: seq_nonempty(aggr) { $1 }
+aggr:
+  func=expr1(expr16)
+  arg=snd("of", expr1(expr16))?
+  alias=snd("as", name)
+  { (func, arg, alias) }
+
+order:
+  | epsilon { Ast.OAsc }
   | "desc" { Ast.ODesc }
 
-%inline agg: expr1 aggof? { ($1, $2) }
-%inline aggof: "of" expr1 { $2 }
+qualify(x): "::" brack(x) { $2 }
+tail(x): "|" x { $2 }
 
-%inline qualify(x): "::" x { $2 }
-%inline tail(x): "|" x { $2 }
+arms: seq_nonempty(arm) { $1 }
+arm: pat0 "=>" expr1(expr16) { ($1, $3) }
 
-%inline clause:
-  | for_generator { let (x0, x1) = $1 in Ast.CFor (x0, x1) }
-  | guard { Ast.CIf ($1) }
-
-%inline for_generator: "for" pat0 "in" expr0 { ($2, $4) }
-%inline guard: "if" expr0 { $2 }
-
-%inline else_block: "else" block { $2 }
-
-%inline arms: separated_nonempty_llist_trailing(",", arm) { $1 }
-%inline arm: pat0 "=>" expr0 { ($1, $3) }
-
-%inline block: "{" stmts expr0? "}" { ($2, $3) }
+block: brace(pair(stmts, expr1(expr16)?)) { $1 }
 
 %inline stmts: llist(stmt) { $1 }
-%inline stmt:
+stmt:
   | ";"
-    { Ast.SNoop }
-  | expr0 ";"
-    { Ast.SExpr $1 }
-  | "val" param "=" expr0 ";"
-    { Ast.SVal ($2, $4) }
-  | "var" name annot(ty0)? "=" expr0 ";"
-    { Ast.SVar (($2, $3), $5) }
+    { Ast.SNoop (loc $loc) }
+  | expr0(expr16) ";"
+    { Ast.SExpr (loc $loc, $1) }
+  | "val" param "=" expr0(expr16) ";"
+    { Ast.SVal (loc $loc, $2, $4) }
+  | "var" name ty_annot? "=" expr0(expr16) ";"
+    { Ast.SVar (loc $loc, ($2, $3), $5) }
 
-%inline pats: separated_nonempty_llist(",", pat0) { $1 }
 pat0:
-  | pat0 "or" pat1
+  | pat0 "or" pat1 { Ast.POr (loc $loc, $1, $3) }
+  | pat0 ":" ty0 { Ast.PAnnot (loc $loc, $1, $3) }
   | pat1 { $1 }
   
 pat1:
-  | lit 
-    { Ast.PConst $1 }
+  | const 
+    { Ast.PConst (loc $loc, $1) }
   | name
-    { Ast.PVar $1 }
-  | path paren(pats)
-    { Ast.PUnwrap ($1, $2) }
+    { Ast.PVar (loc $loc, $1) }
+  | "case" name pat1
+    { Ast.PVariant (loc $loc, $2, $3) }
   | tuple(pat0)
-    { Ast.PTuple $1 }
-  | record(pat0)
-    { Ast.PRecord $1 }
+    { Ast.PTuple (loc $loc, $1) }
+  | pat_record
+    { Ast.PRecord (loc $loc, $1) }
+  | array(pat0)
+    { Ast.PArray (loc $loc, fst $1, snd $1) }
   | "_"
-    { Ast.PIgnore }
+    { Ast.PIgnore (loc $loc) }
 
-%inline tys: separated_nonempty_llist(",", ty0) { $1 }
 ty0:
+  | "fun" paren_seq(ty0) ":" ty0
+    { Ast.TFunc (loc $loc, $2, $4) }
   | ty1
     { $1 }
-  | "fun" paren(tys) ":" ty0
-    { Ast.TFunc ($2, $4) }
 
 ty1:
-  | path loption(brack(tys))
-    { Ast.TPath ($1, $2) }
+  | path loption(brack(seq_nonempty(ty0)))
+    { Ast.TPath (loc $loc, $1, $2) }
   | tuple(ty0)
-    { Ast.TTuple $1 }
-  | record(ty0)
-    { Ast.TRecord $1 }
+    { Ast.TTuple (loc $loc, $1) }
+  | ty_record
+    { Ast.TRecord (loc $loc, $1) }
+  | enum(ty0)
+    { Ast.TEnum (loc $loc, $1) }
   | brack(ty0)
-    { Ast.TArray $1 }
+    { Ast.TArray (loc $loc, $1) }
+  | "()"
+    { Ast.TUnit (loc $loc) }
+  | "!"
+    { Ast.TNever (loc $loc) }
 
-%inline tuple(x): "(" x "," separated_llist_trailing(",", x) ")"
-  { $2::$4 }
+array(x): brack(pair(seq(x), tail(x)?)) { $1 }
+tuple(x): paren(seq_explicit(x)) { $1 }
+enum(x): angle(pair(seq(variant(ty0)), tail(x)?)) { $1 }
+variant(x): name x { ($1, $2) }
 
-%inline record(x): "#{" fields(x) tail(x)? "}"
-  { ($2, $3) }
+lit:
+  | Bool
+    { Ast.LBool (loc $loc, $1) }
+  | Char 
+    { Ast.LChar (loc $loc, $1) }
+  | Int 
+    { Ast.LInt (loc $loc, $1, None) }
+  | IntSuffix 
+    { Ast.LInt (loc $loc, fst $1, Some (snd $1)) }
+  | Float 
+    { Ast.LFloat (loc $loc, $1, None) }
+  | FloatSuffix 
+    { Ast.LFloat (loc $loc, fst $1, Some (snd $1)) }
+  | "()" 
+    { Ast.LUnit (loc $loc) }
+  | String 
+    { Ast.LString (loc $loc, $1) }
 
-%inline fields(x): separated_llist_trailing(",", field(x)) { $1 }
-%inline field(x):
-  | name ":" x
-    { ($1, Some $3) }
-  | name
-    { ($1, None) }
-
-%inline lit:
-  | Bool { Ast.LBool $1 }
-  | Char { Ast.LChar $1 }
-  | Int { Ast.LInt ($1, None) }
-  | Float { Ast.LFloat ($1, None) }
-  | IntSuffix { Ast.LInt (fst $1, Some (snd $1)) }
-  | FloatSuffix { Ast.LFloat (fst $1, Some (snd $1)) }
-  | "unit" { Ast.LUnit }
-  | String { Ast.LString $1 }
+const:
+  | Bool 
+    { Ast.CBool (loc $loc, $1) }
+  | Char 
+    { Ast.CChar (loc $loc, $1) }
+  | Int 
+    { Ast.CInt (loc $loc, $1) }
+  | Float 
+    { Ast.CFloat (loc $loc, $1) }
+  | "()" 
+    { Ast.CUnit (loc $loc) }
+  | String 
+    { Ast.CString (loc $loc, $1) }
