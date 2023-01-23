@@ -13,29 +13,29 @@ OCaml (and dune), Rust (and cargo), and C++ (and CMake and Ninja).
 
 A basic streaming word-count application can be written in functional-style as follows:
 ```
-val wordcounts = lines
-  .flatmap(_.split(" "))
-  .keyby(_)
-  .window(
-    length = 10min,
-    stride = 3min
-  )
-  .count()
+def main() =
+    source(topic: "text")
+        .flatmap(fun(line: String) = line.split(" "))
+        .keyby(fun(word) = word)
+        .window(length = 10min, step = 3min, aggregate = count)
+        .sink(topic: "wordcount")
 ```
 
 The same code can also be written using a more declarative, relational-style, syntax. This concept is borrowed from [Morel](https://github.com/julianhyde/morel) and applied to streaming data.
 
 ```
-val wordcounts =
-  from
-    line in lines,
-    word in line.split(" ")
-  keyby word
-  window
-    length = 10min
-    stride = 3min
-  reduce count
-    identity 1;
+def main() =
+    from line: String in source(topic: "text"),
+         word in line.split(" ") {
+        group word
+        window count as w {
+            length 10min
+            step 3min
+            compute count
+        }
+        select {word, w.count}
+        into sink(topic: "wordcount")
+    }
 ```
 
 ## Feature highlights
