@@ -25,7 +25,7 @@ jobs:
 
       # Checkout branch which we want to test
     - name: Checkout source
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
 
       # Update LLVM dependency
     - name: Update submodule
