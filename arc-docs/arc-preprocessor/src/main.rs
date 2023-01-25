@@ -1,30 +1,25 @@
-use clap::{App, Arg, ArgMatches, SubCommand};
 use mdbook::book::Book;
 use mdbook::errors::Error;
 use mdbook::preprocess::{CmdPreprocessor, Preprocessor, PreprocessorContext};
 use std::io;
 use std::process;
 
-pub fn make_app() -> App<'static, 'static> {
-    App::new("arc-preprocessor")
-        .about("A mdbook preprocessor for arc")
-        .subcommand(
-            SubCommand::with_name("supports")
-                .arg(Arg::with_name("renderer").required(true))
-                .about("Check whether a renderer is supported by this preprocessor"),
-        )
-}
-
 fn main() {
-    let matches = make_app().get_matches();
-
     let preprocessor = ArcLang::new();
 
-    if let Some(sub_args) = matches.subcommand_matches("supports") {
-        handle_supports(&preprocessor, sub_args);
-    } else if let Err(e) = handle_preprocessing(&preprocessor) {
-        eprintln!("{}", e);
-        process::exit(1);
+    let mut args = std::env::args();
+    let _ = args.next().unwrap();
+    if args.next().is_some() {
+        if preprocessor.supports_renderer(&args.next().unwrap()) {
+            process::exit(0);
+        } else {
+            process::exit(1);
+        }
+    } else {
+        if let Err(e) = handle_preprocessing(&preprocessor) {
+            eprintln!("{}", e);
+            process::exit(1);
+        }
     }
 }
 
@@ -45,17 +40,6 @@ fn handle_preprocessing(pre: &dyn Preprocessor) -> Result<(), Error> {
     serde_json::to_writer(io::stdout(), &processed_book)?;
 
     Ok(())
-}
-
-fn handle_supports(pre: &dyn Preprocessor, sub_args: &ArgMatches) -> ! {
-    let renderer = sub_args.value_of("renderer").expect("Required argument");
-    let supported = pre.supports_renderer(&renderer);
-
-    if supported {
-        process::exit(0);
-    } else {
-        process::exit(1);
-    }
 }
 
 pub struct ArcLang;
