@@ -1,0 +1,11 @@
+[package]      
+name = "lexer"
+version = "0.0.0"
+authors = ["Klas Segeljakt <klasseg@kth.se>"]
+edition = "2018"
+license = "MIT"
+
+[dependencies]
+diagnostics = { path = "../diagnostics" }
+info = { path = "../info" }
+logos  = { version = "0.12.1" }

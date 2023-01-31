@@ -76,20 +76,20 @@ and lit =
 and exprs = expr list
 and expr =
   | EAccessRecord of info * ty * expr * name
+  | EAnnot        of info * ty * expr
   | EBreak        of info * ty * expr
   | ECallExpr     of info * ty * expr * exprs
   | ECallItem     of info * ty * path * tys * exprs
-  | EAnnot        of info * ty * expr
   | EContinue     of info * ty
   | EEnwrap       of info * ty * name * expr
   | EItem         of info * ty * path * tys
-  | EVar          of info * ty * name
   | ELit          of info * ty * lit
   | ELoop         of info * ty * block
   | EMatch        of info * ty * expr * arms
   | ERecord       of info * ty * expr record
   | EReturn       of info * ty * expr
-  | EUpdateRecord       of info * ty * expr * name * expr
+  | EUpdateRecord of info * ty * expr * name * expr
+  | EVar          of info * ty * name
 
 let item_info i =
   match i with
@@ -305,8 +305,8 @@ let arms_to_clauses arms e =
   arms |> List.map (fun (p, b) -> ([(e, p)], [], b))
 
 (* t is the tail, which could either be a Ir1.TVar or Ir1.TRowEmpty *)
-let fields_to_rows t fs =
-  fs |> List.fold_left (fun t f -> TRowExtend (f, t)) t
+let fields_to_rows t xts =
+  xts |> List.fold_left (fun t f -> TRowExtend (f, t)) t
 
 (* Converts a list [v0; v1; ..; vn] into [("_0", v0); ("_1", v1); ...; ("_n", vn)] *)
 let indexes_to_rows t is =

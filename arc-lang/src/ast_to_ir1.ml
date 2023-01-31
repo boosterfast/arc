@@ -87,19 +87,9 @@ module Ctx = struct
   and pop_vscope ctx =
     ((hd ctx.vstack).stmts |> rev, { ctx with vstack = tl ctx.vstack })
 
-  and pop_vscope_inlined ctx =
-    let (es, ctx) = pop_vscope ctx in
-    ctx |> add_stmts es
-
   and pop_vscope_to_block e ctx =
     let (ss, ctx) = pop_vscope ctx in
     ((ss, e), ctx)
-
-  and enter_vscope f ctx =
-    let ctx = ctx |> push_vscope in
-    let (e, ctx) = f ctx in
-    let (es, ctx) = ctx |> pop_vscope in
-    ((e, es), ctx)
 
   and add_stmts ss ctx =
     match ctx.vstack with
@@ -264,15 +254,15 @@ and lower_item i ctx =
       let ctx = ctx |> Ctx.push_vscope in
       let (gs, ctx) = gs |> mapm lower_generic ctx in
       let (ps, ctx) = ps |> mapm lower_pat ctx in
-      let ts = ps |> map Ir1.typeof_pat in
-      let (vs, ctx) = ps |> mapm (fun _ ctx -> Ctx.fresh_x ctx) ctx in
       let (t, ctx) = ctx |> lower_type_or_fresh t in
       let (bs, ctx) = bs |> mapm (lower_bound info) ctx in
-      let ((es0, e), ctx) = ctx |> lower_block b in
-      let (es1, ctx) = ctx |> Ctx.pop_vscope in
-      let b = (es1 @ es0, e) in
+      let ((ss0, e), ctx) = ctx |> lower_block b in
+      let (ss1, ctx) = ctx |> Ctx.pop_vscope in
+      let b = (ss1 @ ss0, e) in
       let ctx = ctx |> Ctx.pop_gscope in
-      if vs <> [] then
+      if ps <> [] then
+        let (vs, ctx) = ps |> mapm (fun _ ctx -> Ctx.fresh_x ctx) ctx in
+        let ts = ps |> map Ir1.typeof_pat in
         let (e, ctx) = ctx |> vars_to_expr_record info vs in
         let (p, ctx) = ctx |> patterns_to_record info ps in
         let (e, ctx) = ctx |> Ctx.new_expr (fun t -> EMatch (info, t, e, [(p, b)])) in
@@ -368,10 +358,9 @@ and lower_expr_arg e ctx =
   let (es, ctx) = ctx |> Ctx.pop_vscope in
   let ctx = ctx |> Ctx.add_stmts es in
   let (vs, ctx) = ctx |> Ctx.pop_ascope in
-  match vs with
-  | [] ->
+  if vs = [] then
       (e, ctx)
-  | vs ->
+  else
       let (vts, ctx) = vs |> mapm (fun v ctx ->
           let (t, ctx) = ctx |> Ctx.fresh_t in
           ((v, t), ctx)
@@ -481,9 +470,7 @@ and lower_type_item_path info xs ts ctx =
   | Graph.NItem Ast.IMod _
   | Graph.NMethodDecl _ ->
       raise (Error.NamingError (info, "Found non-type where type was expected"))
-  | Graph.NItem IType (_, _, _, gs, _, _) ->
-      let (ts, ctx) = lower_type_args xs ts gs ctx in
-      (TNominal (xs, ts), ctx)
+  | Graph.NItem Ast.IType (_, _, _, gs, _, _)
   | Graph.NItem Ast.IClass (_, _, _, gs, _, _)
   | Graph.NItem Ast.IAbstractType (_, _, _, _, gs, _) ->
       let (ts, ctx) = lower_type_args xs ts gs ctx in
@@ -531,13 +518,14 @@ and lower_expr expr ctx =
   match expr with
   | Ast.ESet _ -> todo ()
   | Ast.EDict _ -> todo ()
-  | EAccessRecordMulti (_, _, _) -> todo ()
-  | ESliceRecord (_, _, _) -> todo ()
-  | EDynRecord (_, _) -> todo ()
-  | ESource (_, _, _) -> todo ()
+  | Ast.EAccessRecordMulti (_, _, _) -> todo ()
+  | Ast.ESliceRecord (_, _, _) -> todo ()
+  | Ast.EDynRecord (_, _) -> todo ()
+  | Ast.ESource (_, _, _) -> todo ()
   | Ast.EAnon _ ->
       let (x, ctx) = ctx |> Ctx.add_anon in
       ctx |> Ctx.new_expr (fun t -> EVar (Ast.expr_info expr, t, x))
+  (* TODO: REMOVE *)
   | Ast.EBinOpRef (info, op) ->
       let x = Ast.binop_name op in
       let xs = ["std"; indirect_name x] in
@@ -659,9 +647,9 @@ and lower_expr expr ctx =
       let arms = [(p0, b0); (p1, b1)] in
       ctx |> Ctx.new_expr (fun t -> EMatch (info, t, e, arms))
   | Ast.EMatch (info, e, arms) ->
-      let (v, ctx) = lower_expr e ctx in
+      let (e, ctx) = lower_expr e ctx in
       let (arms, ctx) = arms |> mapm lower_arm ctx in
-      ctx |> Ctx.new_expr (fun t -> EMatch (info, t, v, arms))
+      ctx |> Ctx.new_expr (fun t -> EMatch (info, t, e, arms))
   | Ast.EPath (info, xs, ts) ->
       ctx |> lower_expr_path info xs ts
   | Ast.EFrom _ ->
@@ -755,21 +743,21 @@ and lower_type t ctx =
       let (ts, ctx) = ts |> mapm lower_type ctx in
       let t = types_to_record ts in
       (t, ctx)
-  | Ast.TRecord (_, (fs, t)) ->
-      let (fs, ctx) = fs |> mapm lower_field_type ctx in
+  | Ast.TRecord (_, (xts, t)) ->
+      let (xts, ctx) = xts |> mapm lower_field_type ctx in
       let (t, ctx) = match t with
       | Some t -> lower_type t ctx
       | None -> (TRowEmpty, ctx)
       in
-      let t = TRecord (fs |> fields_to_rows t) in
+      let t = TRecord (xts |> fields_to_rows t) in
       (t, ctx)
-  | Ast.TEnum (_, (vs, t)) ->
-      let (vs, ctx) = vs |> mapm lower_variant_type ctx in
+  | Ast.TEnum (_, (xts, t)) ->
+      let (xts, ctx) = xts |> mapm lower_variant_type ctx in
       let (t, ctx) = match t with
       | Some t -> lower_type t ctx
       | None -> (TRowEmpty, ctx)
       in
-      let t = TEnum (vs |> fields_to_rows t) in
+      let t = TEnum (xts |> fields_to_rows t) in
       (t, ctx)
   | Ast.TPath (info, xs, ts) ->
       ctx |> lower_type_path info xs ts
@@ -884,8 +872,8 @@ and lower_block (ss, expr) ctx =
   in
   let ctx = ctx |> Ctx.push_vscope in
   let (e, ctx) = ctx |> lower_stmts ss in
-  let (es, ctx) = ctx |> Ctx.pop_vscope in
-  ((es, e), ctx)
+  let (ss, ctx) = ctx |> Ctx.pop_vscope in
+  ((ss, e), ctx)
 
 and lower_block_opt b ctx =
   match b with

@@ -1,0 +1,18 @@
+[package]      
+name    = "parser"
+version = "0.0.0"
+authors = ["Klas Segeljakt <klasseg@kth.se>"]
+edition = "2018"
+build   = "build.rs"
+license = "MIT"
+
+[dependencies]
+info       = { path = "../info" }
+ast          = { path = "../ast" }
+lexer        = { path = "../lexer" }
+diagnostics  = { path = "../diagnostics" }
+lalrpop-util = { version = "0.19.5" }
+im-rc        = { version = "15.1.0" }
+
+[build-dependencies]     
+lalrpop = { version = "0.19.5", features = [ "lexer" ] }

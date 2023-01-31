@@ -50,7 +50,6 @@ and expr =
   | EBreak        of info * var
   | ECallExpr     of info * var * vars
   | ECallItem     of info * path * tys * vars
-  | EAnnot        of info * var * ty
   | EContinue     of info
   | EEnwrap       of info * name * var
   | EUnwrap       of info * name * var

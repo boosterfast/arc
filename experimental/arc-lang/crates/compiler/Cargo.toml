@@ -1,0 +1,19 @@
+[package]
+name = "compiler"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+info      = { path = "../info" }
+parser      = { path = "../parser" }
+lexer       = { path = "../lexer" }
+ast         = { path = "../ast" }
+ast-to-ir1  = { path = "../ast-to-ir1" }
+ir1-to-ir2  = { path = "../ir1-to-ir2" }
+ir2-to-ir3  = { path = "../ir2-to-ir3" }
+ir3-to-mlir = { path = "../ir3-to-mlir" }
+
+clap        = { version = "4.1.4", features = ["derive"] }
+im-rc       = { version = "15.1.0" }
