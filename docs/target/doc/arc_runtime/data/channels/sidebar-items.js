@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"macro":["impl_channel"],"mod":["local"],"trait":["Channel"]};

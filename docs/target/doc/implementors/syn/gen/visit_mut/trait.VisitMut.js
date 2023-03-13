@@ -1,0 +1,3 @@
+(function() {var implementors = {
+"macros":[["impl <a class=\"trait\" href=\"https://docs.rs/syn/1.0.85/syn/gen/visit_mut/trait.VisitMut.html\" title=\"trait syn::gen::visit_mut::VisitMut\">VisitMut</a> for <a class=\"struct\" href=\"macros/proc_macro_attrs/rewrite/functions/struct.Visitor.html\" title=\"struct macros::proc_macro_attrs::rewrite::functions::Visitor\">Visitor</a>"]]
+};if (window.register_implementors) {window.register_implementors(implementors);} else {window.pending_implementors = implementors;}})()

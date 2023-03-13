@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"struct":["Vec","__Visitor"],"type":["ConcreteVec"]};

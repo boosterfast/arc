@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"macro":["alloc_identity"],"struct":["Gc"],"trait":["Alloc","Garbage"]};

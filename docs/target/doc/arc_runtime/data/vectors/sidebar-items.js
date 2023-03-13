@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"fn":["Vec_capacity","Vec_clear","Vec_dedup","Vec_get","Vec_insert","Vec_is_empty","Vec_len","Vec_new","Vec_pop","Vec_push","Vec_remove","Vec_with_capacity"],"mod":["sendable","sharable"]};

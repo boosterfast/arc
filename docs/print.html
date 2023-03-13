@@ -1,0 +1,1977 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Arc-Lang</title>
+        <meta name="robots" content="noindex" />
+        <!-- Custom HTML head -->
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="Arc-Lang documentation.">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <!-- MathJax -->
+        <script async type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="introduction.html">Introduction</a></li><li class="chapter-item expanded "><a href="getting-started.html">Getting Started</a></li><li class="chapter-item expanded "><a href="tour/mod.html">Tour of Arc-Lang</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="tour/basics.html">Basics</a></li><li class="chapter-item expanded "><a href="tour/tasks.html">Tasks and Channels</a></li><li class="chapter-item expanded "><a href="tour/queries.html">Queries</a></li></ol></li><li class="chapter-item expanded "><a href="examples/mod.html">Examples</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="examples/word-count.html">Word Count</a></li><li class="chapter-item expanded "><a href="examples/tf-idf.html">TF-IDF</a></li><li class="chapter-item expanded "><a href="examples/sensor-data-aggregation.html">Sensor Data Aggregation</a></li></ol></li><li class="chapter-item expanded "><a href="command-line-interface.html">Command Line Interface</a></li><li class="chapter-item expanded "><a href="arc-lang/mod.html">Arc-Lang Reference</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="arc-lang/Program.html">Programs</a></li><li class="chapter-item expanded "><a href="arc-lang/Name.html">Names</a></li><li class="chapter-item expanded "><a href="arc-lang/Path.html">Paths</a></li><li class="chapter-item expanded "><a href="arc-lang/Value.html">Values</a></li><li class="chapter-item expanded "><a href="arc-lang/Type.html">Types</a></li><li class="chapter-item expanded "><a href="arc-lang/Block.html">Blocks</a></li><li class="chapter-item expanded "><a href="arc-lang/Stmt.html">Statements</a></li><li class="chapter-item expanded "><a href="arc-lang/Expr.html">Expressions</a></li><li class="chapter-item expanded "><a href="arc-lang/Pattern.html">Patterns</a></li><li class="chapter-item expanded "><a href="arc-lang/Item.html">Items</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="arc-lang/Global.html">Globals</a></li><li class="chapter-item expanded "><a href="arc-lang/Def.html">Functions</a></li><li class="chapter-item expanded "><a href="arc-lang/Task.html">Tasks</a></li><li class="chapter-item expanded "><a href="arc-lang/TypeAlias.html">Type Aliases</a></li><li class="chapter-item expanded "><a href="arc-lang/TypeClass.html">Type Classes</a></li><li class="chapter-item expanded "><a href="arc-lang/Instance.html">Type Class Instances</a></li><li class="chapter-item expanded "><a href="arc-lang/ExternDef.html">Extern Functions</a></li><li class="chapter-item expanded "><a href="arc-lang/ExternType.html">Extern Types</a></li><li class="chapter-item expanded "><a href="arc-lang/Use.html">Uses</a></li><li class="chapter-item expanded "><a href="arc-lang/Enum.html">Enums</a></li><li class="chapter-item expanded "><a href="arc-lang/Module.html">Modules</a></li></ol></li><li class="chapter-item expanded "><a href="arc-lang/Params.html">Parameters</a></li><li class="chapter-item expanded "><a href="arc-lang/Generics.html">Generics</a></li><li class="chapter-item expanded "><a href="arc-lang/Assign.html">Assignments</a></li><li class="chapter-item expanded "><a href="arc-lang/Annots.html">Annotations</a></li></ol></li><li class="chapter-item expanded "><a href="dev/mod.html">Development</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="dev/ci.html">Continuous Integration</a></li><li class="chapter-item expanded "><a href="dev/arc-mlir/mod.html">Arc-MLIR Reference</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="dev/arc-mlir/Program.html">Programs</a></li><li class="chapter-item expanded "><a href="dev/arc-mlir/Name.html">Names</a></li><li class="chapter-item expanded "><a href="dev/arc-mlir/Operation.html">Operations</a></li><li class="chapter-item expanded "><a href="dev/arc-mlir/Type.html">Types</a></li><li class="chapter-item expanded "><a href="dev/arc-mlir/Value.html">Values</a></li><li class="chapter-item expanded "><a href="dev/arc-mlir/Block.html">Blocks</a></li><li class="chapter-item expanded "><a href="dev/arc-mlir/Item.html">Items</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="dev/arc-mlir/Func.html">Functions</a></li></ol></li><li class="chapter-item expanded "><a href="dev/arc-mlir/Params.html">Parameters</a></li></ol></li><li class="chapter-item expanded "><a href="dev/arc-runtime/mod.html">Arc-Runtime Reference</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="dev/arc-runtime/execution-model.html">Execution Model</a></li><li class="chapter-item expanded "><a href="dev/arc-runtime/data-model.html">Data Model</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="history/mod.html">History</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="history/tasks.html">Tasks</a></li></ol></li><li class="chapter-item expanded "><a href="bibliography.html">References</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Arc-Lang</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h2 id="introduction"><a class="header" href="#introduction">Introduction</a></h2>
+<p>Data analytics pipelines are becoming increasingly more complicated due to the growing number of requirements imposed by data science. Not only must data be processed and analyzed scalably with respect to its volume and velocity, but also intricately by involving many different types of data. <strong>Arc-Lang</strong> is a programming language for data analytics that supports parallel operations over multiple data types including datastreams and dataframes. As an example, a basic word-count application can be implemented as follows in Arc-Lang:</p>
+<pre><code><b>def</b> wordcount(lines) =
+    <b>from</b> line <b>in</b> lines,
+         word <b>in</b> line.split(<b style="color:green">" "</b>)
+    <b>group</b> word
+    <b>window</b> <b style="color:darkorange">10m</b> <b>every</b> <b style="color:darkorange">5m</b>
+    <b>compute</b> count</code></pre>
+<p>The goal of Arc-Lang is to make big-data analytics easy. Arc-Lang targets <em>streaming analytics</em> (i.e., processing data continuously as it is being generated) and <em>batch analytics</em> (i.e., processing data in large chunks all-at-once). From the streaming-perspective, Arc-Lang must be able to manage data at a fine granularity that is generated by many types of sensors, arriving at varying rates, in different formats, sizes, qualities, and possibly out-of-order. Datastreams can in addition be massive in numbers, ranging into the billions, due to the plethora of data sources that have emerged in the recent IoT boom. From the batch-perspective, Arc-Lang must be able to handle different kinds of collection-based data types whose sizes can scale to massive sizes, e.g., tensors and dataframes. Operations should to a large degree be agnostic of the collection type.</p>
+<pre><code></code></pre>
+<p>To cope with the requirements of batch and stream data management, a runtime system is needed which can exploit distributed programming to enable scalability through partitioning and parallelism. Distributed programming is however difficult without abstraction. Application developers must manage problems such as fault tolerance, exactly-once-processing, and coordination while considering tradeoffs in security and efficiency. To this end, distributed systems leverage high-level DSLs which are more friendly towards end-users. DSLs in the form of query languages, frameworks, and libraries allow application developers to focus on domain-specific problems, such as the development of algorithms, and to disregard engineering-related issues. In addition, DSLs that are intermediate languages have been adopted by multiple systems both as a solution to enable reuse by breaking the dependence between the user and runtime, and to enable target-independent optimisation. There is always a tradeoff that must be faced in DSL design. DSLs make some problems easier to solve at the expense of making other problems harder to solve. How a DSL is implemented can also have an impact on its ability to solve problems. DSLs can be categorized as follows:</p>
+<p><img src="images/DSL-Hierarchy.jpg" alt="" /></p>
+<h3 id="approach"><a class="header" href="#approach">Approach</a></h3>
+<p>In contrast to other DSLs, Arc-Lang is a standalone compiled DSL implemented in OCaml. The idea of Arc-Lang's is to combine general purpose imperative and functional programming over <em>small data</em> with declarative programming over <em>big data</em>. As an example, it should be possible to perform both fine-grained processing over individual data items of a datastream, while also being able to compose pipelines of relational operations through SQL-style queries. Arc-Lang is statically typed for the purpose of performance and safety, but at the same time also inferred and polymorphic to enable ease of use and reuse.</p>
+<p>The approach of implementing the language as a standalone DSL allows for more creative freedom in the language design. At the same time, this approach requires everything, including optimisations and libraries, to be implemented from scratch.</p>
+<p>To address the issue of optimisation, we are using the <a href="https://mlir.llvm.org/">MLIR</a> compiler framework to implement Arc-MLIR - an intermediate language - which Arc-Lang programs translate into for optimisations. MLIR defines a universal intermediate language which can be extended with custom dialects. A dialect includes a set of operations, types, type rules, analyses, rewrite rules (to the same dialect), and lowerings (to other dialects). All dialects adhere to the same meta-syntax and meta-semantics which allows them to be interweaved in the same program code. The MLIR framework handles parsing, type checking, line information tracking among other things. Additionally, MLIR provides tooling for testing, parallel compilation, documentation, CLI usage, etc. The plan is to extend Arc-MLIR with custom domain-specific optimisations for the declarative part of Arc-Lang and to capitalize on MLIR's ability to derive general-purpose optimisations such as constant propagation for Arc-Lang's functional and imperative side.</p>
+<p>To address the shortcoming of libraries, Arc-Lang allows both types and functions to be defined externally (inside Rust) and imported into the language. Most of the external functionality is encapsulated inside a runtime library named Arc-Runtime. Arc-Runtime builds on the <a href="https://github.com/kompics/kompact">kompact</a> Component-Actor framework to provide distributed abstractions.</p>
+<h2 id="summary"><a class="header" href="#summary">Summary</a></h2>
+<p>In summary, Arc-Lang as a whole consists of three parts:</p>
+<ul>
+<li><strong>Arc-Lang</strong>: A high-level programming language for big data analytics.</li>
+<li><strong>Arc-MLIR</strong>: An intermediate language for optimising Arc-Lang.</li>
+<li><strong>Arc-Runtime</strong>: A distributed runtime for executing Arc-Lang.</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="getting-started"><a class="header" href="#getting-started">Getting Started</a></h1>
+<p>This section explains how to get started with Arc-Lang.</p>
+<h2 id="prerequisites"><a class="header" href="#prerequisites">Prerequisites</a></h2>
+<p>The following dependencies are required to build Arc-Lang from source:</p>
+<ul>
+<li>CMake</li>
+<li>Clang</li>
+<li>Ninja</li>
+<li>Rust</li>
+</ul>
+<h3 id="macos"><a class="header" href="#macos">macOS</a></h3>
+<p>On macOS, dependencies can be installed with:</p>
+<pre><code>brew install cmake ninja clang
+curl https://sh.rustup.rs -sSf | sh
+</code></pre>
+<h3 id="ubuntu"><a class="header" href="#ubuntu">Ubuntu</a></h3>
+<p>On Ubuntu, dependencies can be installed with:</p>
+<pre><code class="language-bash">sudo apt install cmake ninja-build clang
+curl https://sh.rustup.rs -sSf | sh
+</code></pre>
+<h2 id="installation"><a class="header" href="#installation">Installation</a></h2>
+<p>To install Arc-Lang, clone the repo and run the build script:</p>
+<pre><code class="language-bash">git clone https://github.com/cda-group/arc/
+cd arc
+git submodule update --init --recursive
+./build
+</code></pre>
+<p>The build script installs the <code>arc</code> command-line utility along with the arc-runtime library.</p>
+<h2 id="hello-world"><a class="header" href="#hello-world">Hello World</a></h2>
+<p>Arc-Lang files have the <code>.arc</code> file extension. For example:</p>
+<pre><code><i style="color:gray"># hello-world.arc</i>
+
+<b>def</b> main() = print(<b style="color:green">"Hello World"</b>)</code></pre>
+<p>To execute the above program, run:</p>
+<pre><code class="language-bash">arc run hello-world.arc
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="tour-of-arc-lang"><a class="header" href="#tour-of-arc-lang">Tour of Arc-Lang</a></h1>
+<p>This section presents a brief tour of Arc-Lang, introducing the basics and unique concepts of the language. The tour assumes you have basic knowledge in some other programming language.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="basics"><a class="header" href="#basics">Basics</a></h1>
+<p>Functions in Arc-Lang are written using the <code>def</code> keyword.</p>
+<pre><code><i style="color:gray"># The following code shows how to define the Fibonacci function functionally.</i>
+
+<b>def</b> fib(n) = <b>match</b> n {
+    <b style="color:darkorange">0</b> => <b style="color:darkorange">0</b>,
+    <b style="color:darkorange">1</b> => <b style="color:darkorange">1</b>,
+    n => fib(n-<b style="color:darkorange">2</b>) + fib(n-<b style="color:darkorange">1</b>)
+}</code></pre>
+<p>Immutable variables can be defined with the <code>val</code> keyword and mutable ones with the <code>var</code> keyword.</p>
+<pre><code><i style="color:gray"># The following code shows how to define the Fibonacci function imperatively.</i>
+
+<b>def</b> fib(n) {
+    <b>var</b> a = <b style="color:darkorange">0</b>;
+    <b>var</b> b = <b style="color:darkorange">1</b>;
+    <b>while</b> a < n {
+        a = b;
+        b = a + b;
+    };
+    <b>return</b> a;
+}</code></pre>
+<p>Common values are supported, including interpolated strings, percentage, duration, and datetime literals.</p>
+<pre><code><b>val</b> v0: i32             = <b style="color:darkorange">3</b>;                   <i style="color:gray"># Integer</i>
+<b>val</b> v1: f32             = <b style="color:darkorange">0.1</b>;                 <i style="color:gray"># Float</i>
+<b>val</b> v2: f32             = <b style="color:darkorange">10%</b>;                 <i style="color:gray"># Float (Percentage)</i>
+<b>val</b> v3: i32             = <b style="color:darkorange">100ms</b>;               <i style="color:gray"># Duration</i>
+<b>val</b> v4: String          = <b style="color:darkorange">2020-12-16T16:00:00</b>; <i style="color:gray"># DateTime</i>
+<b>val</b> v5: char            = <b style="color:green">'c'</b>;                 <i style="color:gray"># Character</i>
+<b>val</b> v6: String          = <b style="color:green">"hello"</b>;             <i style="color:gray"># String</i>
+<b>val</b> v7: String          = <b style="color:green">"$v6 world"</b>;         <i style="color:gray"># String (Interpolated)</i>
+<b>val</b> v8: #{x:i32, y:i32} = #{x:<b style="color:darkorange">5</b>, y:<b style="color:darkorange">8</b>};         <i style="color:gray"># Record</i>
+<b>val</b> v9: Option[i32]     = Option::Some(<b style="color:darkorange">3</b>);     <i style="color:gray"># Enum variant</i>
+<b>val</b> v10: [i32]          = [<b style="color:darkorange">1</b>,<b style="color:darkorange">2</b>,<b style="color:darkorange">3</b>];             <i style="color:gray"># Vector</i>
+<b>val</b> v11: <b>fun</b>(i32): i32  = <b>fun</b>(x:i32) = x;      <i style="color:gray"># Lambda function</i></code></pre>
+<p>The declaration order of items is insignificant. A function can call another function defined below it in the source code.</p>
+<pre><code><i style="color:gray"># The declaration <b>order</b> of top-level definitions <b>is</b> insignificant. In other words,</i>
+<i style="color:gray"># functions can reference other functions declared farther down <b>in</b> the code.</i>
+
+<b>def</b> is_even(n) = <b>if</b> n == <b style="color:darkorange">0</b> { true } <b>else</b> { is_odd(n-<b style="color:darkorange">1</b>) }
+
+<b>def</b> is_odd(n) = <b>if</b> n == <b style="color:darkorange">0</b> { false } <b>else</b> { is_even(n-<b style="color:darkorange">1</b>) }</code></pre>
+<p>Enums (also known as disjoint or discriminated unions) are supported:</p>
+<pre><code><b>enum</b> Option[T] {
+    Some(T),
+    None
+}</code></pre>
+<p>Three forms of polymorphism are supported. First, parametric polymorphism allows functions to behave equivalently for different types of parameters:</p>
+<pre><code><b>def</b> id[A](x: A): A = x
+
+<b>def</b> main() {
+    <b>val</b> x = id(<b style="color:darkorange">1</b>);
+    <b>val</b> y = id(<b style="color:darkorange">1.0</b>);
+}</code></pre>
+<p>Second, overloading allows functions to behave differently for different types of parameters:</p>
+<pre><code><b>def</b> test1() = <b style="color:darkorange">1</b> + <b style="color:darkorange">2</b>
+<b>def</b> test2() = <b style="color:darkorange">1.0</b> + <b style="color:darkorange">2.0</b></code></pre>
+<p>Overloading is achieved through the use of type classes:</p>
+<pre><code><b>class</b> Monoid {
+    <b>def</b> identity(): Self;
+    <b>def</b> merge(Self, Self): Self;
+}
+impl Monoid <b>for</b> {sum:i32} {
+    <b>def</b> identity() = #{sum: <b style="color:darkorange">0</b>}
+    <b>def</b> merge(a, b) = #{sum: a.sum + b.sum}
+}
+<b>def</b> main() = x.merge(y.merge(identity()))</code></pre>
+<p>Finally, row polymorphism allows subtyping of records:</p>
+<pre><code><b>def</b> area(shape) = shape.x * shape.y
+
+<b>def</b> main() {
+    <b>val</b> line = #{x:<b style="color:darkorange">5</b>};
+    <b>val</b> rect = #{y:<b style="color:darkorange">10</b>|line};
+    <b>val</b> cube = #{z:<b style="color:darkorange">20</b>|rect};
+
+    area(line); <i style="color:gray"># ERROR</i>
+    area(rect); <i style="color:gray"># OK</i>
+    area(cube); <i style="color:gray"># OK</i>
+}</code></pre>
+<p>While the language aims to be general, it also has its limits. Therefore it is also possible to import externally defined types and functions.</p>
+<pre><code>@{rust: <b style="color:green">"String"</b>}
+<b>extern</b> type String;
+
+@{rust: <b style="color:green">"&'static str"</b>}
+<b>extern</b> type str;
+
+@{rust: <b style="color:green">"String_new"</b>}
+<b>extern</b> def new_str(): String;
+
+@{rust: <b style="color:green">"String_from_str"</b>}
+<b>extern</b> def from_str(str): String;
+
+@{rust: <b style="color:green">"String_concat"</b>}
+<b>extern</b> def concat(String, String): String;
+
+@{rust: <b style="color:green">"String_with_capacity"</b>}
+<b>extern</b> def str_with_capacity(u32): String;
+
+@{rust: <b style="color:green">"String_push_char"</b>}
+<b>extern</b> def push_char(String, char): unit;
+
+@{rust: <b style="color:green">"String_remove_char"</b>}
+<b>extern</b> def remove_char(String, u32): char;
+
+@{rust: <b style="color:green">"String_insert_char"</b>}
+<b>extern</b> def insert_char(String, u32, char): unit;
+
+@{rust: <b style="color:green">"String_is_empty"</b>}
+<b>extern</b> def is_empty_str(String): bool;
+
+@{rust: <b style="color:green">"String_split_off"</b>}
+<b>extern</b> def split_off(String, u32): String;
+
+@{rust: <b style="color:green">"String_clear"</b>}
+<b>extern</b> def clear_str(String);
+
+@{rust: <b style="color:green">"String_eq"</b>}
+<b>extern</b> def str_eq(String, String): bool;</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="tasks-and-channels"><a class="header" href="#tasks-and-channels">Tasks and Channels</a></h1>
+<p>Datastreams have become a prominent data model for analysing live data. A <em>datastream</em> is conceptually an infinite sequence of events, where an <em>event</em> is a data point produced by the stream at a specific moment in time. Arc-Lang provides the concept of tasks and channels to support fine grained processing of datastreams. A <em>channel</em> is a buffer of events which supports two basic operations. Data can be <em>pushed</em> and <em>pulled</em> into and out of the channel's buffer by tasks. In this context, a <em>task</em> is a lightweight thread that is executing an asynchronous function (i.e., a function that can suspend its execution). Tasks can thus await events to arrive on ingoing channels, do some processing, and emit new events onto outgoing channels.</p>
+<pre><code><b>task</b> map(i, f): (o) {
+    <b>loop</b> {
+        o ! f(<b>receive</b> i);
+    }
+}
+
+<b>def</b> main() {
+    <b>val</b> stream0 = source(<b style="color:darkorange">0</b>..);
+    <b>val</b> stream1 = map(stream0, <b>fun</b>(x) = x + <b style="color:darkorange">1</b>);
+}</code></pre>
+<p>In the above code, <code>map</code> is a task which takes a stream on an input channel <code>i</code>, a function <code>f</code>, and produces a stream on an output channel <code>o</code>. The execution of the task enters an infinite loop which receives events from <code>i</code> using the <code>receive</code> operator, applies function <code>f</code>, and emits the result to <code>o</code> using the <code>!</code> operator. The <code>main</code> function instantiates the task using function application syntax.</p>
+<h2 id="directions"><a class="header" href="#directions">Directions</a></h2>
+<p>All channels have a <em>direction</em>. Data can either be pushed into a channel or pulled out of it, but not both. Tasks which push data are referred to as &quot;<em>producers</em>&quot; and tasks which pull data are referred to as &quot;<em>consumers</em>&quot;. It is possible for a task to simultaneously be both a producer and a consumer, but not for the same channel. We refer to pull-only channels as streams (<code>Stream[T]</code>) and push-only channels as drains (<code>Drain[T]</code>). To make the idea more clear, consider this fully type annotated example:</p>
+<pre><code><b>task</b> map(i: Stream[i32], f: <b>fun</b>(i32):i32): (o: Drain[i32]) {
+    <b>loop</b> {
+        o ! f(<b>receive</b> i);
+    }
+}
+
+<b>def</b> main() {
+    <b>val</b> stream0: Stream[i32] = source(<b style="color:darkorange">0</b>..);
+    <b>val</b> stream1: Stream[i32] = map(stream0, <b>fun</b>(x) = x + <b style="color:darkorange">1</b>);
+}</code></pre>
+<h2 id="deadlock-avoidance"><a class="header" href="#deadlock-avoidance">Deadlock Avoidance</a></h2>
+<p>The purpose of introducing tasks and directions is to avoid deadlocks that may occur from cyclic channel-dependencies. To give an example, channels in the Go language have directions like Arc-Lang but no task-abstraction. Go instead exposes the more general concept of goroutines which are lightweight threads that can suspend execution anywhere. For example, it is possible in Go to write the following:</p>
+<pre><code class="language-go">package main
+
+func map(i &lt;-chan int, f func(int) int, o chan&lt;- int) {
+    for x := range i {
+        o &lt;- f(x);
+    }
+}
+
+func main() {
+    c := make(chan int);
+    go map(c, c);
+}
+</code></pre>
+<p>The above code has a problem. The <code>map</code> function is both a consumer and producer of the same channel. This cyclic dependency causes a deadlock. In contrast, Arc-Lang restricts programs such that channels can only be created by instantiating tasks. Once a task is created its inputs cannot change. The output channel of a task cannot end up as an input channel to the same task or any upstream task. This prevents arbitrary cycles from being created in the dataflow graph, and thus prevents deadlocks. Code such as the following will result in a syntax error:</p>
+<pre><code><b>task</b> map(i, f): (o) {
+    <b>loop</b> {
+        o ! f(<b>receive</b> i);
+    }
+}
+
+<b>def</b> main() {
+    <b>val</b> c = map(c, <b>fun</b>(x) = x + <b style="color:darkorange">1</b>);
+}</code></pre>
+<h2 id="exceptions"><a class="header" href="#exceptions">Exceptions</a></h2>
+<p>Operations on streams are by default assumed to succeed without failure, but may also throw <em>exceptions</em> which can be handled by the user. Exceptions are thrown in two scenarios:</p>
+<ol>
+<li>When receiving data from a channel which has no producer and whose buffer is empty.</li>
+<li>When emitting data into a channel which has no consumers.</li>
+</ol>
+<p>By catching exceptions, tasks can prolong their execution beyond the lifetime of their channels. This is especially useful when tasks have multiple input and output channels, as uncaught exceptions will terminate the task.</p>
+<pre><code><b>task</b> producer(xs): (o) {
+    <b>for</b> x <b>in</b> xs {
+        o ! x;
+    }
+}
+
+<b>task</b> consumer(i) {
+    <b>loop</b> {
+        try {
+            print(<b>receive</b> i);
+        } catch Exception::Receive {
+            print(<b style="color:green">"Producer has terminated, therefore I will terminate."</b>);
+            <b>return</b>;
+        }
+    }
+}
+
+<b>def</b> main() {
+    <b>val</b> stream = producer([<b style="color:darkorange">1</b>,<b style="color:darkorange">2</b>,<b style="color:darkorange">3</b>]);
+    consumer(stream);
+}</code></pre>
+<p>In the above code, a <code>producer</code> task is sending data to a <code>consumer</code> task over a stream. The producer terminates once it is done sending all of its data. Since there are no more tasks which can emit data into the stream (i.e., no more references to the output stream), an exception will be raised when trying to receive data from the input stream.</p>
+<pre><code><b>task</b> producer(xs): (o) {
+    <b>for</b> x <b>in</b> xs {
+        try {
+            o ! x;
+        } catch Exception::Emit {
+            print(<b style="color:green">"Consumer has terminated, therefore I will terminate."</b>);
+            <b>return</b>;
+        }
+    }
+}
+
+<b>task</b> consumer(i) {
+    <b>for</b> x <b>in</b> i {
+        print(x);
+        <b>if</b> rand() % <b style="color:darkorange">100</b> == <b style="color:darkorange">0</b> {
+            <b>break</b>;
+        }
+    }
+}
+
+<b>def</b> main() {
+    <b>val</b> stream = producer([<b style="color:darkorange">1</b>,<b style="color:darkorange">2</b>,<b style="color:darkorange">3</b>]);
+    consumer(stream);
+}</code></pre>
+<p>The above code shows the opposite scenario, where a consumer can potentially terminate and raise an exception at the producer.</p>
+<h2 id="flow-control"><a class="header" href="#flow-control">Flow Control</a></h2>
+<p>Channels in Arc-Lang are bounded which means that their buffers have a maximum capacity. It is thus important that buffers do not overflow since this would lead to undefined behavior. For example:</p>
+<pre><code><b>task</b> producer(): (o) {
+    <b>for</b> x <b>in</b> <b style="color:darkorange">0</b>.. {
+        o ! x;
+    }
+}
+
+<b>task</b> consumer(i): () {
+    <b>for</b> x <b>in</b> i.. {
+        sleep(<b style="color:darkorange">1s</b>);
+        print(i);
+    }
+}
+
+<b>def</b> main() {
+    <b>val</b> s = producer();
+    consumer(s);
+}</code></pre>
+<p>In a purely push-based system, the producer would produce data at a faster rate than the consumer can keep up. This would would inevitably cause a buffer overflow in the channel. To prevent such circumstances, a channel will block its producer from pushing events if its buffer is full. Similarly, a channel will block its consumers from pulling events if its buffer is empty. This behavior is implemented by storing multiple queues inside of channels. In particular, each channel has:</p>
+<ul>
+<li>A <em>push-queue</em> of capacity <code>P</code> which stores promises to push data into the channel as soon as its buffer is not full. The respective producer is blocked until the promise is fulfilled.</li>
+<li>A <em>data-queue</em> of capacity <code>N</code> which stores in-flight events.</li>
+<li>A <em>pull-queue</em> of capacity <code>C</code> which stores promises to pull data from the channel as soon as its buffer is not empty. The respective consumer is blocked until the promise is fulfilled.</li>
+</ul>
+<p>We have that <code>P = 1</code> (i.e., a channel can only have one producer), <code>N = &lt;dynamic&gt;</code>, and <code>C = &lt;number of consumers&gt;</code>. Because channels are multicast, all consumers of a channel will pull the same event sequence. To this end, an offset is stored together with each promise in the pull-queue that indicates which event in the data-queue should be pulled. Events can only be evicted from the data-queue if they have been pulled by all consumers.</p>
+<h2 id="ordering-of-events"><a class="header" href="#ordering-of-events">Ordering of Events</a></h2>
+<p>Tasks are not limited to just one input and output channel. In fact, a task can have a dynamic number of input channels (by for example passing the channels in a vector) and a fixed number of output channels.</p>
+<pre><code><b>task</b> merge(s0, s1): (s2) {
+    <b>loop</b> {
+        s2 ! (<b>receive</b> s0);
+        s2 ! (<b>receive</b> s1);
+    }
+}
+
+<b>def</b> main() {
+    <b>val</b> stream0 = <b style="color:darkorange">0</b>..<b style="color:darkorange">100</b>;
+    <b>val</b> stream1 = <b style="color:darkorange">0</b>..<b style="color:darkorange">100</b>;
+    <b>val</b> stream2 = merge(stream0, stream1);
+}</code></pre>
+<p>In the above code, <code>merge</code> is a task which can be used to combine events from two channels <code>s0</code> and <code>s1</code> into one <code>s2</code>. By deterministic, we mean the task pulls events from the input channels in a specific order. It is also possible to receive events non-deterministically from a set of channels, as soon as they arrive, using the <code>on</code> syntax:</p>
+<pre><code><b>task</b> union(s0, s1): (s2) {
+    <b>loop</b> {
+        <b>on</b> {
+            x <b>in</b> s0 => s2 ! x,
+            x <b>in</b> s1 => s2 ! x,
+        }
+    }
+}
+
+<b>def</b> main() {
+    <b>val</b> stream0 = <b style="color:darkorange">0</b>..<b style="color:darkorange">100</b>;
+    <b>val</b> stream1 = <b style="color:darkorange">0</b>..<b style="color:darkorange">100</b>;
+    <b>val</b> stream2 = union(stream0, stream1);
+}</code></pre>
+<p>In the above code, <code>union</code> is a task which can be used to combine two channels <code>s0</code> and <code>s1</code> non-deterministically into one <code>s2</code>. No ordering guarantees are made between the two channels.</p>
+<h2 id="streaming-state"><a class="header" href="#streaming-state">Streaming State</a></h2>
+<p>Streaming state is typically exposed explicitly by stream processors. Users need to declare the type of data they want to persistently store and insert read and write operations in their application code to access the state. In Arc-Lang, state is managed implicitly by automatically translating tasks into FSMs (Finite State Machines) that are persisted by the system.</p>
+<pre><code><b>task</b> reduce(i, f, init): (o) {
+    <b>var</b> state = init;
+    <b>for</b> x <b>in</b> i {
+        state = f(state, x);
+        o ! state;
+    }
+}
+
+<b>def</b> main() {
+    let sum = <b>reduce</b>(<b style="color:darkorange">0</b>..<b style="color:darkorange">100</b>, <b>fun</b>(a, b): a + b, <b style="color:darkorange">0</b>);
+    let count = <b>reduce</b>(<b style="color:darkorange">0</b>..<b style="color:darkorange">100</b>, <b>fun</b>(a, _): a + <b style="color:darkorange">1</b>, <b style="color:darkorange">0</b>);
+    let max = <b>reduce</b>(<b style="color:darkorange">0</b>..<b style="color:darkorange">100</b>, <b>fun</b>(a, b): <b>if</b> a > b { a } <b>else</b> { b }, <b style="color:darkorange">0</b>);
+}</code></pre>
+<p>The code above shows a rolling <code>reduce</code> task which reduces a stream using an aggregation function <code>f</code>, beginning at an initial state <code>init</code>.</p>
+<p>Note that state is always encapsulated within a task. It is not possible (as of yet) to share state between tasks. Any value sent over a channel is copied from the producer to the consumer. This allows Arc-Lang programs to be parallelised without having to consider the risk of race conditions. How values are copied is abstracted and can for example be deep (for data with interior mutability), shallow (for immutable data), or lazy (copy-on-write). CRDTs and transactional memory are under consideration for enabling shared state.</p>
+<h2 id="parallelism"><a class="header" href="#parallelism">Parallelism</a></h2>
+<p>Tasks and channels enable three forms of parallelism:</p>
+<ul>
+<li><strong>Pipeline parallelism</strong>: Multiple tasks can pipeline their execution through channels.</li>
+<li><strong>Task parallelism</strong>: Multiple tasks can process data from the same channel in parallel.</li>
+<li><strong>Data parallelism</strong>: The same task can process data from multiple channels in parallel.</li>
+</ul>
+<p>An example of pipeline parallelism:</p>
+<pre><code><b>task</b> map(i, f): (o) {
+    <b>for</b> x <b>in</b> i {
+        o ! f(<b>receive</b> x)
+    }
+}
+
+<b>task</b> filter(i, f): (o) {
+    <b>for</b> x <b>in</b> i {
+        <b>if</b> f(x) {
+            o ! x
+        }
+    }
+}
+
+<b>def</b> pipeline_parallel() {
+    <b>val</b> s0 = read_stream();
+    <b>val</b> s1 = map(s0, |x| x * <b style="color:darkorange">2</b>);
+    <b>val</b> s2 = filter(s1, |x| x % <b style="color:darkorange">2</b> == <b style="color:darkorange">0</b>);
+    <i style="color:gray"># ...</i>
+}</code></pre>
+<p>An example of task parallelism:</p>
+<pre><code><b>def</b> task_parallel() {
+    <b>val</b> s0 = source(<b style="color:darkorange">0</b>..<b style="color:darkorange">100</b>);
+    <b>val</b> s1 = map(s0, |x| x * <b style="color:darkorange">2</b>);
+    <b>val</b> s2 = filter(s0, |x| x % <b style="color:darkorange">2</b> == <b style="color:darkorange">0</b>);
+    <i style="color:gray"># ...</i>
+}</code></pre>
+<p>Arc-Lang chooses to make data parallelism implicit since this is the most common form of parallelism. All of the above examples are thus data parallel. The idea of data parallelism is that channels are divided into partitions that can transport events in parallel. Each event has an associated <em>key</em> that determines which partition the event is assigned to. A key can for example be the unique identifier of a sensor that generates data, a location tag, or an article number. Events are required to have a key at the point where they enter the system. It is also possible to change the key of an event. This will be covered in the next section. Note that the method for assigning events to partitions is abstract. This allows Arc-Lang to choose the partitioning approach based on the scenario. Though, currently a static partitioning approach is used. </p>
+<h2 id="summary-1"><a class="header" href="#summary-1">Summary</a></h2>
+<p>Channels of Arc-Lang are planned to support the following properties:</p>
+<ul>
+<li><strong>Directions</strong>: Channels can be used to either pull or push data, but not both. Tasks which push data are referred to as &quot;producers&quot; and tasks which pull data are referred to as &quot;consumers&quot;. A task can simultaneously be both a producer and a consumer but not for the same channel.</li>
+<li><strong>Bounded</strong>: Channels have a maximum capacity which, when exceeded, will block the producer from pushing events. Similarly, an empty channel will block the consumer from pulling events.</li>
+<li><strong>SPMC</strong>: Channels have a single producer and possibly multiple consumers.</li>
+<li><strong>Multicast</strong>: All consumers of a channel will pull the same event sequence.</li>
+<li><strong>Exceptions</strong>: A channel can be closed by a producer or consumer. When a channel is closed, all tasks waiting on the channel will be notified.</li>
+<li><strong>Data parallelism</strong>: A logical channel consists of multiple physical channels which are partitioned using consistent hashing. Data can be transferred over different physical channels in parallel.</li>
+<li><strong>Deadlock avoidance</strong>: Channels can only be created by instantiating tasks. The output channel of a task cannot be passed as an input channel to the same task or any upstream task. This prevents arbitrary cycles from being created in the dataflow graph, and thus prevents deadlocks.</li>
+<li><strong>Uni-directional</strong>: Channels can only be used to send data in a single direction, i.e., from producer to consumer. Dataflow graphs created through channels and tasks are always directed and acyclic.</li>
+<li><strong>Network transparency</strong>: Channels can be used for both local and networked communication. Whether the producer and consumer are on the same machine or on different machines is transparent to the user.</li>
+<li><strong>Persistence</strong>: Channels should be able to snapshot their state and replay it from an earlier offset.</li>
+</ul>
+<h2 id="limitations"><a class="header" href="#limitations">Limitations</a></h2>
+<p>The following restrictions are for now enforced on channels and tasks but may eventually be lifted:</p>
+<ul>
+<li>Tasks cannot create new tasks. Tasks may only be created by the main-thread of a program. This is because </li>
+<li>It is only possible to push and pull events from channels inside of tasks.</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="queries"><a class="header" href="#queries">Queries</a></h1>
+<p>Arc-Lang allows the formulation of queries over data collections (similar to SQL). This concept is borrowed from <a href="https://github.com/julianhyde/morel">Morel</a> which embeds SQL-style queries over relations in StandardML. The following query defines a word-count application.</p>
+<pre><code><b>def</b> wordcount(lines) =
+    <b>from</b> line <b>in</b> lines,
+         word <b>in</b> line.split(<b style="color:green">" "</b>)
+    <b>group</b> word
+    <b>window</b> <b style="color:darkorange">10m</b> <b>every</b> <b style="color:darkorange">5m</b>
+    <b>compute</b> count</code></pre>
+<p>The top-level statements provided by Arc-Lang are:</p>
+<table><thead><tr><th>Operator</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>from</code></td><td>Iterate over data items</td></tr>
+<tr><td><code>yield</code></td><td>Map data items</td></tr>
+<tr><td><code>where</code></td><td>Filter data items</td></tr>
+<tr><td><code>join</code></td><td>Join data items on a common predicate</td></tr>
+<tr><td><code>group</code></td><td>Group data items by a key</td></tr>
+<tr><td><code>window</code></td><td>Sliding or tumbling window</td></tr>
+<tr><td><code>compute</code></td><td>Aggregate data items</td></tr>
+<tr><td><code>reduce</code></td><td>Rolling aggregate data items</td></tr>
+<tr><td><code>sort</code></td><td>Sort data items</td></tr>
+</tbody></table>
+<p>The exact syntax of these statements is described <a href="tour/../arc-lang/Expr.html#Query">here</a>.</p>
+<h2 id="query-expressions"><a class="header" href="#query-expressions">Query expressions</a></h2>
+<p>A <em>query</em> in Arc-Lang is a type of expression that takes data collections as operands and evaluates into a data collection as output. A data collection could either be a finite dataframe or an infinite datastream. Queries begin with the <code>from</code> keyword and are followed by a set of statements. The <code>from</code> statement can in of itself be used to compute the cross product between collections.</p>
+<pre><code><b>val</b> a = [<b style="color:darkorange">1</b>,<b style="color:darkorange">2</b>];
+<b>val</b> b = [<b style="color:darkorange">3</b>];
+
+<b>val</b> c = <b>from</b> x <b>in</b> a, y <b>in</b> b;
+
+<i style="color:gray"># Equivalent to:</i>
+<i style="color:gray"># <b>val</b> c = a.flatmap(<b>fun</b>(x): b.map(<b>fun</b>(y): #{x:x,y:y}));</i>
+
+assert(c == [#{x:<b style="color:darkorange">1</b>,y:<b style="color:darkorange">3</b>},#{x:<b style="color:darkorange">2</b>,y:<b style="color:darkorange">3</b>}]);</code></pre>
+<h2 id="projection"><a class="header" href="#projection">Projection</a></h2>
+<p>The <code>yield</code> clause can be used to project elements</p>
+<pre><code><b>val</b> a = [[[<b style="color:darkorange">0</b>,<b style="color:darkorange">1</b>]],[[<b style="color:darkorange">2</b>,<b style="color:darkorange">3</b>]],[[<b style="color:darkorange">4</b>,<b style="color:darkorange">5</b>]]];
+
+<b>val</b> b = <b>from</b> x <b>in</b> a, y <b>in</b> x <b>yield</b> y+<b style="color:darkorange">1</b>;
+
+<i style="color:gray"># Equivalent to:</i>
+<i style="color:gray"># <b>val</b> b = a.flatmap(<b>fun</b>(x): x.map(<b>fun</b>(y): #{x:x,y:y}))</i>
+<i style="color:gray">#          .map(<b>fun</b>(r): r.y + <b style="color:darkorange">1</b>);</i>
+
+assert(b == [<b style="color:darkorange">1</b>,<b style="color:darkorange">2</b>,<b style="color:darkorange">3</b>,<b style="color:darkorange">4</b>,<b style="color:darkorange">5</b>,<b style="color:darkorange">6</b>]);</code></pre>
+<h2 id="selection"><a class="header" href="#selection">Selection</a></h2>
+<p>The <code>where</code> clause can be used for retaining elements which satisfy a predicate.</p>
+<pre><code><b>val</b> a = [<b style="color:darkorange">0</b>,<b style="color:darkorange">1</b>,<b style="color:darkorange">2</b>,<b style="color:darkorange">3</b>,<b style="color:darkorange">4</b>];
+
+<b>val</b> b = <b>from</b> x <b>in</b> a <b>where</b> x % <b style="color:darkorange">2</b> == <b style="color:darkorange">0</b>;
+
+<i style="color:gray"># Equivalent to:</i>
+<i style="color:gray"># <b>val</b> b = a.filter(<b>fun</b>(x): x % <b style="color:darkorange">2</b> == <b style="color:darkorange">0</b>);</i>
+
+assert(a, [<b style="color:darkorange">0</b>,<b style="color:darkorange">2</b>,<b style="color:darkorange">4</b>]);</code></pre>
+<p>Any kind of expression can be used as a predicate, as long as it evaluates into a boolean value.</p>
+<h2 id="ordering"><a class="header" href="#ordering">Ordering</a></h2>
+<p>The <code>order</code> clause can be used to sort elements according to a criterion. By default, sorting is ascending.</p>
+<pre><code><b>val</b> a = [<b style="color:darkorange">3</b>,<b style="color:darkorange">1</b>,<b style="color:darkorange">2</b>,<b style="color:darkorange">4</b>,<b style="color:darkorange">0</b>];
+
+<b>val</b> b = <b>from</b> x <b>in</b> a <b>order</b> x;
+<b>val</b> c = <b>from</b> x <b>in</b> a <b>order</b> x <b>desc</b>;
+
+<i style="color:gray"># Equivalent to:</i>
+<i style="color:gray"># <b>val</b> b = x.sort_asc(<b>fun</b>(x): x);</i>
+<i style="color:gray"># <b>val</b> c = x.sort_desc(<b>fun</b>(x): x);</i>
+
+assert(b == [<b style="color:darkorange">0</b>,<b style="color:darkorange">1</b>,<b style="color:darkorange">2</b>,<b style="color:darkorange">3</b>,<b style="color:darkorange">4</b>]);
+assert(c == [<b style="color:darkorange">4</b>,<b style="color:darkorange">3</b>,<b style="color:darkorange">2</b>,<b style="color:darkorange">1</b>,<b style="color:darkorange">0</b>]);</code></pre>
+<p>Streams cannot be sorted since sorting requires that the input is finite.</p>
+<h2 id="aggregating"><a class="header" href="#aggregating">Aggregating</a></h2>
+<p>The <code>compute</code> clause can be used to aggregate values.</p>
+<pre><code><b>val</b> a = [<b style="color:darkorange">1</b>,<b style="color:darkorange">2</b>,<b style="color:darkorange">3</b>];
+<b>val</b> b = [#{v:<b style="color:darkorange">1</b>},#{v:<b style="color:darkorange">2</b>},#{v:<b style="color:darkorange">3</b>}];
+
+<b>val</b> c = <b>from</b> x <b>in</b> a <b>compute</b> sum;
+<b>val</b> d = <b>from</b> x <b>in</b> b <b>compute</b> sum <b>of</b> x.v;
+
+<i style="color:gray"># Equivalent to:</i>
+<i style="color:gray"># <b>val</b> c = a._compute(sum);</i>
+<i style="color:gray"># <b>val</b> d = a._compute(sum, elem: <b>fun</b>(x) = x.v);</i>
+
+assert(c == #{sum:<b style="color:darkorange">6</b>});
+assert(d == #{sum:<b style="color:darkorange">6</b>});</code></pre>
+<p>Aggregation is only allowed on finite-sized data collections.</p>
+<h3 id="rolling-aggregates"><a class="header" href="#rolling-aggregates">Rolling Aggregates</a></h3>
+<p>The <code>reduce</code> clause can be used to compute rolling aggregates.</p>
+<pre><code><b>val</b> a = [<b style="color:darkorange">1</b>,<b style="color:darkorange">2</b>,<b style="color:darkorange">3</b>];
+
+<b>val</b> c = <b>from</b> x <b>in</b> a <b>reduce</b> sum;
+
+<i style="color:gray"># Equivalent to:</i>
+<i style="color:gray"># <b>val</b> c = a._reduce(sum);</i>
+
+assert(c == [#{sum:<b style="color:darkorange">1</b>}, #{sum:<b style="color:darkorange">3</b>}, #{sum:<b style="color:darkorange">6</b>}]);</code></pre>
+<p>Rolling aggregates are allowed on both finite- and infinite-sized data collections.</p>
+<h3 id="custom-aggregators"><a class="header" href="#custom-aggregators">Custom Aggregators</a></h3>
+<p>It is possible to define custom aggregators that can be used inside <code>compute</code> clauses. The <code>sum</code>, <code>count</code>, and <code>average</code> aggregators are monoids:</p>
+<pre><code><b>val</b> count = Aggregator::Monoid(#{
+    lift: <b>fun</b>(x) = #{count: <b style="color:darkorange">1</b>},
+    identity: <b>fun</b>() = #{count: <b style="color:darkorange">0</b>},
+    merge: <b>fun</b>(x,y) = #{count: x.count+y.count},
+    lower: <b>fun</b>(x): x,
+});
+
+<b>val</b> sum = Aggregator::Monoid(#{
+    lift: <b>fun</b>(x) = #{sum: x},
+    identity: <b>fun</b>() = #{sum: <b style="color:darkorange">0</b>},
+    merge: <b>fun</b>(x,y) = #{sum: x.sum+y.sum},
+    lower: <b>fun</b>(x): x,
+});
+
+<b>val</b> average = Aggregator::Monoid(#{
+    lift: <b>fun</b>(x) = #{sum: x, count: <b style="color:darkorange">1</b>},
+    identity: <b>fun</b>() = #{sum: <b style="color:darkorange">0</b>, count: <b style="color:darkorange">0</b>},
+    merge: <b>fun</b>(x,y) = #{sum: x.sum+y.sum, count: x.count+y.count},
+    lower: <b>fun</b>(x): #{average: x.sum/x.count},
+});</code></pre>
+<p>Holistic aggregators such as <code>median</code> (i.e., aggregators that operate on the whole input) can be defined as.</p>
+<pre><code><b>val</b> median = Aggregator::Holistic(#{
+    calc: <b>fun</b>(v) = {
+        <b>val</b> n = v.len();
+        <b>if</b> n % <b style="color:darkorange">2</b> == <b style="color:darkorange">0</b> {
+            (v[n/<b style="color:darkorange">2</b>] + v[n/<b style="color:darkorange">2</b>+<b style="color:darkorange">1</b>])/<b style="color:darkorange">2</b>
+        } <b>else</b> {
+            v[n/<b style="color:darkorange">2</b>+<b style="color:darkorange">1</b>]
+        }
+    }
+});</code></pre>
+<p>Here, <code>calc</code> is a function that gets the whole input collection.</p>
+<h2 id="grouping"><a class="header" href="#grouping">Grouping</a></h2>
+<p>The <code>group</code> clause can be used to group elements by key into partitions. After grouping, it is possible to apply a partition-wise transformation.</p>
+<pre><code><b>val</b> a = [#{k:<b style="color:darkorange">1</b>,v:<b style="color:darkorange">2</b>}, #{k:<b style="color:darkorange">2</b>,v:<b style="color:darkorange">2</b>}, #{k:<b style="color:darkorange">2</b>,v:<b style="color:darkorange">2</b>}];
+
+<b>val</b> b = <b>from</b> x <b>in</b> a <b>group</b> x.k;
+<b>val</b> c = <b>from</b> x <b>in</b> a <b>group</b> x.k <b>compute</b> average <b>of</b> x.v;
+
+<i style="color:gray"># Equivalent to:</i>
+<i style="color:gray"># <b>val</b> b = a._group(<b>fun</b>(x) = x.k);</i>
+<i style="color:gray"># <b>val</b> d = a._group(<b>fun</b>(x) = x.k, _compute: sum, elem: <b>fun</b>(v) = x.v);</i>
+
+assert(b == [#{k:<b style="color:darkorange">1</b>,v:[<b style="color:darkorange">2</b>]},#{k:<b style="color:darkorange">2</b>,v:[<b style="color:darkorange">2</b>,<b style="color:darkorange">2</b>]}]);
+assert(d == [#{k:<b style="color:darkorange">1</b>,sum:<b style="color:darkorange">2</b>},#{k:<b style="color:darkorange">2</b>,sum:<b style="color:darkorange">4</b>}]);</code></pre>
+<h2 id="windowing"><a class="header" href="#windowing">Windowing</a></h2>
+<p>The <code>window</code> clause can be used to slice data collections into multiple, possibly overlapping, partitions. Like <code>group</code>, a transformation can be applied per-partition. The <code>after</code> clause starts the window at an offset, and the <code>every</code> clause specifies the slide of a sliding window.</p>
+<pre><code><b>val</b> a = [#{t:<b style="color:darkorange">00:00:01</b>,v:<b style="color:darkorange">1</b>}, #{t:<b style="color:darkorange">00:00:04</b>,v:<b style="color:darkorange">2</b>}, #{t:<b style="color:darkorange">00:00:09</b>,v:<b style="color:darkorange">3</b>}];
+
+<b>val</b> b = <b>from</b> x <b>in</b> a <b>window</b> <b style="color:darkorange">5s</b>;
+<b>val</b> e = <b>from</b> x <b>in</b> a <b>window</b> <b style="color:darkorange">5s</b> <b>compute</b> count;
+<b>val</b> c = <b>from</b> x <b>in</b> a <b>window</b> <b style="color:darkorange">5s</b> <b>after</b> <b style="color:darkorange">00:00:02</b>;
+<b>val</b> d = <b>from</b> x <b>in</b> a <b>window</b> <b style="color:darkorange">5s</b> <b>every</b> <b style="color:darkorange">3s</b>;
+
+<i style="color:gray"># Equivalent to:</i>
+<i style="color:gray"># <b>val</b> b = a._window(<b style="color:darkorange">5s</b>);</i>
+<i style="color:gray"># <b>val</b> b = a._window(<b style="color:darkorange">5s</b>, _compute: count);</i>
+<i style="color:gray"># <b>val</b> c = a._window(<b style="color:darkorange">5s</b>, _after: <b style="color:darkorange">00:00:02</b>);</i>
+<i style="color:gray"># <b>val</b> d = a._window(<b style="color:darkorange">5s</b>, _every: <b style="color:darkorange">3s</b>);</i>
+
+assert(b == [#{t:<b style="color:darkorange">00:00:05</b>,v:[<b style="color:darkorange">1</b>,<b style="color:darkorange">2</b>]}, #{t:<b style="color:darkorange">00:00:10</b>,v:[<b style="color:darkorange">3</b>]}]);
+assert(e == [#{t:<b style="color:darkorange">00:00:05</b>,count:<b style="color:darkorange">2</b>}, #{t:<b style="color:darkorange">00:00:10</b>,count:<b style="color:darkorange">1</b>);
+assert(c == [#{t:<b style="color:darkorange">00:00:07</b>,v:[<b style="color:darkorange">1</b>,<b style="color:darkorange">2</b>]}, #{t:<b style="color:darkorange">00:00:12</b>,v:[<b style="color:darkorange">3</b>]}]);
+assert(d == [#{t:<b style="color:darkorange">00:00:05</b>,v:[<b style="color:darkorange">1</b>,<b style="color:darkorange">2</b>]}, #{t:<b style="color:darkorange">00:00:08</b>,v:[<b style="color:darkorange">2</b>]}, #{t:<b style="color:darkorange">00:00:11</b>,v:[<b style="color:darkorange">3</b>]}]);</code></pre>
+<h2 id="joining"><a class="header" href="#joining">Joining</a></h2>
+<p>The <code>join</code> clause can be used to join multiple data collections on a common key.</p>
+<pre><code><b>val</b> a = [#{id:<b style="color:darkorange">0</b>,name:<b style="color:green">"Tim"</b>}, #{id:<b style="color:darkorange">1</b>,name:<b style="color:green">"Bob"</b>}];
+<b>val</b> b = [#{id:<b style="color:darkorange">0</b>,age:<b style="color:darkorange">30</b>}, #{id:<b style="color:darkorange">1</b>,age:<b style="color:darkorange">100</b>}];
+
+<b>val</b> c = <b>from</b> x <b>in</b> a <b>join</b> y <b>in</b> b <b>on</b> x.id == y.id;
+
+<i style="color:gray"># Equivalent to</i>
+<i style="color:gray"># <b>val</b> c = a._join(b, <b>fun</b>(x,y): x.id == y.id);</i>
+
+assert(c == [#{id:<b style="color:darkorange">0</b>,name:<b style="color:green">"Tim"</b>,age:<b style="color:darkorange">30</b>}, #{id:<b style="color:darkorange">1</b>,name:<b style="color:green">"Bob"</b>,age:<b style="color:darkorange">100</b>}]);</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="examples"><a class="header" href="#examples">Examples</a></h1>
+<p>In this section we describe examples of how to use Arc-Lang.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="word-count"><a class="header" href="#word-count">Word Count</a></h1>
+<p>Word count is a simple way to count the number of words in a text. The code for calculating a wordcount is as follows.</p>
+<pre><code><b>def</b> wordcount(lines) =
+    <b>from</b> line <b>in</b> lines,
+         word <b>in</b> line.split(<b style="color:green">" "</b>)
+    <b>group</b> word
+    <b>window</b> <b style="color:darkorange">10m</b> <b>every</b> <b style="color:darkorange">5m</b>
+    <b>compute</b> count</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="tf-idf"><a class="header" href="#tf-idf">TF-IDF</a></h1>
+<p>The formula that is used to compute tf-idf is defined as follows:</p>
+<ul>
+<li><code>tf-idf(t, d) = tf(t, d) * idf(t)</code>
+<ul>
+<li><code>t</code> is a term</li>
+<li><code>d</code> is a document in a document set</li>
+<li><code>idf(t) = log [n/df(t)] + 1</code> is the inverse document frequency
+<ul>
+<li><code>n</code> is the total number of documents in the document set</li>
+<li><code>df(t)</code> is the document frequency of <code>t</code>
+<ul>
+<li>i.e., number of documents containing the term <code>t</code></li>
+</ul>
+</li>
+<li><code>tf(t, d)</code> is the term frequency of <code>t</code> in <code>d</code>
+<ul>
+<li>i.e., number of occurrences of the term <code>t</code> within the document <code>d</code></li>
+</ul>
+</li>
+<li><code>1</code> is added so that terms which occur in all documents will not be
+entirely ignored.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="sensor-data-aggregation"><a class="header" href="#sensor-data-aggregation">Sensor Data Aggregation</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="command-line-interface"><a class="header" href="#command-line-interface">Command Line Interface</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="language-reference"><a class="header" href="#language-reference">Language Reference</a></h1>
+<p>The core concepts of Arc are:</p>
+<ul>
+<li><a href="arc-lang/Name.html"><strong>Names</strong></a></li>
+<li><a href="arc-lang/Path.html"><strong>Paths</strong></a></li>
+<li><a href="arc-lang/Value.html"><strong>Values</strong></a></li>
+<li><a href="arc-lang/Type.html"><strong>Types</strong></a></li>
+<li><a href="arc-lang/Expr.html"><strong>Expressions</strong></a></li>
+<li><a href="arc-lang/Pattern.html"><strong>Patterns</strong></a></li>
+<li><a href="arc-lang/Item.html"><strong>Items</strong></a></li>
+</ul>
+<p>In the following sections, we will explain each concept by presenting its syntax and discussing its semantics through examples. Syntax will be explained using a Regex-based variation of the BNF grammar where:</p>
+<ul>
+<li><code>+</code> and <code>*</code> denote repetition.</li>
+<li><code>?</code> is for optional rules.</li>
+<li><code>(</code> <code>)</code> indicates grouping.</li>
+<li><code>|</code> is for alternation.</li>
+<li><code>[</code> <code>]</code> for is character-alternation (e.g., <code>abc</code>).</li>
+<li><code>-</code> is for ranges (e.g., <code>a-zA-Z</code>).</li>
+<li><code>.</code> is for matching any character.</li>
+<li><code>\</code> is for escaping characters.</li>
+<li>Non-terminals are written as uppercase (e.g., <code>Expr</code>).</li>
+<li>Terminals are written in blue text (e.g., <code><for></code>)</li>
+</ul>
+<p>Some code examples do not yet compile. These are highlighted with an orange background.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="programs"><a class="header" href="#programs">Programs</a></h1>
+<p>An Arc-Lang program is a sequence of items. Programs start their execution from a main function.</p>
+<pre><code><a id="Program" href="arc-lang/Program.html#Program">Program</a> ::= <a href="arc-lang/Item.html#Item">Item</a>*</code></pre>
+<p>Source files are suffixed with the <code>.arc</code> file extension.</p>
+<h3 id="examples-1"><a class="header" href="#examples-1">Examples</a></h3>
+<pre><code><b>def</b> main() {
+    <i style="color:gray"># ...</i>
+}</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="names"><a class="header" href="#names">Names</a></h1>
+<p>A <strong>name</strong> is a symbolic identifier which can be assigned to a <strong>variable</strong> or <strong>item</strong>.</p>
+<pre><code><a id="Name" href="arc-lang/Name.html#Name">Name</a> ::= [a-zA-Z_][a-zA-Z_0-9]*</code></pre>
+<h2 id="examples-2"><a class="header" href="#examples-2">Examples</a></h2>
+<pre><code><b>def</b> this_is_a_name(this_is_also_a_name) {
+    <b>val</b> this_is_yet_another_name = <b style="color:darkorange">1</b>;
+}</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="paths"><a class="header" href="#paths">Paths</a></h1>
+<p>A <strong>path</strong> is a list of names which point to an <strong>item</strong> in the module hierarchy.</p>
+<pre><code><a id="Path" href="arc-lang/Path.html#Path">Path</a> ::= <b>::</b>? <a href="arc-lang/Name.html#Name">Name</a><b>::</b>* <a href="arc-lang/Name.html#Name">Name</a></code></pre>
+<p>Paths can be both <em>relative</em> and <em>absolute</em>. Absolute paths are absolute with respect to the root of the module hierarchy. Relative paths are relative with respect to the current namespace.</p>
+<pre><code>mod1::mod2::MyItem   <i style="color:gray"># Relative path</i>
+::mod1::mod2::MyItem <i style="color:gray"># Absolute path</i></code></pre>
+<h3 id="examples-3"><a class="header" href="#examples-3">Examples</a></h3>
+<pre><code><b>mod</b> foo {
+    <b>mod</b> bar {
+        <b>val</b> baz = <b style="color:darkorange">3</b>
+        <b>def</b> relative() = baz
+        <b>def</b> absolute() = ::foo::bar::baz
+    }
+    <b>def</b> relative() = bar::baz
+    <b>def</b> absolute() = ::foo::bar::baz
+}
+
+<b>def</b> relative() = foo::bar::baz
+<b>def</b> absolute() = ::foo::bar::baz</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="values"><a class="header" href="#values">Values</a></h1>
+<p>A <strong>value</strong> is the result of evaluating an <strong>expression</strong>.</p>
+<pre><code><a id="Value" href="arc-lang/Value.html#Value">Value</a> ::=
+  | <b>#{</b> (<a href="arc-lang/Name.html#Name">Name</a> <b>:</b> <a href="arc-lang/Value.html#Value">Value</a>)<b>,</b>+ <b>}</b>              <i style="color:gray">Record-value</i>
+  | <b>(</b> <a href="arc-lang/Value.html#Value">Value</a><b>,</b>+ <b>)</b>                        <i style="color:gray">Tuple-value</i>
+  | <b>fun</b> <b>(</b> (<a href="arc-lang/Pattern.html#Pattern">Pattern</a> <b>:</b> <a href="arc-lang/Type.html#Type">Type</a>)<b>,</b>+ <b>)</b> <b>:</b> <a href="arc-lang/Expr.html#Expr">Expr</a>  <i style="color:gray">Lambda-value</i>
+  | <a href="arc-lang/Value.html#Value">Value</a>? <b>..</b> (<b>=</b>? <a href="arc-lang/Value.html#Value">Value</a>)?              <i style="color:gray">Range-value</i>
+  | <a href="arc-lang/Path.html#Path">Path</a>                               <i style="color:gray">Item-value</i>
+  | <a href="arc-lang/Path.html#Path">Path</a> <b>(</b> <a href="arc-lang/Value.html#Value">Value</a> <b>)</b>                     <i style="color:gray">Enum-value</i>
+  | <a href="arc-lang/Literal.html#Literal">Literal</a>
+
+<a id="Literal" href="arc-lang/Value.html#Literal">Literal</a> ::=
+  | <b>true</b> | <b>false</b>        <i style="color:gray">Literal boolean</i>
+  | <b>unit</b>                <i style="color:gray">Literal unit</i>
+  | <b>'</b>[^<b>'</b>]<b>'</b>              <i style="color:gray">Literal character</i>
+  | <b>"</b>[^<b>"</b>]*<b>"</b>             <i style="color:gray">Literal string</i>
+  | [<b>1</b>-<b>9</b>][<b>0</b>-<b>9</b>]*         <i style="color:gray">Literal integer</i>
+  | [<b>1</b>-<b>9</b>][<b>0</b>-<b>9</b>]*<b>.</b>[<b>0</b>-<b>9</b>]*  <i style="color:gray">Literal floating point</i>
+  | <a href="arc-lang/Value.html#DateTime">DateTime</a>
+  | <a href="arc-lang/Value.html#Duration">Duration</a>
+
+<a id="DateTime" href="arc-lang/Value.html#DateTime">DateTime</a> ::=
+  | [<b>0</b>-<b>9</b>]+<b>-</b>[<b>0</b>-<b>9</b>]+<b>-</b>[<b>0</b>-<b>9</b>]+                                         <i style="color:gray">Date</i>
+  | [<b>0</b>-<b>9</b>]+<b>-</b>[<b>0</b>-<b>9</b>]+<b>-</b>[<b>0</b>-<b>9</b>]+<b>T</b>[<b>0</b>-<b>9</b>]+<b>:</b>[<b>0</b>-<b>9</b>]+<b>:</b>[<b>0</b>-<b>9</b>]+                    <i style="color:gray">Date + Time</i>
+  | [<b>0</b>-<b>9</b>]+<b>-</b>[<b>0</b>-<b>9</b>]+<b>-</b>[<b>0</b>-<b>9</b>]+<b>T</b>[<b>0</b>-<b>9</b>]+<b>:</b>[<b>0</b>-<b>9</b>]+<b>:</b>[<b>0</b>-<b>9</b>]+(<b>+</b>|<b>-</b>)[<b>0</b>-<b>9</b>]+<b>:</b>[<b>0</b>-<b>9</b>]+  <i style="color:gray">Date + Time + Zone</i>
+
+<a id="Duration" href="arc-lang/Value.html#Duration">Duration</a> ::= 
+  | [<b>0</b>-<b>9</b>]+<b>ns</b>  <i style="color:gray">Nanosecond</i>
+  | [<b>0</b>-<b>9</b>]+<b>us</b>  <i style="color:gray">Microsecond</i>
+  | [<b>0</b>-<b>9</b>]+<b>ms</b>  <i style="color:gray">Millisecond</i>
+  | [<b>0</b>-<b>9</b>]+<b>s</b>   <i style="color:gray">Second</i>
+  | [<b>0</b>-<b>9</b>]+<b>m</b>   <i style="color:gray">Minute</i>
+  | [<b>0</b>-<b>9</b>]+<b>h</b>   <i style="color:gray">Hour</i>
+  | [<b>0</b>-<b>9</b>]+<b>d</b>   <i style="color:gray">Day</i>
+  | [<b>0</b>-<b>9</b>]+<b>w</b>   <i style="color:gray">Week</i></code></pre>
+<h2 id="examples-4"><a class="header" href="#examples-4">Examples</a></h2>
+<p>Some examples of different values:</p>
+<pre><code><b>val</b> v0: i32             = <b style="color:darkorange">3</b>;                   <i style="color:gray"># Integer</i>
+<b>val</b> v1: f32             = <b style="color:darkorange">0.1</b>;                 <i style="color:gray"># Float</i>
+<b>val</b> v2: f32             = <b style="color:darkorange">10%</b>;                 <i style="color:gray"># Float (Percentage)</i>
+<b>val</b> v3: i32             = <b style="color:darkorange">100ms</b>;               <i style="color:gray"># Duration</i>
+<b>val</b> v4: String          = <b style="color:darkorange">2020-12-16T16:00:00</b>; <i style="color:gray"># DateTime</i>
+<b>val</b> v5: char            = <b style="color:green">'c'</b>;                 <i style="color:gray"># Character</i>
+<b>val</b> v6: String          = <b style="color:green">"hello"</b>;             <i style="color:gray"># String</i>
+<b>val</b> v7: String          = <b style="color:green">"$v6 world"</b>;         <i style="color:gray"># String (Interpolated)</i>
+<b>val</b> v8: #{x:i32, y:i32} = #{x:<b style="color:darkorange">5</b>, y:<b style="color:darkorange">8</b>};         <i style="color:gray"># Record</i>
+<b>val</b> v9: Option[i32]     = Option::Some(<b style="color:darkorange">3</b>);     <i style="color:gray"># Enum variant</i>
+<b>val</b> v10: [i32]          = [<b style="color:darkorange">1</b>,<b style="color:darkorange">2</b>,<b style="color:darkorange">3</b>];             <i style="color:gray"># Vector</i>
+<b>val</b> v11: <b>fun</b>(i32): i32  = <b>fun</b>(x:i32) = x;      <i style="color:gray"># Lambda function</i></code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="types"><a class="header" href="#types">Types</a></h1>
+<p>All expressions in arc-lang have a statically inferred type which indicates what set of values they evaluate into. Types of items and variables can be inferred, and thus do not need to be annotated unless desired.</p>
+<pre><code><a id="Type" href="arc-lang/Type.html#Type">Type</a> ::=
+  | <b>#{</b> (<a href="arc-lang/Name.html#Name">Name</a> <b>:</b> <a href="arc-lang/Type.html#Type">Type</a>)<b>,</b>+ <b>}</b>   <i style="color:gray">Record-type</i>
+  | <b>(</b> <a href="arc-lang/Type.html#Type">Type</a><b>,</b>+ <b>)</b>             <i style="color:gray">Tuple-type</i>
+  | <b>fun</b> <b>(</b> <a href="arc-lang/Type.html#Type">Type</a><b>,</b>+ <b>)</b> <b>:</b> <a href="arc-lang/Type.html#Type">Type</a>  <i style="color:gray">Function-type</i>
+  | <a href="arc-lang/Type.html#Type">Type</a>? <b>..</b> (<b>=</b>? <a href="arc-lang/Type.html#Type">Type</a>)?    <i style="color:gray">Range-type</i>
+  | <a href="arc-lang/Path.html#Path">Path</a> (<b>[</b> <a href="arc-lang/Type.html#Type">Type</a><b>,</b>* <b>]</b>)?     <i style="color:gray">Item-type (with optional type parameters)</i></code></pre>
+<h2 id="examples-5"><a class="header" href="#examples-5">Examples</a></h2>
+<p>Some examples of different types:</p>
+<pre><code>#{x:i32, y:str} <i style="color:gray"># Record-<b>type</b></i>
+(i32, str)      <i style="color:gray"># Tuple-<b>type</b></i>
+fun(i32): i32   <i style="color:gray"># Function-<b>type</b></i>
+i32..=i32       <i style="color:gray"># Inclusive Range-<b>type</b>    </i>
+i32..i32        <i style="color:gray"># Exclusive Range-<b>type</b></i></code></pre>
+<h1 id="standard-types"><a class="header" href="#standard-types">Standard types</a></h1>
+<p>The following types are provided in the <a href="https://github.com/cda-group/arc/blob/master/arc-lang/stdlib/stdlib.arc">standard library</a> of Arc-Lang:</p>
+<pre><code><b>extern</b> type unit;
+<b>extern</b> type i8;
+<b>extern</b> type i16;
+<b>extern</b> type i32;
+<b>extern</b> type i64;
+<b>extern</b> type i128;
+<b>extern</b> type u8;
+<b>extern</b> type u16;
+<b>extern</b> type u32;
+<b>extern</b> type u64;
+<b>extern</b> type u128;
+<b>extern</b> type f32;
+<b>extern</b> type f64;
+<b>extern</b> type bool;
+<b>extern</b> type char;
+<b>extern</b> type String;
+<b>extern</b> type str;
+<b>extern</b> type Array[T];
+<b>extern</b> type Cell[T];
+<b>extern</b> type Iter[T];
+<b>extern</b> type Range[T];
+<b>extern</b> type Stream[T];</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="blocks"><a class="header" href="#blocks">Blocks</a></h1>
+<p>A <strong>block</strong> is a sequence of statements optionally terminated by an expression which the block evaluates into. If no expression is specified, then the block evaluates into unit.</p>
+<pre><code><a id="Block" href="arc-lang/Block.html#Block">Block</a> ::= <b>{</b> <a href="arc-lang/Stmt.html#Stmt">Stmt</a>* <a href="arc-lang/Expr.html#Expr">Expr</a>? <b>}</b></code></pre>
+<h2 id="examples-6"><a class="header" href="#examples-6">Examples</a></h2>
+<pre><code><b>val</b> a = { { { { { <b style="color:darkorange">6</b> } } } } };
+<b>val</b> b = { <b style="color:darkorange">1</b>; <b style="color:darkorange">2</b>; <b style="color:darkorange">3</b>; <b style="color:darkorange">4</b>; <b style="color:darkorange">5</b>; <b style="color:darkorange">6</b> };
+<b>val</b> c = { <b style="color:darkorange">1</b>; { <b style="color:darkorange">2</b>; { <b style="color:darkorange">3</b>; { <b style="color:darkorange">4</b>; { <b style="color:darkorange">5</b>; { <b style="color:darkorange">6</b> } } } } } };
+<b>val</b> d = { { { { { { <b style="color:darkorange">1</b> }; <b style="color:darkorange">2</b> }; <b style="color:darkorange">3</b> }; <b style="color:darkorange">4</b> }; <b style="color:darkorange">5</b> }; <b style="color:darkorange">6</b> };
+<b>val</b> e = a + b + c + d;</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="statements"><a class="header" href="#statements">Statements</a></h1>
+<p>A <strong>statement</strong> is either a variable assignment or an expression whose result is ignored.</p>
+<pre><code><a id="Stmt" href="arc-lang/Stmt.html#Stmt">Stmt</a> ::=
+  | <b>;</b>
+  | <a href="arc-lang/Expr.html#Expr">Expr</a> <b>;</b>
+  | <a href="arc-lang/Assign.html#Assign">Assign</a></code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="expressions"><a class="header" href="#expressions">Expressions</a></h1>
+<p>An <strong>expression</strong> is syntactic construct which can be evaluated into a <strong>value</strong>.</p>
+<pre><code><a id="Expr" href="arc-lang/Expr.html#Expr">Expr</a> ::=
+  | <a href="arc-lang/Name.html#Name">Name</a>         <i style="color:gray">Variable reference</i>
+  | <a href="arc-lang/Path.html#Path">Path</a>         <i style="color:gray">Item reference</i>
+  | <a href="arc-lang/Value.html#Value">Value</a>        <i style="color:gray">Value literal</i>
+  | <b>(</b> <a href="arc-lang/Expr.html#BinOp">BinOp</a> <b>)</b>    <i style="color:gray">Binary operator reference</i>
+  | <b>_</b>            <i style="color:gray">Placeholder</i>
+  | <a href="arc-lang/Expr.html#Query">Query</a>        <i style="color:gray">Query expression</i>
+  | <a href="arc-lang/Expr.html#Constructor">Constructor</a>  <i style="color:gray">Constructor expression</i>
+  | <a href="arc-lang/Expr.html#Operation">Operation</a>    <i style="color:gray">Operation expression</i>
+  | <a href="arc-lang/Expr.html#ControlFlow">ControlFlow</a>  <i style="color:gray">Control flow expression</i>
+  | <a href="arc-lang/Expr.html#DataFlow">DataFlow</a>     <i style="color:gray">Dataflow expression</i>
+
+<a id="Constructor" href="arc-lang/Expr.html#Constructor">Constructor</a> ::=
+  | <b>#{</b> (<a href="arc-lang/Name.html#Name">Name</a> <b>:</b> <a href="arc-lang/Expr.html#Expr">Expr</a>)<b>,</b>* <b>}</b>          <i style="color:gray">Record-construction</i>
+  | <b>(</b> <a href="arc-lang/Expr.html#Expr">Expr</a><b>,</b>+ <b>)</b>                    <i style="color:gray">Tuple-construction</i>
+  | <b>[</b> <a href="arc-lang/Expr.html#Expr">Expr</a><b>,</b>* <b>]</b>                    <i style="color:gray">Array-construction</i>
+  | <a href="arc-lang/Expr.html#Expr">Expr</a>? <b>..</b> (<b>=</b>? <a href="arc-lang/Expr.html#Expr">Expr</a>)?           <i style="color:gray">Range-construction</i>
+  | <b>fun</b> <a href="arc-lang/Params.html#Params">Params</a> (<b>:</b> <a href="arc-lang/Type.html#Type">Type</a>)? <b>=</b> <a href="arc-lang/Expr.html#Expr">Expr</a>   <i style="color:gray">Lambda-function construction</i>
+  | <b>task</b> <a href="arc-lang/Params.html#Params">Params</a>? <b>:</b> <a href="arc-lang/Params.html#Params">Params</a> <b>=</b> <a href="arc-lang/Expr.html#Expr">Expr</a>  <i style="color:gray">Lambda-task construction</i>
+  | <a href="arc-lang/Path.html#Path">Path</a> <b>(</b> <a href="arc-lang/Expr.html#Expr">Expr</a> <b>)</b>                 <i style="color:gray">Enum-variant construction</i>
+
+<a id="Operation" href="arc-lang/Expr.html#Operation">Operation</a> ::=
+  | <a href="arc-lang/Expr.html#Expr">Expr</a> <a href="arc-lang/Expr.html#BinOp">BinOp</a> <a href="arc-lang/Expr.html#Expr">Expr</a>   <i style="color:gray">Binary operation</i>
+  | <a href="arc-lang/Expr.html#Expr">Expr</a> <a href="arc-lang/Expr.html#UnOp">UnOp</a>         <i style="color:gray">Unary operator</i>
+  | <a href="arc-lang/Expr.html#Expr">Expr</a> <b>(</b> <a href="arc-lang/Expr.html#Expr">Expr</a><b>,</b>* <b>)</b>   <i style="color:gray">Function call</i>
+  | <a href="arc-lang/Expr.html#Expr">Expr</a> <b>.</b> <a href="arc-lang/Name.html#Name">Name</a>       <i style="color:gray">Field projection</i>
+  | <a href="arc-lang/Expr.html#Expr">Expr</a> <b>.</b> [0-9]+     <i style="color:gray">Index projection</i>
+  | <a href="arc-lang/Expr.html#Expr">Expr</a> <b>as</b> <a href="arc-lang/Type.html#Type">Type</a>      <i style="color:gray">Type cast</i>
+  | <a href="arc-lang/Expr.html#Expr">Expr</a> <b>in</b> <a href="arc-lang/Expr.html#Expr">Expr</a>      <i style="color:gray">Contains</i>
+  | <a href="arc-lang/Expr.html#Expr">Expr</a> <b>not</b> <b>in</b> <a href="arc-lang/Expr.html#Expr">Expr</a>  <i style="color:gray">Does not contain</i>
+
+<a id="UnOp" href="arc-lang/Expr.html#UnOp">UnOp</a> ::=
+  | <b>-</b>    <i style="color:gray">Arithmetic negation</i>
+  | <b>not</b>  <i style="color:gray">Logical negation</i>
+
+<a id="BinOp" href="arc-lang/Expr.html#BinOp">BinOp</a> ::=
+  | <b>+</b>   | <b>-</b>  | <b>*</b>   | <b>/</b>    | <b>**</b>  | <b>%</b>     <i style="color:gray">Arithmetic</i>
+  | <b>==</b>  | <b>!=</b> | <b><</b>   | <b>></b>    | <b><=</b>  | <b>>=</b>    <i style="color:gray">Equality and comparison</i>
+  | <b>and</b> | <b>or</b> | <b>xor</b> | <b>band</b> | <b>bor</b> | <b>bxor</b>  <i style="color:gray">Logical and bitwise</i>
+
+<a id="ControlFlow" href="arc-lang/Expr.html#ControlFlow">ControlFlow</a> ::=
+  | <b>if</b> <a href="arc-lang/Expr.html#Expr">Expr</a> <a href="arc-lang/Block.html#Block">Block</a> (<b>else</b> <a href="arc-lang/Block.html#Block">Block</a>)?                         <i style="color:gray">If-else-expression</i>
+  | <b>match</b> <a href="arc-lang/Expr.html#Expr">Expr</a> <b>{</b> (<a href="arc-lang/Pattern.html#Pattern">Pattern</a> (<b>if</b> <a href="arc-lang/Expr.html#Expr">Expr</a>)? <b>=></b> <a href="arc-lang/Expr.html#Expr">Expr</a>)<b>,</b>+ <b>}</b>       <i style="color:gray">Match-expression</i>
+  | <b>for</b> <a href="arc-lang/Pattern.html#Pattern">Pattern</a> <b>in</b> <a href="arc-lang/Expr.html#Expr">Expr</a> <b>{</b> <a href="arc-lang/Expr.html#Expr">Expr</a> <b>}</b>                        <i style="color:gray">For-loop</i>
+  | <b>while</b> <a href="arc-lang/Expr.html#Expr">Expr</a> <a href="arc-lang/Block.html#Block">Block</a>                                    <i style="color:gray">While-loop</i>
+  | <b>loop</b> <a href="arc-lang/Block.html#Block">Block</a>                                          <i style="color:gray">Infinite loop</i>
+  | <b>break</b> | <b>continue</b> | <b>return</b> <a href="arc-lang/Expr.html#Expr">Expr</a>?                     <i style="color:gray">Jumps</i>
+  | <b>try</b> <a href="arc-lang/Expr.html#Expr">Expr</a> <b>catch</b> (<a href="arc-lang/Pattern.html#Pattern">Pattern</a> <b>=></b> <a href="arc-lang/Expr.html#Expr">Expr</a>)<b>,</b>+ (<b>finally</b> <a href="arc-lang/Expr.html#Expr">Expr</a>)?  <i style="color:gray">Exceptions</i>
+  | <b>[</b> <a href="arc-lang/Expr.html#Expr">Expr</a> <b>for</b> <a href="arc-lang/Pattern.html#Pattern">Pattern</a> <b>in</b> <a href="arc-lang/Expr.html#Expr">Expr</a> (<b>if</b> <a href="arc-lang/Expr.html#Expr">Expr</a>)* <b>]</b>             <i style="color:gray">Comprehension</i>
+
+<a id="DataFlow" href="arc-lang/Expr.html#DataFlow">DataFlow</a> ::=
+  | <b>receive</b> <a href="arc-lang/Expr.html#Expr">Expr</a>                        <i style="color:gray">Selective receive</i>
+  | <b>on</b> <b>{</b> (<a href="arc-lang/Pattern.html#Pattern">Pattern</a> <b>in</b> <a href="arc-lang/Expr.html#Expr">Expr</a> <b>=></b> <a href="arc-lang/Expr.html#Expr">Expr</a>)<b>,</b>+ <b>}</b>  <i style="color:gray">Non-selective receive</i>
+  | <a href="arc-lang/Expr.html#Expr">Expr</a> <b>!</b> <a href="arc-lang/Expr.html#Expr">Expr</a>                         <i style="color:gray">Emit event</i>
+
+<a id="Query" href="arc-lang/Expr.html#Query">Query</a> ::= <b>from</b> (<a href="arc-lang/Pattern.html#Pattern">Pattern</a> <b>in</b> <a href="arc-lang/Expr.html#Expr">Expr</a>)<b>,</b>+ <a href="arc-lang/Expr.html#QueryStmt">QueryStmt</a>+
+
+<a id="QueryStmt" href="arc-lang/Expr.html#QueryStmt">QueryStmt</a> ::=
+  | <b>yield</b> <a href="arc-lang/Expr.html#Expr">Expr</a>                            <i style="color:gray">Select</i>
+  | <b>where</b> <a href="arc-lang/Expr.html#Expr">Expr</a>                            <i style="color:gray">Filter</i>
+  | <b>join</b> <a href="arc-lang/Expr.html#Expr">Expr</a> (<b>on</b> <a href="arc-lang/Expr.html#Expr">Expr</a>)?                  <i style="color:gray">Join</i>
+  | <b>keyby</b> ((<a href="arc-lang/Name.html#Name">Name</a> <b>=</b>)? <a href="arc-lang/Expr.html#Expr">Expr</a>)<b>,</b>*              <i style="color:gray">Partition</i>
+  | <b>compute</b> (<a href="arc-lang/Name.html#Name">Name</a> <b>=</b>)? <a href="arc-lang/Expr.html#Expr">Expr</a> (<b>of</b> <a href="arc-lang/Expr.html#Expr">Expr</a>)?     <i style="color:gray">Aggregation</i>
+  | <b>sort</b> <a href="arc-lang/Expr.html#Expr">Expr</a> <b>desc</b>?                       <i style="color:gray">Sort</i>
+  | <b>window</b> <a href="arc-lang/Expr.html#Expr">Expr</a> (<b>every</b> <a href="arc-lang/Expr.html#Expr">Expr</a>)? (<b>at</b> <a href="arc-lang/Expr.html#Expr">Expr</a>)?  <i style="color:gray">Sliding or tumbling window</i></code></pre>
+<h2 id="operators"><a class="header" href="#operators">Operators</a></h2>
+<p>Operators are defined as follows, with precedence from highest to lowest:</p>
+<table><thead><tr><th>Operator</th><th>Arity</th><th>Affix</th><th>Associativity</th><th>Overloadable?</th></tr></thead><tbody>
+<tr><td><code>return</code> <code>break</code></td><td>Unary</td><td>Prefix*</td><td></td><td>No</td></tr>
+<tr><td><code>fun</code> <code>task</code> <code>on</code></td><td>Unary</td><td>Prefix</td><td></td><td>No</td></tr>
+<tr><td><code>=</code> <code>!</code> <code>+=</code> <code>-=</code> <code>%=</code> <code>*=</code> <code>/=</code> <code>**=</code></td><td>Binary</td><td>Infix</td><td>None</td><td>No</td></tr>
+<tr><td><code>in</code> <code>not in</code></td><td>Binary</td><td>Infix</td><td>Left</td><td>No</td></tr>
+<tr><td><code>..</code> <code>..=</code></td><td>Binary</td><td>Infix</td><td>None</td><td>No</td></tr>
+<tr><td><code>and</code> <code>or</code> <code>xor</code> <code>bor</code> <code>band</code> <code>bxor</code></td><td>Binary</td><td>Infix</td><td>Left</td><td>Yes</td></tr>
+<tr><td><code>==</code> <code>!=</code></td><td>Binary</td><td>Infix</td><td>None</td><td>No</td></tr>
+<tr><td><code>&lt;</code> <code>&gt;</code> <code>&lt;=</code> <code>&gt;=</code></td><td>Binary</td><td>Infix</td><td>None</td><td>No</td></tr>
+<tr><td><code>-</code> <code>+</code> <code>%</code></td><td>Binary</td><td>Infix</td><td>Left</td><td>Yes</td></tr>
+<tr><td><code>*</code> <code>/</code></td><td>Binary</td><td>Infix</td><td>Left</td><td>Yes</td></tr>
+<tr><td><code>**</code></td><td>Binary</td><td>Infix</td><td>Right</td><td>Yes</td></tr>
+<tr><td><code>not</code> <code>-</code></td><td>Unary</td><td>Prefix</td><td></td><td>Yes</td></tr>
+<tr><td><code>as</code></td><td>Binary</td><td>Infix</td><td>Left</td><td>No</td></tr>
+<tr><td><code>(exprs)</code> <code>[exprs]</code></td><td>Unary</td><td>Postfix</td><td></td><td>No</td></tr>
+<tr><td><code>.index</code> <code>.name</code> <code>.name(exprs)</code> <code>.name[exprs]</code></td><td>Unary</td><td>Postfix</td><td></td><td>No</td></tr>
+<tr><td>Primary expressions</td><td>Nullary</td><td></td><td></td><td>No</td></tr>
+</tbody></table>
+<p>(*) Operand is optional.</p>
+<h2 id="builtin-functions"><a class="header" href="#builtin-functions">Builtin Functions</a></h2>
+<p>The builtin functions of Arc-Lang are listed here.</p>
+<pre><code><b>extern</b> def +(i32, i32): i32;
+<b>extern</b> def -(i32, i32): i32;
+<b>extern</b> def *(i32, i32): i32;
+<b>extern</b> def /(i32, i32): i32;
+<b>extern</b> def **(i32, i32): i32;
+<b>extern</b> def %(i32, i32): i32;
+<b>extern</b> def ==(i32, i32): bool;
+<b>extern</b> def >=(i32, i32): bool;
+<b>extern</b> def <=(i32, i32): bool;
+<b>extern</b> def >(i32, i32): bool;
+<b>extern</b> def <(i32, i32): bool;
+<b>extern</b> def <b>bor</b>(i32, i32): bool;
+<b>extern</b> def <b>bxor</b>(i32, i32): bool;
+<b>extern</b> def <b>band</b>(i32, i32): bool;
+<b>extern</b> def neg(i32): i32;
+<b>extern</b> def i32_to_string(i32): String;
+<b>extern</b> def +u32(u32, u32): u32;
+<b>extern</b> def -u32(u32, u32): u32;
+<b>extern</b> def *u32(u32, u32): u32;
+<b>extern</b> def /u32(u32, u32): u32;
+<b>extern</b> def **u32(u32, u32): u32;
+<b>extern</b> def %u32(u32, u32): u32;
+<b>extern</b> def ==u32(u32, u32): bool;
+<b>extern</b> def >=u32(u32, u32): bool;
+<b>extern</b> def <=u32(u32, u32): bool;
+<b>extern</b> def >u32(u32, u32): bool;
+<b>extern</b> def <u32(u32, u32): bool;
+<b>extern</b> def negu32(u32): u32;
+<b>extern</b> def +f32(f32, f32): f32;
+<b>extern</b> def -f32(f32, f32): f32;
+<b>extern</b> def *f32(f32, f32): f32;
+<b>extern</b> def /f32(f32, f32): f32;
+<b>extern</b> def **f32(f32, f32): f32;
+<b>extern</b> def %f32(f32, f32): f32;
+<b>extern</b> def ==f32(f32, f32): bool;
+<b>extern</b> def >=f32(f32, f32): bool;
+<b>extern</b> def <=f32(f32, f32): bool;
+<b>extern</b> def >f32(f32, f32): bool;
+<b>extern</b> def <f32(f32, f32): bool;
+<b>extern</b> def negf32(f32): f32;
+<b>extern</b> def f32_to_string(i32): String;
+<b>extern</b> def <b>and</b>(bool, bool): bool;
+<b>extern</b> def <b>or</b>(bool, bool): bool;
+<b>extern</b> def <b>xor</b>(bool, bool): bool;
+<b>extern</b> def ==bool(bool, bool): bool;
+<b>extern</b> def new_str(): String;
+<b>extern</b> def from_str(str): String;
+<b>extern</b> def concat(String, String): String;
+<b>extern</b> def str_with_capacity(u32): String;
+<b>extern</b> def push_char(String, char): unit;
+<b>extern</b> def remove_char(String, u32): char;
+<b>extern</b> def insert_char(String, u32, char): unit;
+<b>extern</b> def is_empty_str(String): bool;
+<b>extern</b> def split_off(String, u32): String;
+<b>extern</b> def clear_str(String);
+<b>extern</b> def str_eq(String, String): bool;
+<b>extern</b> def assert(bool);
+<b>extern</b> def print(String);
+<b>extern</b> def panic(String);
+<b>extern</b> def array[T](): Array[T];
+<b>extern</b> def push[T](Array[T], T);
+<b>extern</b> def pop[T](Array[T]);
+<b>extern</b> def remove[T](Array[T], u32): T;
+<b>extern</b> def get[T](Array[T], u32): T;
+<b>extern</b> def insert[T](Array[T], u32, T);
+<b>extern</b> def replace[T](Array[T], u32, T);
+<b>extern</b> def is_empty[T](Array[T]): bool;
+<b>extern</b> def len[T](Array[T]): u32;
+<b>extern</b> def extend[T](Array[T], Array[T]);
+<b>extern</b> def clear[T](Array[T]);
+<b>extern</b> def capacity[T](Array[T]): u32;
+<b>extern</b> def cell[T](T): Cell[T];
+<b>extern</b> def set_cell[T](Cell[T], T);
+<b>extern</b> def get_cell[T](Cell[T]): T;
+<b>extern</b> def next[T](Iter[T], T): T;
+<b>extern</b> def new_range[T](T, T): Range[T];
+<b>extern</b> def leq_range[T](Range[T], T): bool;
+<b>extern</b> def geq_range[T](Range[T], T): bool;
+<b>extern</b> def lt_range[T](Range[T], T): bool;
+<b>extern</b> def gt_range[T](Range[T], T): bool;
+<b>extern</b> def map[A,B](Stream[A], <b>fun</b>(A):B): Stream[B];</code></pre>
+<h2 id="examples-7"><a class="header" href="#examples-7">Examples</a></h2>
+<h3 id="basic-function-calls"><a class="header" href="#basic-function-calls">Basic function calls</a></h3>
+<pre><code><b>def</b> foo() = bar(<b style="color:darkorange">1</b>)
+
+<b>def</b> bar(a) = a</code></pre>
+<h3 id="lambda-functions"><a class="header" href="#lambda-functions">Lambda functions</a></h3>
+<pre><code><i style="color:gray"># Lambdas can both capture their environment <b>and</b> be passed around <b>as</b> values.</i>
+
+<b>def</b> main() {
+    <b>val</b> a = <b style="color:darkorange">1</b>;
+    <b>val</b> b = <b style="color:darkorange">2</b>;
+    <b>val</b> x = <b>fun</b>(c) = a + b + c;
+    <b>val</b> y = <b>fun</b>(b) = a + b;
+    run(x);
+    run(y);
+}
+
+<i style="color:gray"># If a function takes a lambda <b>as</b> parameter, then it <b>is</b> polymorphic over the</i>
+<i style="color:gray"># lambda's environment.</i>
+
+<b>def</b> run(lambda) = lambda(<b style="color:darkorange">3</b>)</code></pre>
+<h3 id="binary-operators"><a class="header" href="#binary-operators">Binary operators</a></h3>
+<pre><code><b>val</b> n = <b style="color:darkorange">1</b>;
+<b>val</b> b = true;
+
+<i style="color:gray"># Arithmetic</i>
+<i style="color:gray"># - n;</i>
+n + n;
+n - n;
+n * n;
+n / n;
+<i style="color:gray"># n ** n;</i>
+n % n;
+
+<i style="color:gray"># Equality</i>
+n == n;
+<i style="color:gray"># n != n;</i>
+
+<i style="color:gray"># Logical</i>
+b <b>and</b> b;
+b <b>or</b> b;
+<i style="color:gray"># n <b>band</b> n;</i>
+<i style="color:gray"># n <b>bor</b> n;</i>
+<i style="color:gray"># n <b>bxor</b> n;</i>
+<i style="color:gray"># <b>not</b> b;</i>
+
+<i style="color:gray"># Containers</i>
+<i style="color:gray"># n <b>in</b> [n, n, n];</i>
+<i style="color:gray"># n <b>not</b> in [];</i></code></pre>
+<h3 id="comprehensions"><a class="header" href="#comprehensions">Comprehensions</a></h3>
+<pre><code><b>def</b> test(stream) {
+    [event+<b style="color:darkorange">1</b>; <b>for</b> event <b>in</b> stream; <b>if</b> event != <b style="color:darkorange">0</b>]
+}</code></pre>
+<h3 id="placeholders"><a class="header" href="#placeholders">Placeholders</a></h3>
+<pre><code><i style="color:gray"># `(_ + _)` desugars into a lambda function `<b>fun</b>(x0, x1): x0 + x1`</i>
+<b>def</b> main() = {
+    apply(_ + _);
+}
+
+<b>def</b> apply(f) = f(<b style="color:darkorange">1</b>, <b style="color:darkorange">2</b>)</code></pre>
+<h3 id="binary-operator-lifting"><a class="header" href="#binary-operator-lifting">Binary operator lifting</a></h3>
+<pre><code><i style="color:gray"># Binary operators can be lifted into functions.</i>
+<b>def</b> apply(binop, l, r) = binop(l, r)
+
+<b>def</b> main() = {
+    assert(apply((+), <b style="color:darkorange">1</b>, <b style="color:darkorange">3</b>) == <b style="color:darkorange">4</b>);
+}</code></pre>
+<h3 id="string-interpolation"><a class="header" href="#string-interpolation">String interpolation</a></h3>
+<pre><code><i style="color:gray"># String interpolation <b>is</b> supported using the $ <b>and</b> ${} syntax.</i>
+
+<b>def</b> main() {
+  <b>val</b> hello = <b style="color:green">"hello"</b>;
+  <b>val</b> world = <b style="color:green">"world"</b>;
+  <b>val</b> result = <b style="color:green">"$hello $world, <b style="color:darkorange">1</b>+<b style="color:darkorange">2</b> = ${<b style="color:darkorange">1</b>+<b style="color:darkorange">2</b>}"</b>;
+}</code></pre>
+<h3 id="query-with-explicit-variables"><a class="header" href="#query-with-explicit-variables">Query (with explicit variables)</a></h3>
+<pre><code><b>def</b> test1(s: Stream[#{k:i32,v:i32}]) =
+    <b>from</b> x <b>in</b> s {
+        <b>where</b> x.k != <b style="color:darkorange">1</b>
+        <b>group</b> k = x.k
+        <b>reduce</b>
+            sum = sum <b>of</b> x.v,
+            count = count
+    }</code></pre>
+<h3 id="query-with-implicit-variables"><a class="header" href="#query-with-implicit-variables">Query (with implicit variables)</a></h3>
+<pre><code><b>def</b> test0(s) =
+    <b>from</b> x <b>in</b> s {
+        <b>where</b> x.k != <b style="color:darkorange">1</b>
+        <b>group</b> x.k
+        <b>reduce</b>
+            sum <b>of</b> x.v,
+            count
+    }</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="patterns"><a class="header" href="#patterns">Patterns</a></h1>
+<p>A <strong>pattern</strong> is a syntactic construct for deconstructing a <strong>value</strong> and binding its parts to variables.</p>
+<pre><code><a id="Pattern" href="arc-lang/Pattern.html#Pattern">Pattern</a> ::=
+  | <a href="arc-lang/Name.html#Name">Name</a>                       <i style="color:gray">Variable binding</i>
+  | <a href="arc-lang/Value.html#Value">Value</a>                      <i style="color:gray">Value comparison</i>
+  | <b>{</b> (<a href="arc-lang/Name.html#Name">Name</a> (<b>:</b> <a href="arc-lang/Pattern.html#Pattern">Pattern</a>)?)<b>,</b>+ <b>}</b>  <i style="color:gray">Record deconstruction</i>
+  | <b>(</b> <a href="arc-lang/Pattern.html#Pattern">Pattern</a><b>,</b>+ <b>)</b>              <i style="color:gray">Tuple deconstruction</i>
+  | <a href="arc-lang/Pattern.html#Pattern">Pattern</a>? <b>..</b> (<b>=</b>? <a href="arc-lang/Pattern.html#Pattern">Pattern</a>)?  <i style="color:gray">Range deconstruction</i>
+  | <a href="arc-lang/Path.html#Path">Path</a> <b>(</b> <a href="arc-lang/Pattern.html#Pattern">Pattern</a> <b>)</b>           <i style="color:gray">Variant deconstruction</i>
+  | <a href="arc-lang/Pattern.html#Pattern">Pattern</a> <b>or</b> <a href="arc-lang/Pattern.html#Pattern">Pattern</a>         <i style="color:gray">Alternation</i></code></pre>
+<h2 id="examples-8"><a class="header" href="#examples-8">Examples</a></h2>
+<h3 id="tuples"><a class="header" href="#tuples">Tuples</a></h3>
+<pre><code><i style="color:gray"># Pattern matching <b>on</b> tuples:</i>
+<b>val</b> a = (<b style="color:darkorange">1</b>, <b style="color:darkorange">2</b>, <b style="color:darkorange">3</b>);
+<b>val</b> (x0, x1, x2) = a;</code></pre>
+<h3 id="records"><a class="header" href="#records">Records</a></h3>
+<pre><code><i style="color:gray"># Pattern matching <b>on</b> records</i>
+<b>val</b> a = {x0:<b style="color:darkorange">0</b>, x1:<b style="color:darkorange">2</b>, x2:<b style="color:darkorange">3</b>};
+<b>val</b> {x0, x1, x2} = a;   <i style="color:gray"># Extract `x0`, `x1`, <b>and</b> `x2`</i>
+<b>val</b> {x0} = a;           <i style="color:gray"># Extract only `x0`</i>
+<b>val</b> {x0, x1, x2:y} = a; <i style="color:gray"># Extract `x0` <b>and</b> `x1`, <b>and</b> alias `x2` to `y`</i>
+<b>val</b> {x0, x1|b} = a;     <i style="color:gray"># Extract `x0` <b>and</b> `x1`, <b>and</b> bind `{x1}` to `b`</i></code></pre>
+<h3 id="enums"><a class="header" href="#enums">Enums</a></h3>
+<pre><code><i style="color:gray"># Pattern matching <b>on</b> enums</i>
+<b>val</b> a = Option::Some(<b style="color:darkorange">3</b>);
+
+<b>match</b> a {
+    Option::Some(<b style="color:darkorange">2</b>) => <b style="color:darkorange">2</b>,
+    Option::Some(x) => x,
+    Option::None(_) => <b style="color:darkorange">0</b>
+};</code></pre>
+<h3 id="enums-1"><a class="header" href="#enums-1">Enums</a></h3>
+<pre><code><i style="color:gray"># Pattern matching <b>on</b> vectors</i>
+<b>val</b> a = [<b style="color:darkorange">1</b>,<b style="color:darkorange">2</b>,<b style="color:darkorange">3</b>];
+
+<b>match</b> a {
+    [<b style="color:darkorange">1</b>, ..] => <b style="color:darkorange">1</b>,
+    [.., <b style="color:darkorange">3</b>] => <b style="color:darkorange">3</b>,
+    _ => <b style="color:darkorange">0</b>
+};</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="items"><a class="header" href="#items">Items</a></h1>
+<p>An <strong>item</strong> is a named top-level definition which can be referenced by path. The ordering of how items are defined in the source code insignificant. Items can be prefixed by annotations for configuration.</p>
+<pre><code><a id="Item" href="arc-lang/Item.html#Item">Item</a> ::=
+  | <a href="arc-lang/Annots.html#Annots">Annots</a>? <a href="arc-lang/Global.html#Global">Global</a>      <i style="color:gray">Global immutable value</i>
+  | <a href="arc-lang/Annots.html#Annots">Annots</a>? <a href="arc-lang/Def.html#Def">Def</a>         <i style="color:gray">Function definition</i>
+  | <a href="arc-lang/Annots.html#Annots">Annots</a>? <a href="arc-lang/Task.html#Task">Task</a>        <i style="color:gray">Task definition</i>
+  | <a href="arc-lang/Annots.html#Annots">Annots</a>? <a href="arc-lang/TypeAlias.html#TypeAlias">TypeAlias</a>   <i style="color:gray">Type alias</i>
+  | <a href="arc-lang/Annots.html#Annots">Annots</a>? <a href="arc-lang/ExternDef.html#ExternDef">ExternDef</a>   <i style="color:gray">Extern function declaration</i>
+  | <a href="arc-lang/Annots.html#Annots">Annots</a>? <a href="arc-lang/ExternType.html#ExternType">ExternType</a>  <i style="color:gray">Extern type declaration</i>
+  | <a href="arc-lang/Annots.html#Annots">Annots</a>? <a href="arc-lang/Enum.html#Enum">Enum</a>        <i style="color:gray">Disjoint union</i>
+  | <a href="arc-lang/Annots.html#Annots">Annots</a>? <a href="arc-lang/Use.html#Use">Use</a>         <i style="color:gray">Import</i>
+  | <a href="arc-lang/Annots.html#Annots">Annots</a>? <a href="arc-lang/Module.html#Module">Module</a>      <i style="color:gray">Module</i></code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="globals"><a class="header" href="#globals">Globals</a></h1>
+<p>A <strong>global</strong> is an <em>immutable</em> variable which can be referenced by-path.</p>
+<pre><code><a id="Global" href="arc-lang/Global.html#Global">Global</a> ::= <b>val</b> <a href="arc-lang/Name.html#Name">Name</a> <b>=</b> <a href="arc-lang/Value.html#Value">Value</a> <b>;</b></code></pre>
+<h2 id="example"><a class="header" href="#example">Example</a></h2>
+<p>The following code initializes two global variables, one by a literal, and another by calling a function.</p>
+<pre><code><b>val</b> pi = <b style="color:darkorange">3.14</b>;
+
+<b>def</b> main() {
+    <b>val</b> x = pi * <b style="color:darkorange">2.0</b>;
+}</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="functions"><a class="header" href="#functions">Functions</a></h1>
+<p>Functions are written with the <code>def</code> keyword.</p>
+<pre><code><a id="Def" href="arc-lang/Def.html#Def">Def</a> ::= <b>def</b> <a href="arc-lang/Name.html#Name">Name</a> <a href="arc-lang/Generics.html#Generics">Generics</a>? <a href="arc-lang/Params.html#Params">Params</a> <b>:</b> <a href="arc-lang/Type.html#Type">Type</a> <a href="arc-lang/Body.html#Body">Body</a></code></pre>
+<h2 id="examples-9"><a class="header" href="#examples-9">Examples</a></h2>
+<h3 id="functional-functions"><a class="header" href="#functional-functions">Functional functions</a></h3>
+<pre><code><i style="color:gray"># The following code shows how to define the Fibonacci function functionally.</i>
+
+<b>def</b> fib(n) = <b>match</b> n {
+    <b style="color:darkorange">0</b> => <b style="color:darkorange">0</b>,
+    <b style="color:darkorange">1</b> => <b style="color:darkorange">1</b>,
+    n => fib(n-<b style="color:darkorange">2</b>) + fib(n-<b style="color:darkorange">1</b>)
+}</code></pre>
+<h3 id="imperative-functions"><a class="header" href="#imperative-functions">Imperative functions</a></h3>
+<pre><code><i style="color:gray"># The following code shows how to define the Fibonacci function imperatively.</i>
+
+<b>def</b> fib(n) {
+    <b>var</b> a = <b style="color:darkorange">0</b>;
+    <b>var</b> b = <b style="color:darkorange">1</b>;
+    <b>while</b> a < n {
+        a = b;
+        b = a + b;
+    };
+    <b>return</b> a;
+}</code></pre>
+<h3 id="declare-after-use"><a class="header" href="#declare-after-use">Declare-after-use</a></h3>
+<pre><code><i style="color:gray"># The declaration <b>order</b> of top-level definitions <b>is</b> insignificant. In other words,</i>
+<i style="color:gray"># functions can reference other functions declared farther down <b>in</b> the code.</i>
+
+<b>def</b> is_even(n) = <b>if</b> n == <b style="color:darkorange">0</b> { true } <b>else</b> { is_odd(n-<b style="color:darkorange">1</b>) }
+
+<b>def</b> is_odd(n) = <b>if</b> n == <b style="color:darkorange">0</b> { false } <b>else</b> { is_even(n-<b style="color:darkorange">1</b>) }</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="tasks"><a class="header" href="#tasks">Tasks</a></h1>
+<p>A <strong>task</strong> is an asynchronous function which can suspend its execution to wait for events. The <code>receive</code>, <code>on</code>, and <code>!</code> expressions can (for now) only be used inside tasks.</p>
+<pre><code><a id="Task" href="arc-lang/Task.html#Task">Task</a> ::= <b>task</b> <a href="arc-lang/Name.html#Name">Name</a> <a href="arc-lang/Generics.html#Generics">Generics</a>? <a href="arc-lang/Params.html#Params">Params</a> <b>:</b> <a href="arc-lang/Params.html#Params">Params</a> <a href="arc-lang/Block.html#Block">Block</a></code></pre>
+<h2 id="examples-10"><a class="header" href="#examples-10">Examples</a></h2>
+<h3 id="basic-task"><a class="header" href="#basic-task">Basic task</a></h3>
+<pre><code><b>task</b> identity(source): (sink) {
+    <b>loop</b> {
+        <b>on</b> event <b>in</b> source => sink ! event;
+    }
+}</code></pre>
+<h3 id="lambda-tasks"><a class="header" href="#lambda-tasks">Lambda tasks</a></h3>
+<pre><code><b>def</b> test(i) {
+    <b>task</b>: (o) = <b>loop</b> {
+        <b>on</b> x <b>in</b> i => o ! x
+    }
+}</code></pre>
+<h3 id="multi-input-tasks"><a class="header" href="#multi-input-tasks">Multi-Input Tasks</a></h3>
+<pre><code><b>task</b> merge(s0, s1): (s2) {
+    <b>loop</b> {
+        s2 ! (<b>receive</b> s0);
+        s2 ! (<b>receive</b> s1);
+    }
+}
+
+<b>def</b> main() {
+    <b>val</b> stream0 = <b style="color:darkorange">0</b>..<b style="color:darkorange">100</b>;
+    <b>val</b> stream1 = <b style="color:darkorange">0</b>..<b style="color:darkorange">100</b>;
+    <b>val</b> stream2 = merge(stream0, stream1);
+}</code></pre>
+<h3 id="multi-output-tasks"><a class="header" href="#multi-output-tasks">Multi-Output Tasks</a></h3>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="type-aliases"><a class="header" href="#type-aliases">Type Aliases</a></h1>
+<p>A <strong>type alias</strong> is a purely cosmetic alias of a type.</p>
+<pre><code><a id="TypeAlias" href="arc-lang/TypeAlias.html#TypeAlias">TypeAlias</a> ::= <b>type</b> <a href="arc-lang/Name.html#Name">Name</a> <a href="arc-lang/Generics.html#Generics">Generics</a>? <b>=</b> <a href="arc-lang/Type.html#Type">Type</a> <b>;</b></code></pre>
+<h2 id="example-1"><a class="header" href="#example-1">Example</a></h2>
+<p>The following code defines type aliases for representing lines on a two-dimensional plane, and a function for calculating the length of a line.</p>
+<pre><code><b>type</b> Num = i32;
+<b>type</b> Point = {x:Num, y:Num};
+<b>type</b> Line = {start:Point, end:Point};
+
+<b>def</b> length(line) {
+    <b>val</b> a = line.start.x - line.end.x;
+    <b>val</b> b = line.start.y - line.end.y;
+    sqrt(a**<b style="color:darkorange">2</b> + b**<b style="color:darkorange">2</b>)
+}
+
+<b>def</b> main() {
+    <b>val</b> p0 = {x:<b style="color:darkorange">0</b>, y:<b style="color:darkorange">1</b>};
+    <b>val</b> p1 = {x:<b style="color:darkorange">5</b>, y:<b style="color:darkorange">9</b>};
+    <b>val</b> line = {start:p0, end:p1};
+    length(line);
+}</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="type-classes"><a class="header" href="#type-classes">Type Classes</a></h1>
+<p>Type classes are written with the <code>class</code> keyword.</p>
+<pre><code><a id="TypeClass" href="arc-lang/TypeClass.html#TypeClass">TypeClass</a> ::= <b>class</b> <a href="arc-lang/Name.html#Name">Name</a> <a href="arc-lang/Generics.html#Generics">Generics</a>? <b>{</b> <a href="arc-lang/TypeClass.html#Decl">Decl</a><b>,</b>+ <b>}</b>
+
+<a id="Decl" href="arc-lang/TypeClass.html#Decl">Decl</a> ::= <b>def</b> <a href="arc-lang/Name.html#Name">Name</a> <a href="arc-lang/Generics.html#Generics">Generics</a>? <b>(</b> <a href="arc-lang/Type.html#Type">Type</a><b>,</b>+ <b>)</b></code></pre>
+<h2 id="examples-11"><a class="header" href="#examples-11">Examples</a></h2>
+<pre><code><b>class</b> Add<T> {
+    <b>def</b> add(T, T): T;
+}</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="type-class-instances"><a class="header" href="#type-class-instances">Type Class Instances</a></h1>
+<p>Type class instances are written with the <code>instance</code> keyword.</p>
+<pre><code><a id="TypeClass" href="arc-lang/Instance.html#TypeClass">TypeClass</a> ::= <b>class</b> <a href="arc-lang/Name.html#Name">Name</a> <a href="arc-lang/Generics.html#Generics">Generics</a>? <b>{</b> <a href="arc-lang/Def.html#Def">Def</a><b>,</b>+ <b>}</b></code></pre>
+<h2 id="examples-12"><a class="header" href="#examples-12">Examples</a></h2>
+<pre><code><b>instance</b> Add<#{sum:i32}> {
+    <b>def</b> add(l, r) = #{sum: l.sum + r.sum}
+}</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="extern-functions"><a class="header" href="#extern-functions">Extern Functions</a></h1>
+<p>An <strong>extern function</strong> is a function-declaration whose implementation is defined externally, outside of Arc-Lang, inside Rust.</p>
+<pre><code><a id="ExternDef" href="arc-lang/ExternDef.html#ExternDef">ExternDef</a> ::= <b>extern</b> <b>def</b> <a href="arc-lang/Name.html#Name">Name</a> <a href="arc-lang/Generics.html#Generics">Generics</a>? <b>(</b> <a href="arc-lang/Type.html#Type">Type</a><b>,</b>* <b>)</b> <b>:</b> <a href="arc-lang/Type.html#Type">Type</a> <b>;</b></code></pre>
+<h2 id="examples-13"><a class="header" href="#examples-13">Examples</a></h2>
+<pre><code>@{rust: <b style="color:green">"String"</b>}
+<b>extern</b> type String;
+
+@{rust: <b style="color:green">"&'static str"</b>}
+<b>extern</b> type str;
+
+@{rust: <b style="color:green">"String_new"</b>}
+<b>extern</b> def new_str(): String;
+
+@{rust: <b style="color:green">"String_from_str"</b>}
+<b>extern</b> def from_str(str): String;
+
+@{rust: <b style="color:green">"String_concat"</b>}
+<b>extern</b> def concat(String, String): String;
+
+@{rust: <b style="color:green">"String_with_capacity"</b>}
+<b>extern</b> def str_with_capacity(u32): String;
+
+@{rust: <b style="color:green">"String_push_char"</b>}
+<b>extern</b> def push_char(String, char): unit;
+
+@{rust: <b style="color:green">"String_remove_char"</b>}
+<b>extern</b> def remove_char(String, u32): char;
+
+@{rust: <b style="color:green">"String_insert_char"</b>}
+<b>extern</b> def insert_char(String, u32, char): unit;
+
+@{rust: <b style="color:green">"String_is_empty"</b>}
+<b>extern</b> def is_empty_str(String): bool;
+
+@{rust: <b style="color:green">"String_split_off"</b>}
+<b>extern</b> def split_off(String, u32): String;
+
+@{rust: <b style="color:green">"String_clear"</b>}
+<b>extern</b> def clear_str(String);
+
+@{rust: <b style="color:green">"String_eq"</b>}
+<b>extern</b> def str_eq(String, String): bool;</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="extern-types"><a class="header" href="#extern-types">Extern types</a></h1>
+<p>An <strong>extern type</strong> is an abstract data type with methods whose implementations are defined in Rust.</p>
+<pre><code><a id="ExternType" href="arc-lang/ExternType.html#ExternType">ExternType</a> ::= <b>extern</b> <b>type</b> <a href="arc-lang/Name.html#Name">Name</a> <a href="arc-lang/Generics.html#Generics">Generics</a>? <b>;</b></code></pre>
+<h2 id="example-2"><a class="header" href="#example-2">Example</a></h2>
+<p>The following code shows how to define an extern type <code>String</code> in arc-lang.</p>
+<pre><code>@{rust: <b style="color:green">"Vec"</b>}
+<b>extern</b> type Array[T];</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="uses"><a class="header" href="#uses">Uses</a></h1>
+<p>A <strong>use</strong>-item imports a name into the current namespace and optionally aliases it.</p>
+<pre><code><a id="Use" href="arc-lang/Use.html#Use">Use</a> ::= <b>use</b> <a href="arc-lang/Path.html#Path">Path</a> (<b>as</b> <a href="arc-lang/Name.html#Name">Name</a>)?;</code></pre>
+<h2 id="examples-14"><a class="header" href="#examples-14">Examples</a></h2>
+<p>The following code creates a <code>Person</code>-type and an alias and use it as a <code>Human</code>.</p>
+<pre><code><b>type</b> Person = #{name: str, age: i32}
+
+<b>use</b> Person <b>as</b> Human; <i style="color:gray"># Creates an alias</i>
+
+<b>def</b> main(): Person {
+    <b>val</b> person: Person = #{name:<b style="color:green">"Bob"</b>, age:<b style="color:darkorange">35</b>};
+    <b>val</b> human: Human = Person;
+}</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="enums-2"><a class="header" href="#enums-2">Enums</a></h1>
+<p>An <strong>enum</strong> is a nominal type which is a disjoint set (tagged union) of values. Each item of the disjoint set is referred to as a <strong>variant</strong>.</p>
+<pre><code><a id="Enum" href="arc-lang/Enum.html#Enum">Enum</a> ::= <b>enum</b> <a href="arc-lang/Name.html#Name">Name</a> <a href="arc-lang/Generics.html#Generics">Generics</a>? <b>{</b> <a href="arc-lang/Enum.html#Variant">Variant</a><b>,</b>* <b>}</b>
+
+<a id="Variant" href="arc-lang/Enum.html#Variant">Variant</a> ::= <a href="arc-lang/Name.html#Name">Name</a> <b>(</b> <a href="arc-lang/Type.html#Type">Type</a> <b>)</b></code></pre>
+<h2 id="examples-15"><a class="header" href="#examples-15">Examples</a></h2>
+<pre><code><b>enum</b> Shape[T] {
+    Rectangle(T, T),
+    Circle(T),
+}
+
+<b>def</b> area(shape) = <b>match</b> shape {
+    Shape::Rectangle(width, height) => width * height,
+    Shape::Circle(radius) => <b style="color:darkorange">3.14</b> * radius ** <b style="color:darkorange">2</b>
+}
+
+<b>def</b> main() {
+    <b>val</b> a0 = area(Shape::Rectangle(<b style="color:darkorange">5.0</b>, <b style="color:darkorange">3.0</b>));
+    <b>val</b> a1 = area(Shape::Circle(<b style="color:darkorange">3.0</b>));
+}</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="modules"><a class="header" href="#modules">Modules</a></h1>
+<p>A <strong>module</strong> is a named unit of encapsulation which may contain items and other modules.</p>
+<pre><code><a id="Module" href="arc-lang/Module.html#Module">Module</a> ::= <b>mod</b> <a href="arc-lang/Name.html#Name">Name</a> <b>{</b> <a href="arc-lang/Item.html#Item">Item</a>* <b>}</b></code></pre>
+<p>Modules form a hierarchy through nesting. This hierarchy is in addition tied to the file system hierarchy (similar to Rust):</p>
+<pre><code class="language-text">my-project/
+  src/
+    main.arc     # :: (root module)
+    foo/
+      mod.arc    # ::foo
+      bar/
+        mod.arc  # ::foo::bar
+    baz/
+      mod.arc    # ::foo::baz
+</code></pre>
+<h2 id="examples-16"><a class="header" href="#examples-16">Examples</a></h2>
+<pre><code><b>mod</b> foo {
+    <b>mod</b> bar {
+        <b>mod</b> baz {
+            <b>def</b> qux() = <b style="color:darkorange">3</b>
+        }
+    }
+}
+
+<b>def</b> main() = foo::bar::baz::qux()</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="parameters"><a class="header" href="#parameters">Parameters</a></h1>
+<p>Parameters are used in function and task definitions. In general, they do not need to be type annotated.</p>
+<pre><code><a id="Params" href="arc-lang/Params.html#Params">Params</a> ::= <b>(</b> <a href="arc-lang/Param.html#Param">Param</a><b>,</b>+ <b>)</b>
+
+<a id="Param" href="arc-lang/Params.html#Param">Param</a> ::= <a href="arc-lang/Pattern.html#Pattern">Pattern</a> (<b>:</b> <a href="arc-lang/Type.html#Type">Type</a> )?</code></pre>
+<h3 id="examples-17"><a class="header" href="#examples-17">Examples</a></h3>
+<pre><code><b>def</b> test(typed_param: i32, untyped_param) = typed_param + untyped_param</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="generics"><a class="header" href="#generics">Generics</a></h1>
+<p>Items can be parameterised by generic types. Generics can in addition be bounded by type class constraints.</p>
+<pre><code><a id="Generics" href="arc-lang/Generics.html#Generics">Generics</a> ::= <b>[</b> <a href="arc-lang/Generics.html#Generic">Generic</a><b>,</b>+ <b>]</b>
+
+<a id="Generic" href="arc-lang/Generics.html#Generic">Generic</a> ::= <a href="arc-lang/Name.html#Name">Name</a> <a href="arc-lang/Generics.html#Bounds">Bounds</a>?
+
+<a id="Bounds" href="arc-lang/Generics.html#Bounds">Bounds</a> ::= <b>:</b> <a href="arc-lang/Path.html#Path">Path</a><b>&</b>+</code></pre>
+<h2 id="examples-18"><a class="header" href="#examples-18">Examples</a></h2>
+<h3 id="explicit-generic-function"><a class="header" href="#explicit-generic-function">Explicit generic function</a></h3>
+<pre><code><b>def</b> id[A](x: A): A = x
+
+<b>def</b> main() {
+    id(<b style="color:darkorange">1</b>);
+    id(<b style="color:darkorange">1.0</b>);
+    id::[i32](<b style="color:darkorange">1</b>);
+    id::[f32](<b style="color:darkorange">1.0</b>);
+}</code></pre>
+<h3 id="inferred-generic-function"><a class="header" href="#inferred-generic-function">Inferred generic function</a></h3>
+<pre><code><b>def</b> id(x) = x
+
+<b>def</b> main() {
+    id(<b style="color:darkorange">1</b>);
+    id(<b style="color:darkorange">1.0</b>);
+}</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="assignments"><a class="header" href="#assignments">Assignments</a></h1>
+<p>Variables can be assigned as mutable with <code>var</code> and immutable with <code>val</code>.</p>
+<pre><code><a id="Assign" href="arc-lang/Assign.html#Assign">Assign</a> ::=
+ | <b>val</b> <a href="arc-lang/Pattern.html#Pattern">Pattern</a> (<b>:</b> <a href="arc-lang/Type.html#Type">Type</a>)? <b>=</b> <a href="arc-lang/Expr.html#Expr">Expr</a> <b>;</b>
+ | <b>var</b> <a href="arc-lang/Pattern.html#Pattern">Pattern</a> (<b>:</b> <a href="arc-lang/Type.html#Type">Type</a>)? <b>=</b> <a href="arc-lang/Expr.html#Expr">Expr</a> <b>;</b></code></pre>
+<h2 id="examples-19"><a class="header" href="#examples-19">Examples</a></h2>
+<pre><code><b>val</b> x = <b style="color:darkorange">1</b>;
+<b>var</b> y = <b style="color:darkorange">2</b>;
+y = x + y;</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="annotations"><a class="header" href="#annotations">Annotations</a></h1>
+<p>Annotations can optionally be attached to items.</p>
+<pre><code><a id="Annots" href="arc-lang/Annots.html#Annots">Annots</a> ::= <b>@{</b> <a href="arc-lang/Annots.html#Annot">Annot</a><b>,</b>* <b>}</b>
+
+<a id="Annot" href="arc-lang/Annots.html#Annot">Annot</a> ::= <a href="arc-lang/Name.html#Name">Name</a> <b>:</b> <a href="arc-lang/Value.html#Value">Value</a></code></pre>
+<h2 id="examples-20"><a class="header" href="#examples-20">Examples</a></h2>
+<pre><code>@{mlir: <b style="color:green">"none"</b>}
+<b>extern</b> type unit;</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="development"><a class="header" href="#development">Development</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><p>Below are instructions for setting up a custom runner, running in a Docker container, for GitHub actions.</p>
+<pre><code class="language-bash"># Setup docker
+
+docker pull ubuntu:18.04
+docker run -i -t ubuntu:18.04 /bin/bash
+
+# Setup user
+
+passwd # change root password
+adduser arc-runner sudo
+su -l arc-runner
+
+# Install apt dependencies
+
+sudo add-apt-repository ppa:git-core/ppa -y
+sudo apt update &amp;&amp; apt upgrade -y
+sudo apt install -y git vim curl z3 libz3-dev curl libssl-dev gcc pkg-config make ninja-build python zip openjdk-8-jdk software-properties-common texlive-xetex latexmk gettext ccache
+
+# Install Rust
+
+curl https://sh.rustup.rs -sSf | sh
+source $HOME/.cargo/env
+echo 'source $HOME/.cargo/env' &gt;&gt; ~/.bashrc
+rustup toolchain add nightly
+rustup target add wasm32-unknown-unknown
+rustup default nightly
+cargo install mdbook
+cargo install sccache
+
+# Install Cmake
+
+cd ~/
+curl -L https://github.com/Kitware/CMake/releases/download/v3.18.1/cmake-3.18.1.tar.gz --output cmake.tar.gz
+tar -xf cmake.tar.gz
+cd cmake-3.18.1/
+./bootstrap
+make
+make install
+
+# Install LLVM
+
+curl -L https://releases.llvm.org/9.0.0/clang+llvm-9.0.0-x86_64-linux-gnu-ubuntu-16.04.tar.xz --output llvm.tar.xz
+tar -xf llvm.tar.xz
+mv clang+llvm-9.0.0-x86_64-linux-gnu-ubuntu-18.04 llvm
+cd llvm
+export PATH=~/llvm/bin:$PATH
+export LD_LIBRARY_PATH=~/llvm/lib:$LD_LIBRARY_PATH
+echo 'export PATH=~/llvm/bin:$PATH' &gt;&gt; ~/.bashrc
+echo 'export LD_LIBRARY_PATH=~/llvm/lib:$LD_LIBRARY_PATH' &gt;&gt; ~/.bashrc
+
+# Install OCaml
+
+sudo bash -c &quot;sh &lt;(curl -fsSL https://raw.githubusercontent.com/ocaml/opam/master/shell/install.sh)&quot;
+opam init # Make sure to disable sandboxing
+eval $(opam env)
+opam switch create 4.13.1
+eval $(opam env)
+opam install core
+opam install dune
+opam install menhir
+
+# Install GitHub Actions Runner
+
+# Follow this tutorial (Which generates a unique token):
+#     https://github.com/cda-group/arc/settings/actions/runners/new?arch=x64&amp;os=linux
+
+# Setup Runner
+
+./run.sh &amp;
+disown &lt;PID&gt;
+
+# To exit the container: &lt;C-p&gt;&lt;C-q&gt;
+
+# [OPTIONAL] Check that everything builds
+
+cd ~
+git clone https://github.com/cda-group/arc
+cd ~/arc
+git checkout mlir
+git submodule update --init --recursive
+
+# Check if arc-lang builds
+
+cd ~/arc/arc-lang
+cargo check --all-features --tests --bins --examples --benches
+
+# Check if arc-mlir builds
+
+cd ~/arc/arc-mlir/
+./arc-mlir-build
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="language-reference-1"><a class="header" href="#language-reference-1">Language Reference</a></h1>
+<p>This section gives a definition of Arc-MLIR's grammar.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="programs-1"><a class="header" href="#programs-1">Programs</a></h1>
+<pre><code><a id="Program" href="dev/arc-mlir/Program.html#Program">Program</a> ::= <b>mod</b> <a href="dev/arc-mlir/Path.html#Path">Path</a> <b>{</b> <a href="dev/arc-mlir/Item.html#Item">Item</a><b>,</b>* <b>}</b></code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="names-1"><a class="header" href="#names-1">Names</a></h1>
+<p>A <strong>name</strong> is a symbolic identifier which can be assigned to a <strong>variable</strong> or <strong>item</strong>.</p>
+<pre><code><a id="Name" href="dev/arc-mlir/Name.html#Name">Name</a> ::= [a-zA-Z_][a-zA-Z_0-9]*</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="operations"><a class="header" href="#operations">Operations</a></h1>
+<p>This section describes the operations of Arc-MLIR.</p>
+<pre><code><a id="Operation" href="dev/arc-mlir/Operation.html#Operation">Operation</a> ::=
+  | <a href="dev/arc-mlir/Operation.html#Arc">Arc</a>
+  | <a href="dev/arc-mlir/Operation.html#Std">Std</a>
+  | <a href="dev/arc-mlir/Operation.html#Deprecated">Deprecated</a>
+
+<a id="Arc" href="dev/arc-mlir/Operation.html#Arc">Arc</a> ::=
+  | <b>arc.keep</b> <b>(</b> <a href="dev/arc-mlir/Value.html#Value">Value</a> <b>)</b> <b>:</b> <b>(</b> <a href="dev/arc-mlir/Type.html#Type">Type</a> <b>)</b> <b>-></b> <b>()</b>
+  | <b>arc.tan</b> <a href="dev/arc-mlir/Value.html#Value">Value</a> <b>:</b> <a href="dev/arc-mlir/Type.html#Type">Type</a>
+  | <b>arc.acos</b> <a href="dev/arc-mlir/Value.html#Value">Value</a> <b>:</b> <a href="dev/arc-mlir/Type.html#Type">Type</a>
+  | <b>arc.asin</b> <a href="dev/arc-mlir/Value.html#Value">Value</a> <b>:</b> <a href="dev/arc-mlir/Type.html#Type">Type</a>
+  | <b>arc.cosh</b> <a href="dev/arc-mlir/Value.html#Value">Value</a> <b>:</b> <a href="dev/arc-mlir/Type.html#Type">Type</a>
+  | <b>arc.sinh</b> <a href="dev/arc-mlir/Value.html#Value">Value</a> <b>:</b> <a href="dev/arc-mlir/Type.html#Type">Type</a>
+  | <b>arc.erf</b> <a href="dev/arc-mlir/Value.html#Value">Value</a> <b>:</b> <a href="dev/arc-mlir/Type.html#Type">Type</a>
+  | <b>arc.make_struct</b> <b>(</b> <a href="dev/arc-mlir/Value.html#Value">Value</a><b>,</b>* <b>:</b> <a href="dev/arc-mlir/Type.html#Type">Type</a><b>,</b>* <b>)</b> <b>:</b> <a href="dev/arc-mlir/Type.html#Type">Type</a>
+  | <b>arc.make_enum</b> <a href="dev/arc-mlir/Value.html#Value">Value</a> <b>(</b> <a href="dev/arc-mlir/Value.html#Value">Value</a> <b>:</b> <a href="dev/arc-mlir/Type.html#Type">Type</a> <b>)</b> <b>:</b> <a href="dev/arc-mlir/Type.html#Type">Type</a>
+  | <b>arc.if</b> <b>(</b> <a href="dev/arc-mlir/Value.html#Value">Value</a> <b>)</b> <b>(</b> <a href="dev/arc-mlir/Block.html#Block">Block</a><b>,</b> <a href="dev/arc-mlir/Block.html#Block">Block</a> <b>)</b>
+  | <b>arc.loop.break</b> <b>(</b> <a href="dev/arc-mlir/Value.html#Value">Value</a><b>,</b>+ <b>)</b> <b>:</b> <b>(</b> <a href="dev/arc-mlir/Type.html#Type">Type</a><b>,</b>+ <b>)</b> <b>-></b> <b>()</b>
+  | <b>arc.adt_constant</b> <a href="dev/arc-mlir/Operation.html#String">String</a> <b>:</b> <a href="dev/arc-mlir/Type.html#Type">Type</a>
+  | <b>arc.constant</b> <a href="dev/arc-mlir/Literal.html#Literal">Literal</a> <b>:</b> <a href="dev/arc-mlir/Type.html#Type">Type</a>
+  | <b>arc.cmpi</b> <a href="dev/arc-mlir/Operation.html#Cmp">Cmp</a><b>,</b> <a href="dev/arc-mlir/Value.html#Value">Value</a><b>,</b> <a href="dev/arc-mlir/Value.html#Value">Value</a> <b>:</b> <a href="dev/arc-mlir/Type.html#Type">Type</a>
+  | <b>arc.receive</b> <b>(</b> <a href="dev/arc-mlir/Value.html#Value">Value</a> <b>)</b> <b>:</b> <b>(</b> <a href="dev/arc-mlir/Type.html#Type">Type</a> <b>)</b> <b>-></b> <a href="dev/arc-mlir/Type.html#Type">Type</a>
+  | <b>arc.select</b> <a href="dev/arc-mlir/Value.html#Value">Value</a><b>,</b> <a href="dev/arc-mlir/Value.html#Value">Value</a><b>,</b> <a href="dev/arc-mlir/Value.html#Value">Value</a> <b>:</b> <a href="dev/arc-mlir/Type.html#Type">Type</a>
+  | <b>arc.send</b> <b>(</b> <a href="dev/arc-mlir/Value.html#Value">Value</a><b>,</b> <a href="dev/arc-mlir/Value.html#Value">Value</a> <b>)</b> <b>-></b> <b>()</b>
+  | <b>arc.enum_access</b> <a href="dev/arc-mlir/Operation.html#String">String</a> <b>in</b> <b>(</b> <a href="dev/arc-mlir/Value.html#Value">Value</a> <b>:</b> <a href="dev/arc-mlir/Type.html#Type">Type</a> <b>)</b> <b>:</b> <a href="dev/arc-mlir/Type.html#Type">Type</a>
+  | <b>arc.enum_check</b> <b>(</b> <a href="dev/arc-mlir/Value.html#Value">Value</a> <b>:</b> <a href="dev/arc-mlir/Type.html#Type">Type</a> <b>)</b> <b>is</b> <a href="dev/arc-mlir/Operation.html#String">String</a> <b>:</b> <a href="dev/arc-mlir/Type.html#Type">Type</a>
+  | <b>arc.struct_access</b> <b>(</b> <a href="dev/arc-mlir/Value.html#Value">Value</a> <b>)</b> <b>{</b> <b>field</b> <b>=</b> <a href="dev/arc-mlir/Operation.html#String">String</a> <b>}</b> <b>:</b> <b>(</b> <a href="dev/arc-mlir/Type.html#Type">Type</a> <b>)</b> <b>-></b> <a href="dev/arc-mlir/Type.html#Type">Type</a>
+  | <b>arc.addi</b> <a href="dev/arc-mlir/Value.html#Value">Value</a><b>,</b> <a href="dev/arc-mlir/Value.html#Value">Value</a> <b>:</b> <a href="dev/arc-mlir/Type.html#Type">Type</a>
+  | <b>arc.and</b> <a href="dev/arc-mlir/Value.html#Value">Value</a><b>,</b> <a href="dev/arc-mlir/Value.html#Value">Value</a> <b>:</b> <a href="dev/arc-mlir/Type.html#Type">Type</a>
+  | <b>arc.divi</b> <a href="dev/arc-mlir/Value.html#Value">Value</a><b>,</b> <a href="dev/arc-mlir/Value.html#Value">Value</a> <b>:</b> <a href="dev/arc-mlir/Type.html#Type">Type</a>
+  | <b>arc.or</b> <a href="dev/arc-mlir/Value.html#Value">Value</a><b>,</b> <a href="dev/arc-mlir/Value.html#Value">Value</a> <b>:</b> <a href="dev/arc-mlir/Type.html#Type">Type</a>
+  | <b>arc.muli</b> <a href="dev/arc-mlir/Value.html#Value">Value</a><b>,</b> <a href="dev/arc-mlir/Value.html#Value">Value</a> <b>:</b> <a href="dev/arc-mlir/Type.html#Type">Type</a>
+  | <b>arc.subi</b> <a href="dev/arc-mlir/Value.html#Value">Value</a><b>,</b> <a href="dev/arc-mlir/Value.html#Value">Value</a> <b>:</b> <a href="dev/arc-mlir/Type.html#Type">Type</a>
+  | <b>arc.remi</b> <a href="dev/arc-mlir/Value.html#Value">Value</a><b>,</b> <a href="dev/arc-mlir/Value.html#Value">Value</a> <b>:</b> <a href="dev/arc-mlir/Type.html#Type">Type</a>
+  | <b>arc.xor</b> <a href="dev/arc-mlir/Value.html#Value">Value</a><b>,</b> <a href="dev/arc-mlir/Value.html#Value">Value</a> <b>:</b> <a href="dev/arc-mlir/Type.html#Type">Type</a>
+  | <b>arc.panic</b> <b>()</b> (<b>msg</b> <b>=</b> <a href="dev/arc-mlir/Operation.html#String">String</a>)? : <b>()</b> <b>-></b> <b>()</b>
+
+<a id="Std" href="dev/arc-mlir/Operation.html#Std">Std</a> ::=
+  | <b>call</b> <a href="dev/arc-mlir/Path.html#Path">Path</a> <b>(</b> <a href="dev/arc-mlir/Value.html#Value">Value</a><b>,</b>+ <b>)</b> <b>:</b> <b>(</b> <a href="dev/arc-mlir/Type.html#Type">Type</a><b>,</b>+ <b>)</b> <b>-></b> <a href="dev/arc-mlir/Type.html#Type">Type</a>
+  | <b>call_indirect</b> <a href="dev/arc-mlir/Value.html#Value">Value</a> <b>(</b> <a href="dev/arc-mlir/Value.html#Value">Value</a><b>,</b>+ <b>)</b> <b>:</b> <b>(</b> <a href="dev/arc-mlir/Type.html#Type">Type</a><b>,</b>+ <b>)</b> <b>-></b> <a href="dev/arc-mlir/Type.html#Type">Type</a>
+  | <b>return</b> <b>(</b> <a href="dev/arc-mlir/Value.html#Value">Value</a> <b>)</b> <b>:</b> <b>(</b> <a href="dev/arc-mlir/Type.html#Type">Type</a> <b>)</b> <b>-></b> <b>()</b>
+
+<a id="Deprecated" href="dev/arc-mlir/Operation.html#Deprecated">Deprecated</a> ::= <i style="color:gray">Deprecated and unused operations</i>
+  | <b>arc.emit</b> <b>(</b> <a href="dev/arc-mlir/Value.html#Value">Value</a><b>,</b> <a href="dev/arc-mlir/Value.html#Value">Value</a> <b>)</b> <b>-></b> <b>(</b> <a href="dev/arc-mlir/Type.html#Type">Type</a><b>,</b> <a href="dev/arc-mlir/Type.html#Type">Type</a> <b>)</b> <b>-></b> <b>()</b>
+  | <b>arc.make_vector</b> <b>(</b> <a href="dev/arc-mlir/Value.html#Value">Value</a><b>,</b>* <b>)</b> <b>:</b> (<a href="dev/arc-mlir/Type.html#Type">Type</a><b>,</b>*) <b>-></b> <a href="dev/arc-mlir/Type.html#Type">Type</a>
+  | <b>arc.make_tuple</b> <b>(</b> <a href="dev/arc-mlir/Value.html#Value">Value</a><b>,</b>* <b>)</b> <b>:</b> <b>(</b> <a href="dev/arc-mlir/Type.html#Type">Type</a><b>,</b>* <b>)</b> <b>-></b> <a href="dev/arc-mlir/Type.html#Type">Type</a>
+  | <b>arc.make_tensor</b> <b>(</b> <a href="dev/arc-mlir/Value.html#Value">Value</a><b>,</b>* <b>)</b> <b>:</b> <b>(</b> <a href="dev/arc-mlir/Type.html#Type">Type</a><b>,</b>* <b>)</b>
+  | <b>arc.index_tuple</b> <b>(</b> <a href="dev/arc-mlir/Value.html#Value">Value</a> <b>)</b> <b>{</b> <b>index</b> <b>=</b> <a href="dev/arc-mlir/Operation.html#Int">Int</a> <b>}</b> <b>:</b> <b>(</b> <a href="dev/arc-mlir/Type.html#Type">Type</a> <b>)</b> <b>-></b> <a href="dev/arc-mlir/Type.html#Type">Type</a>
+  | <b>arc.make_appender</b> <b>()</b> <b>:</b> <b>()</b> -> <a href="dev/arc-mlir/Type.html#Type">Type</a>
+  | <b>arc.merge</b> <b>(</b> <a href="dev/arc-mlir/Value.html#Value">Value</a><b>,</b> <a href="dev/arc-mlir/Value.html#Value">Value</a> <b>)</b> <b>:</b> <b>(</b> <a href="dev/arc-mlir/Type.html#Type">Type</a><b>,</b>* <b>)</b> <b>-></b> <a href="dev/arc-mlir/Type.html#Type">Type</a>
+  | <b>arc.result</b> <b>(</b> <a href="dev/arc-mlir/Value.html#Value">Value</a> <b>)</b> <b>:</b> <b>(</b> <a href="dev/arc-mlir/Type.html#Type">Type</a><b>,</b>* <b>)</b> <b>-></b> <a href="dev/arc-mlir/Type.html#Type">Type</a>
+  | <b>arc.appender_push</b> <b>(</b> <a href="dev/arc-mlir/Value.html#Value">Value</a><b>,</b> <a href="dev/arc-mlir/Value.html#Value">Value</a> <b>)</b> <b>:</b> <b>(</b> <a href="dev/arc-mlir/Type.html#Type">Type</a><b>,</b> <a href="dev/arc-mlir/Type.html#Type">Type</a> <b>)</b> <b>-></b> <b>()</b>
+  | <b>arc.appender_fold</b> <b>(</b> <a href="dev/arc-mlir/Value.html#Value">Value</a><b>,</b> <a href="dev/arc-mlir/Value.html#Value">Value</a> <b>)</b> <b>:</b> <b>(</b> <a href="dev/arc-mlir/Type.html#Type">Type</a><b>,</b> <a href="dev/arc-mlir/Type.html#Type">Type</a> <b>)</b> <b>-></b> <a href="dev/arc-mlir/Type.html#Type">Type</a>
+  | <b>arc.map_contains</b> <b>(</b> <a href="dev/arc-mlir/Value.html#Value">Value</a><b>,</b> <a href="dev/arc-mlir/Value.html#Value">Value</a> <b>)</b> <b>:</b> <b>(</b> <a href="dev/arc-mlir/Type.html#Type">Type</a><b>,</b> <a href="dev/arc-mlir/Type.html#Type">Type</a> <b>)</b> <b>-></b> <a href="dev/arc-mlir/Type.html#Type">Type</a>
+  | <b>arc.map_get</b> <b>(</b> <a href="dev/arc-mlir/Value.html#Value">Value</a><b>,</b> <a href="dev/arc-mlir/Value.html#Value">Value</a> <b>)</b> <b>:</b> <b>(</b> <a href="dev/arc-mlir/Type.html#Type">Type</a><b>,</b> <a href="dev/arc-mlir/Type.html#Type">Type</a> <b>)</b> <b>-></b> <a href="dev/arc-mlir/Type.html#Type">Type</a>
+  | <b>arc.map_insert</b> <b>(</b> <a href="dev/arc-mlir/Value.html#Value">Value</a><b>,</b> <a href="dev/arc-mlir/Value.html#Value">Value</a><b>,</b> <a href="dev/arc-mlir/Value.html#Value">Value</a> <b>)</b> <b>:</b> <b>(</b> <a href="dev/arc-mlir/Type.html#Type">Type</a><b>,</b> <a href="dev/arc-mlir/Type.html#Type">Type</a><b>,</b> <a href="dev/arc-mlir/Type.html#Type">Type</a> <b>)</b> <b>-></b> <a href="dev/arc-mlir/Type.html#Type">Type</a>
+  | <b>arc.map_remove</b> <b>(</b> <a href="dev/arc-mlir/Value.html#Value">Value</a><b>,</b> <a href="dev/arc-mlir/Value.html#Value">Value</a> <b>)</b> <b>:</b> <b>(</b> <a href="dev/arc-mlir/Type.html#Type">Type</a><b>,</b> <a href="dev/arc-mlir/Type.html#Type">Type</a> <b>)</b> <b>-></b> <a href="dev/arc-mlir/Type.html#Type">Type</a>
+  | <b>arc.value_write</b> <b>(</b> <a href="dev/arc-mlir/Value.html#Value">Value</a><b>,</b> <a href="dev/arc-mlir/Value.html#Value">Value</a> <b>)</b> <b>:</b> <b>(</b> <a href="dev/arc-mlir/Type.html#Type">Type</a><b>,</b> <a href="dev/arc-mlir/Type.html#Type">Type</a> <b>)</b> <b>-></b> <a href="dev/arc-mlir/Type.html#Type">Type</a>
+  | <b>arc.value_read</b> <b>(</b> <a href="dev/arc-mlir/Value.html#Value">Value</a> <b>)</b> <b>:</b> <b>(</b> <a href="dev/arc-mlir/Type.html#Type">Type</a> <b>)</b> <b>-></b> <a href="dev/arc-mlir/Type.html#Type">Type</a>
+
+<a id="Int" href="dev/arc-mlir/Operation.html#Int">Int</a> ::= [<b>1</b>-<b>9</b>][<b>0</b>-<b>9</b>]*<b>.</b>[<b>0</b>-<b>9</b>]*
+
+<a id="String" href="dev/arc-mlir/Operation.html#String">String</a> ::= <b>"</b>[^<b>"</b>]*<b>"</b>
+
+<a id="Literal" href="dev/arc-mlir/Operation.html#Literal">Literal</a> ::=
+  | Int
+  | String
+
+<a id="Cmp" href="dev/arc-mlir/Operation.html#Cmp">Cmp</a> ::= <b>eq</b> | <b>ne</b> | <b>lt</b> | <b>le</b> | <b>gt</b> | <b>ge</b></code></pre>
+<h2 id="builtin-functions-1"><a class="header" href="#builtin-functions-1">Builtin functions</a></h2>
+<pre><code>func @add_u8(%a : ui8, %b : ui8) -> ui8 attributes 
+func @sub_u8(%a : ui8, %b : ui8) -> ui8 attributes 
+func @mul_u8(%a : ui8, %b : ui8) -> ui8 attributes 
+func @div_u8(%a : ui8, %b : ui8) -> ui8 attributes 
+func @rem_u8(%a : ui8, %b : ui8) -> ui8 attributes 
+func @add_u16(%a : ui16, %b : ui16) -> ui16 attributes 
+func @sub_u16(%a : ui16, %b : ui16) -> ui16 attributes 
+func @mul_u16(%a : ui16, %b : ui16) -> ui16 attributes 
+func @div_u16(%a : ui16, %b : ui16) -> ui16 attributes 
+func @rem_u16(%a : ui16, %b : ui16) -> ui16 attributes 
+func @add_u32(%a : ui32, %b : ui32) -> ui32 attributes 
+func @sub_u32(%a : ui32, %b : ui32) -> ui32 attributes 
+func @mul_u32(%a : ui32, %b : ui32) -> ui32 attributes 
+func @div_u32(%a : ui32, %b : ui32) -> ui32 attributes 
+func @rem_u32(%a : ui32, %b : ui32) -> ui32 attributes 
+func @add_u64(%a : ui64, %b : ui64) -> ui64 attributes 
+func @sub_u64(%a : ui64, %b : ui64) -> ui64 attributes 
+func @mul_u64(%a : ui64, %b : ui64) -> ui64 attributes 
+func @div_u64(%a : ui64, %b : ui64) -> ui64 attributes 
+func @rem_u64(%a : ui64, %b : ui64) -> ui64 attributes 
+func @add_i8(%a : si8, %b : si8) -> si8 attributes 
+func @sub_i8(%a : si8, %b : si8) -> si8 attributes 
+func @mul_i8(%a : si8, %b : si8) -> si8 attributes 
+func @div_i8(%a : si8, %b : si8) -> si8 attributes 
+func @rem_i8(%a : si8, %b : si8) -> si8 attributes 
+func @add_i16(%a : si16, %b : si16) -> si16 attributes 
+func @sub_i16(%a : si16, %b : si16) -> si16 attributes 
+func @mul_i16(%a : si16, %b : si16) -> si16 attributes 
+func @div_i16(%a : si16, %b : si16) -> si16 attributes 
+func @rem_i16(%a : si16, %b : si16) -> si16 attributes 
+func @add_i32(%a : si32, %b : si32) -> si32 attributes 
+func @sub_i32(%a : si32, %b : si32) -> si32 attributes 
+func @mul_i32(%a : si32, %b : si32) -> si32 attributes 
+func @div_i32(%a : si32, %b : si32) -> si32 attributes 
+func @rem_i32(%a : si32, %b : si32) -> si32 attributes 
+func @add_i64(%a : si64, %b : si64) -> si64 attributes 
+func @sub_i64(%a : si64, %b : si64) -> si64 attributes 
+func @mul_i64(%a : si64, %b : si64) -> si64 attributes 
+func @div_i64(%a : si64, %b : si64) -> si64 attributes 
+func @rem_i64(%a : si64, %b : si64) -> si64 attributes 
+func @rem_f32(%a : f32, %b : f32) -> f32 attributes 
+func @add_f32(%a: f32, %b: f32) -> f32 attributes 
+func @sub_f32(%a: f32, %b: f32) -> f32 attributes 
+func @mul_f32(%a: f32, %b: f32) -> f32 attributes 
+func @div_f32(%a: f32, %b: f32) -> f32 attributes 
+func @pow_f32(%a: f32, %b: f32) -> f32 attributes 
+func @rem_f64(%a : f64, %b : f64) -> f64 attributes 
+func @add_f64(%a: f64, %b: f64) -> f64 attributes 
+func @sub_f64(%a: f64, %b: f64) -> f64 attributes 
+func @mul_f64(%a: f64, %b: f64) -> f64 attributes 
+func @div_f64(%a: f64, %b: f64) -> f64 attributes 
+func @pow_f64(%a : f64, %b : f64) -> f64 attributes 
+func @eq_i1(%a : i1, %b : i1) -> i1 attributes 
+func @and_i1(%arg0: i1, %arg1: i1) -> i1 attributes 
+func @or_i1(%arg0: i1, %arg1: i1) -> i1 attributes 
+func @xor_i1(%arg0: i1, %arg1: i1) -> i1 attributes 
+func @and_i8(%arg0: i8, %arg1: i8) -> i8 attributes 
+func @or_i8(%arg0: i8, %arg1: i8) -> i8 attributes 
+func @xor_i8(%arg0: i8, %arg1: i8) -> i8 attributes 
+func @and_i16(%arg0: i16, %arg1: i16) -> i16 attributes 
+func @or_i16(%arg0: i16, %arg1: i16) -> i16 attributes 
+func @xor_i16(%arg0: i16, %arg1: i16) -> i16 attributes 
+func @and_i32(%arg0: i32, %arg1: i32) -> i32 attributes 
+func @or_i32(%arg0: i32, %arg1: i32) -> i32 attributes 
+func @xor_i32(%arg0: i32, %arg1: i32) -> i32 attributes 
+func @and_i64(%arg0: i64, %arg1: i64) -> i64 attributes 
+func @or_i64(%arg0: i64, %arg1: i64) -> i64 attributes 
+func @xor_i64(%arg0: i64, %arg1: i64) -> i64 attributes 
+func @eq_u8(%a : ui8, %b : ui8) -> i1 attributes 
+func @ne_u8(%a : ui8, %b : ui8) -> i1 attributes 
+func @lt_u8(%a : ui8, %b : ui8) -> i1 attributes 
+func @le_u8(%a : ui8, %b : ui8) -> i1 attributes 
+func @gt_u8(%a : ui8, %b : ui8) -> i1 attributes 
+func @ge_u8(%a : ui8, %b : ui8) -> i1 attributes 
+func @eq_u16(%a : ui16, %b : ui16) -> i1 attributes 
+func @ne_u16(%a : ui16, %b : ui16) -> i1 attributes 
+func @lt_u16(%a : ui16, %b : ui16) -> i1 attributes 
+func @le_u16(%a : ui16, %b : ui16) -> i1 attributes 
+func @gt_u16(%a : ui16, %b : ui16) -> i1 attributes 
+func @ge_u16(%a : ui16, %b : ui16) -> i1 attributes 
+func @eq_u32(%a : ui32, %b : ui32) -> i1 attributes 
+func @ne_u32(%a : ui32, %b : ui32) -> i1 attributes 
+func @lt_u32(%a : ui32, %b : ui32) -> i1 attributes 
+func @le_u32(%a : ui32, %b : ui32) -> i1 attributes 
+func @gt_u32(%a : ui32, %b : ui32) -> i1 attributes 
+func @ge_u32(%a : ui32, %b : ui32) -> i1 attributes 
+func @eq_u64(%a : ui64, %b : ui64) -> i1 attributes 
+func @ne_u64(%a : ui64, %b : ui64) -> i1 attributes 
+func @lt_u64(%a : ui64, %b : ui64) -> i1 attributes 
+func @le_u64(%a : ui64, %b : ui64) -> i1 attributes 
+func @gt_u64(%a : ui64, %b : ui64) -> i1 attributes 
+func @ge_u64(%a : ui64, %b : ui64) -> i1 attributes 
+func @eq_i8(%a : si8, %b : si8) -> i1 attributes 
+func @ne_i8(%a : si8, %b : si8) -> i1 attributes 
+func @lt_i8(%a : si8, %b : si8) -> i1 attributes 
+func @le_i8(%a : si8, %b : si8) -> i1 attributes 
+func @gt_i8(%a : si8, %b : si8) -> i1 attributes 
+func @ge_i8(%a : si8, %b : si8) -> i1 attributes 
+func @eq_i16(%a : si16, %b : si16) -> i1 attributes 
+func @ne_i16(%a : si16, %b : si16) -> i1 attributes 
+func @lt_i16(%a : si16, %b : si16) -> i1 attributes 
+func @le_i16(%a : si16, %b : si16) -> i1 attributes 
+func @gt_i16(%a : si16, %b : si16) -> i1 attributes 
+func @ge_i16(%a : si16, %b : si16) -> i1 attributes 
+func @eq_i32(%a : si32, %b : si32) -> i1 attributes 
+func @ne_i32(%a : si32, %b : si32) -> i1 attributes 
+func @lt_i32(%a : si32, %b : si32) -> i1 attributes 
+func @le_i32(%a : si32, %b : si32) -> i1 attributes 
+func @gt_i32(%a : si32, %b : si32) -> i1 attributes 
+func @ge_i32(%a : si32, %b : si32) -> i1 attributes 
+func @eq_i64(%a : si64, %b : si64) -> i1 attributes 
+func @ne_i64(%a : si64, %b : si64) -> i1 attributes 
+func @lt_i64(%a : si64, %b : si64) -> i1 attributes 
+func @le_i64(%a : si64, %b : si64) -> i1 attributes 
+func @gt_i64(%a : si64, %b : si64) -> i1 attributes 
+func @ge_i64(%a : si64, %b : si64) -> i1 attributes 
+func @eq_f32(%a : f32, %b : f32) -> i1 attributes 
+func @ne_f32(%a : f32, %b : f32) -> i1 attributes 
+func @lt_f32(%a : f32, %b : f32) -> i1 attributes 
+func @le_f32(%a : f32, %b : f32) -> i1 attributes 
+func @gt_f32(%a : f32, %b : f32) -> i1 attributes 
+func @ge_f32(%a : f32, %b : f32) -> i1 attributes 
+func @eq_f64(%a : f64, %b : f64) -> i1 attributes 
+func @ne_f64(%a : f64, %b : f64) -> i1 attributes 
+func @lt_f64(%a : f64, %b : f64) -> i1 attributes 
+func @le_f64(%a : f64, %b : f64) -> i1 attributes 
+func @gt_f64(%a : f64, %b : f64) -> i1 attributes 
+func @ge_f64(%a : f64, %b : f64) -> i1 attributes 
+func @acos_f32(%a : f32) -> f32 attributes 
+func @asin_f32(%a : f32) -> f32 attributes 
+func @atan_f32(%a : f32) -> f32 attributes 
+func @cos_f32(%a : f32) -> f32 attributes 
+func @cosh_f32(%a : f32) -> f32 attributes 
+func @exp_f32(%a : f32) -> f32 attributes 
+func @log_f32(%a : f32) -> f32 attributes 
+func @sin_f32(%a : f32) -> f32 attributes 
+func @sinh_f32(%a : f32) -> f32 attributes 
+func @sqrt_f32(%a : f32) -> f32 attributes 
+func @tan_f32(%a : f32) -> f32 attributes 
+func @tanh_f32(%a : f32) -> f32 attributes 
+func @acos_f64(%a : f64) -> f64 attributes 
+func @asin_f64(%a : f64) -> f64 attributes 
+func @atan_f64(%a : f64) -> f64 attributes 
+func @cos_f64(%a : f64) -> f64 attributes 
+func @cosh_f64(%a : f64) -> f64 attributes 
+func @exp_f64(%a : f64) -> f64 attributes 
+func @log_f64(%a : f64) -> f64 attributes 
+func @sin_f64(%a : f64) -> f64 attributes 
+func @sinh_f64(%a : f64) -> f64 attributes 
+func @sqrt_f64(%a : f64) -> f64 attributes 
+func @tan_f64(%a : f64) -> f64 attributes 
+func @tanh_f64(%a : f64) -> f64 attributes</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="types-1"><a class="header" href="#types-1">Types</a></h1>
+<p>Unlike Arc-Lang, Arc-MLIR has no nominal types.</p>
+<pre><code><a id="Type" href="dev/arc-mlir/Type.html#Type">Type</a> ::=
+  | <b>!arc.struct</b> <b><</b> (<a href="dev/arc-mlir/Name.html#Name">Name</a> <b>:</b> <a href="dev/arc-mlir/Type.html#Type">Type</a>)<b>,</b>* <b>></b>
+  | <b>!arc.enum</b> <b><</b> (<a href="dev/arc-mlir/Name.html#Name">Name</a> <b>:</b> <a href="dev/arc-mlir/Type.html#Type">Type</a>)<b>,</b>* <b>></b>
+  | <b>!arc.adt</b> <b><</b> <a href="dev/arc-mlir/String.html#String">String</a> <b>></b>
+  | <b>!arc.stream</b> <b><</b> <a href="dev/arc-mlir/Type.html#Type">Type</a> <b>></b>
+  | <b>f32</b> | <b>f64</b> | <b>i32</b> | <b>i64</b> | <b>si32</b> | <b>si64</b>
+  | <b>()</b>
+  | <a href="dev/arc-mlir/Type.html#Deprecated">Deprecated</a>
+
+<a id="Deprecated" href="dev/arc-mlir/Type.html#Deprecated">Deprecated</a> ::= <i style="color:gray">Deprecated and unused types</i>
+  | <b>!arc.arcon.value</b> <b><</b> <a href="dev/arc-mlir/Type.html#Type">Type</a> <b>></b>
+  | <b>!arc.arcon.appender</b> <b><</b> <a href="dev/arc-mlir/Type.html#Type">Type</a> <b>></b>
+  | <b>!arc.arcon.map</b> <b><</b> <a href="dev/arc-mlir/Type.html#Type">Type</a><b>,</b> <a href="dev/arc-mlir/Type.html#Type">Type</a> <b>></b>
+
+<a id="String" href="dev/arc-mlir/Type.html#String">String</a> ::= <b>"</b>[^<b>"</b>]*<b>"</b></code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="values-1"><a class="header" href="#values-1">Values</a></h1>
+<pre><code><a id="Value" href="dev/arc-mlir/Value.html#Value">Value</a> ::= <b>%</b> <a href="dev/arc-mlir/Name.html#Name">Name</a></code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="blocks-1"><a class="header" href="#blocks-1">Blocks</a></h1>
+<p>A <strong>block</strong> is a sequence of operations.</p>
+<pre><code><a id="Block" href="dev/arc-mlir/Block.html#Block">Block</a> ::= <b>{</b> <a href="dev/arc-mlir/Operation.html#Operation">Operation</a>* <b>}</b></code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="items-1"><a class="header" href="#items-1">Items</a></h1>
+<pre><code><a id="Item" href="dev/arc-mlir/Item.html#Item">Item</a> ::=
+  | <a href="dev/arc-mlir/Func.html#Func">Func</a></code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="functions-1"><a class="header" href="#functions-1">Functions</a></h1>
+<pre><code><a id="Func" href="dev/arc-mlir/Func.html#Func">Func</a> ::= <b>func</b> <a href="dev/arc-mlir/Path.html#Path">Path</a> <b>(</b> <a href="dev/arc-mlir/Params.html#Params">Params</a> <b>)</b> <b>-></b> <a href="dev/arc-mlir/Type.html#Type">Type</a> <a href="dev/arc-mlir/Block.html#Block">Block</a></code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="parameters-1"><a class="header" href="#parameters-1">Parameters</a></h1>
+<pre><code><a id="Params" href="dev/arc-mlir/Params.html#Params">Params</a> ::= <a href="dev/arc-mlir/Params.html#Param">Param</a><b>,</b>*
+
+<a id="Param" href="dev/arc-mlir/Params.html#Param">Param</a> ::= <a href="dev/arc-mlir/Value.html#Value">Value</a> <b>:</b> <a href="dev/arc-mlir/Type.html#Type">Type</a></code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="arc-runtime-reference"><a class="header" href="#arc-runtime-reference">Arc-Runtime Reference</a></h1>
+<p>Arc-Runtime is a runtime library, for executing Arc-Lang programs, which focuses on flexibility, portability, native performance, and scalability. Its API provides lower-level abstractions than Arc-Lang that are more general but less safe. Programs written directly in Arc-Runtime can for example deadlock if the programmer is not careful, while Arc-Lang's parser and type system prevents such behavior. Arc-MLIR and Arc-Runtime share different responsibilities in making Arc-Lang programs execute efficiently.</p>
+<p>Arc-MLIR supports ahead-of-time standard compiler optimisations as well as logical and physical optimisations of streaming-relational operators. However, Arc-MLIR makes no assumptions of where programs will execute and what the input data will be. That is, all Arc-MLIR optimisations are based on the source code itself.</p>
+<p>Arc-Runtime supports runtime optimisations which might rely on information that is only known during execution. Streaming programs are expected to run for an indefinite duration and must therefore be able to adapt to changes in their environment. Among its responsibilities, Arc-Runtime must therefore be able to take care of specialisation, scheduling, and scaling decisions.</p>
+<p>For more information, see the <a href="dev/arc-runtime/../../target/doc/arc_runtime/index.html">internal developer documentation of the Arc-Runtime</a>.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="execution-model"><a class="header" href="#execution-model">Execution Model</a></h1>
+<p>Arc-Runtime is implemented on top of the <a href="https://github.com/kompics/kompact">Kompact</a> framework. To understand how Arc-Runtime executes, </p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="data-model"><a class="header" href="#data-model">Data Model</a></h1>
+<p>Values in Arc-Lang appear 
+Values in Arc-Lang are separated into semantic categories.</p>
+<h2 id="copying-semantics"><a class="header" href="#copying-semantics">Copying Semantics</a></h2>
+<p>All values in Arc-Lang can be sent over channels</p>
+<p>Those which are fixed-size and </p>
+<ul>
+<li>Fixed-size vs dynamic-size</li>
+<li>Interior Mutability vs </li>
+<li>QoL: Debug, Clone</li>
+<li>Sharable vs Sendable</li>
+<li>Garbage collection
+Values in Arc-Lang appear to the programmer as 
+Every value in Arc-Runtime Arc-Runtime has two kinds of values</li>
+</ul>
+<p>Now:</p>
+<ul>
+<li>Writing a lot about tasks and channels in Arc-Lang</li>
+<li>Writing about other parts: arc-runtime, language integrated queries</li>
+<li>Reading Martin Klepmann's book to find applications
+<ul>
+<li>Edge vs Cloud
+<ul>
+<li>Fault-tolerance</li>
+</ul>
+</li>
+<li>Meeting with students</li>
+</ul>
+</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><h1 id="evolution-of-tasks"><a class="header" href="#evolution-of-tasks">Evolution of Tasks</a></h1>
+<p>In the original design, tasks were able to accept a single input and output stream.</p>
+<pre><code>task Identity(): ~i32 -&gt; ~i32 {
+    var x = 0;
+    on event =&gt; {
+        x += 1;
+        emit x;
+    }
+}
+</code></pre>
+<p>This was then extended so that tasks could accept multiple input and output streams.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="references"><a class="header" href="#references">References</a></h1>
+<script type="text/javascript">
+function defaultCopyTextToClipboard(text) {
+    var textArea = document.createElement("textarea");
+    textArea.value = text;
+
+    // Avoid scrolling to bottom
+    textArea.style.top = "0";
+    textArea.style.left = "0";
+    textArea.style.position = "fixed";
+
+    document.body.appendChild(textArea);
+    textArea.focus();
+    textArea.select();
+
+    try {
+        var ok = document.execCommand('copy');
+        var msg = ok ? 'was ok' : 'failed';
+        console.log('Backing copy: Text copy was ' + msg);
+    } catch (err) {
+        console.error('Backing copy: Unable to copy text', err);
+    }
+
+    document.body.removeChild(textArea);
+}
+
+function copyToClipboard(text) {
+    if (!navigator.clipboard) {
+        defaultCopyTextToClipboard(text);
+        return;
+    }
+    navigator.clipboard.writeText(text).then(function() {
+        console.log('Text copied to clipboard');
+    }, function(err) {
+        console.error('Error copying text: ', err);
+    });
+}
+
+</script>
+<style></style>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+            </nav>
+
+        </div>
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        <script type="text/javascript">
+        window.addEventListener('load', function() {
+            MathJax.Hub.Register.StartupHook('End', function() {
+                window.setTimeout(window.print, 100);
+            });
+        });
+        </script>
+    </body>
+</html>

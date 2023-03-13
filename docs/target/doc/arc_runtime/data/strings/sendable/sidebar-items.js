@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"struct":["String","__Visitor"],"type":["ConcreteString"]};

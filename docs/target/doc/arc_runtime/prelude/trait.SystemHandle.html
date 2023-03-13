@@ -1,0 +1,329 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="A limited version of a KompactSystem"><title>SystemHandle in arc_runtime::prelude - Rust</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Regular-46f98efaafac5295.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Bold-a2c9cd1067f8b328.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-e5308b57e507db71.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../static.files/light-d59023bfa12059d2.css"><link rel="stylesheet" disabled href="../../static.files/dark-1ca41bb1e10af075.css"><link rel="stylesheet" disabled href="../../static.files/ayu-18b4181a2f3fb862.css"><script src="../../static.files/storage-3891ce972e3a2bf8.js"></script><script defer src="sidebar-items.js"></script><script defer src="../../static.files/main-98a684e84ae5b08b.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc trait"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="logo-container" href="../../arc_runtime/index.html"><img class="rust-logo" src="../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><h2></h2></nav><nav class="sidebar"><a class="logo-container" href="../../arc_runtime/index.html"><img class="rust-logo" src="../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><h2 class="location"><a href="#">SystemHandle</a></h2><div class="sidebar-elems"><section><h3><a href="#required-methods">Required Methods</a></h3><ul class="block"><li><a href="#tymethod.create">create</a></li><li><a href="#tymethod.create_and_register">create_and_register</a></li><li><a href="#tymethod.deadletter_ref">deadletter_ref</a></li><li><a href="#tymethod.kill">kill</a></li><li><a href="#tymethod.kill_notify">kill_notify</a></li><li><a href="#tymethod.max_messages">max_messages</a></li><li><a href="#tymethod.register">register</a></li><li><a href="#tymethod.register_by_alias">register_by_alias</a></li><li><a href="#tymethod.set_routing_policy">set_routing_policy</a></li><li><a href="#tymethod.shutdown_async">shutdown_async</a></li><li><a href="#tymethod.spawn">spawn</a></li><li><a href="#tymethod.start">start</a></li><li><a href="#tymethod.start_notify">start_notify</a></li><li><a href="#tymethod.stop">stop</a></li><li><a href="#tymethod.stop_notify">stop_notify</a></li><li><a href="#tymethod.system_path">system_path</a></li><li><a href="#tymethod.throughput">throughput</a></li><li><a href="#tymethod.update_alias_registration">update_alias_registration</a></li></ul><h3><a href="#implementors">Implementors</a></h3></section><h2><a href="index.html">In arc_runtime::prelude</a></h2></div></nav><main><div class="width-limiter"><nav class="sub"><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../static.files/wheel-7b819b6101059cd0.svg"></a></div></form></nav><section id="main-content" class="content"><div class="main-heading"><h1>Trait <a href="../index.html">arc_runtime</a>::<wbr><a href="index.html">prelude</a>::<wbr><a class="trait" href="#">SystemHandle</a><button id="copy-path" title="Copy item path to clipboard"><img src="../../static.files/clipboard-7571035ce49a181d.svg" width="19" height="18" alt="Copy item path"></button></h1><span class="out-of-band"><button id="toggle-all-docs" title="collapse all docs">[<span>&#x2212;</span>]</button></span></div><pre class="rust item-decl"><code>pub trait SystemHandle: Dispatching + CanCancelTimers {
+<details class="toggle type-contents-toggle"><summary class="hideme"><span>Show 18 methods</span></summary>    // Required methods
+    fn <a href="#tymethod.create" class="fn">create</a>&lt;C, F&gt;(&amp;self, f: F) -&gt; <a class="struct" href="struct.Arc.html" title="struct arc_runtime::prelude::Arc">Arc</a>&lt;<a class="struct" href="struct.Component.html" title="struct arc_runtime::prelude::Component">Component</a>&lt;C&gt;&gt;
+       <span class="where">where F: <a class="trait" href="https://doc.rust-lang.org/nightly/core/ops/function/trait.FnOnce.html" title="trait core::ops::function::FnOnce">FnOnce</a>() -&gt; C,
+             C: <a class="trait" href="trait.ComponentDefinition.html" title="trait arc_runtime::prelude::ComponentDefinition">ComponentDefinition</a> + 'static</span>;
+<span class="item-spacer"></span>    fn <a href="#tymethod.register" class="fn">register</a>(
+        &amp;self,
+        c: &amp;dyn UniqueRegistrable
+    ) -&gt; KFuture&lt;<a class="enum" href="https://doc.rust-lang.org/nightly/core/result/enum.Result.html" title="enum core::result::Result">Result</a>&lt;ActorPath, RegistrationError&gt;&gt; <a href="#" class="tooltip" data-notable-ty="KFuture&lt;Result&lt;ActorPath, RegistrationError&gt;&gt;">ⓘ</a>;
+<span class="item-spacer"></span>    fn <a href="#tymethod.create_and_register" class="fn">create_and_register</a>&lt;C, F&gt;(
+        &amp;self,
+        f: F
+    ) -&gt; (<a class="struct" href="struct.Arc.html" title="struct arc_runtime::prelude::Arc">Arc</a>&lt;<a class="struct" href="struct.Component.html" title="struct arc_runtime::prelude::Component">Component</a>&lt;C&gt;&gt;, KFuture&lt;<a class="enum" href="https://doc.rust-lang.org/nightly/core/result/enum.Result.html" title="enum core::result::Result">Result</a>&lt;ActorPath, RegistrationError&gt;&gt;)
+       <span class="where">where F: <a class="trait" href="https://doc.rust-lang.org/nightly/core/ops/function/trait.FnOnce.html" title="trait core::ops::function::FnOnce">FnOnce</a>() -&gt; C,
+             C: <a class="trait" href="trait.ComponentDefinition.html" title="trait arc_runtime::prelude::ComponentDefinition">ComponentDefinition</a> + 'static</span>;
+<span class="item-spacer"></span>    fn <a href="#tymethod.register_by_alias" class="fn">register_by_alias</a>&lt;A&gt;(
+        &amp;self,
+        c: &amp;dyn DynActorRefFactory,
+        alias: A
+    ) -&gt; KFuture&lt;<a class="enum" href="https://doc.rust-lang.org/nightly/core/result/enum.Result.html" title="enum core::result::Result">Result</a>&lt;ActorPath, RegistrationError&gt;&gt; <a href="#" class="tooltip" data-notable-ty="KFuture&lt;Result&lt;ActorPath, RegistrationError&gt;&gt;">ⓘ</a>
+       <span class="where">where A: <a class="trait" href="https://doc.rust-lang.org/nightly/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="struct" href="https://doc.rust-lang.org/nightly/alloc/string/struct.String.html" title="struct alloc::string::String">String</a>&gt;</span>;
+<span class="item-spacer"></span>    fn <a href="#tymethod.update_alias_registration" class="fn">update_alias_registration</a>&lt;A&gt;(
+        &amp;self,
+        c: &amp;dyn DynActorRefFactory,
+        alias: A
+    ) -&gt; KFuture&lt;<a class="enum" href="https://doc.rust-lang.org/nightly/core/result/enum.Result.html" title="enum core::result::Result">Result</a>&lt;ActorPath, RegistrationError&gt;&gt; <a href="#" class="tooltip" data-notable-ty="KFuture&lt;Result&lt;ActorPath, RegistrationError&gt;&gt;">ⓘ</a>
+       <span class="where">where A: <a class="trait" href="https://doc.rust-lang.org/nightly/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="struct" href="https://doc.rust-lang.org/nightly/alloc/string/struct.String.html" title="struct alloc::string::String">String</a>&gt;</span>;
+<span class="item-spacer"></span>    fn <a href="#tymethod.set_routing_policy" class="fn">set_routing_policy</a>&lt;P&gt;(
+        &amp;self,
+        policy: P,
+        path: &amp;<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.str.html">str</a>,
+        update: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a>
+    ) -&gt; KFuture&lt;<a class="enum" href="https://doc.rust-lang.org/nightly/core/result/enum.Result.html" title="enum core::result::Result">Result</a>&lt;ActorPath, RegistrationError&gt;&gt; <a href="#" class="tooltip" data-notable-ty="KFuture&lt;Result&lt;ActorPath, RegistrationError&gt;&gt;">ⓘ</a>
+       <span class="where">where P: <a class="trait" href="https://doc.rust-lang.org/nightly/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;StorePolicy&gt;</span>;
+<span class="item-spacer"></span>    fn <a href="#tymethod.start" class="fn">start</a>(&amp;self, c: &amp;<a class="struct" href="struct.Arc.html" title="struct arc_runtime::prelude::Arc">Arc</a>&lt;impl AbstractComponent&gt;);
+<span class="item-spacer"></span>    fn <a href="#tymethod.start_notify" class="fn">start_notify</a>(&amp;self, c: &amp;<a class="struct" href="struct.Arc.html" title="struct arc_runtime::prelude::Arc">Arc</a>&lt;impl AbstractComponent&gt;) -&gt; KFuture&lt;<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.unit.html">()</a>&gt; <a href="#" class="tooltip" data-notable-ty="KFuture&lt;()&gt;">ⓘ</a>;
+<span class="item-spacer"></span>    fn <a href="#tymethod.stop" class="fn">stop</a>(&amp;self, c: &amp;<a class="struct" href="struct.Arc.html" title="struct arc_runtime::prelude::Arc">Arc</a>&lt;impl AbstractComponent&gt;);
+<span class="item-spacer"></span>    fn <a href="#tymethod.stop_notify" class="fn">stop_notify</a>(&amp;self, c: &amp;<a class="struct" href="struct.Arc.html" title="struct arc_runtime::prelude::Arc">Arc</a>&lt;impl AbstractComponent&gt;) -&gt; KFuture&lt;<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.unit.html">()</a>&gt; <a href="#" class="tooltip" data-notable-ty="KFuture&lt;()&gt;">ⓘ</a>;
+<span class="item-spacer"></span>    fn <a href="#tymethod.kill" class="fn">kill</a>(&amp;self, c: <a class="struct" href="struct.Arc.html" title="struct arc_runtime::prelude::Arc">Arc</a>&lt;impl AbstractComponent&gt;);
+<span class="item-spacer"></span>    fn <a href="#tymethod.kill_notify" class="fn">kill_notify</a>(&amp;self, c: <a class="struct" href="struct.Arc.html" title="struct arc_runtime::prelude::Arc">Arc</a>&lt;impl AbstractComponent&gt;) -&gt; KFuture&lt;<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.unit.html">()</a>&gt; <a href="#" class="tooltip" data-notable-ty="KFuture&lt;()&gt;">ⓘ</a>;
+<span class="item-spacer"></span>    fn <a href="#tymethod.throughput" class="fn">throughput</a>(&amp;self) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.usize.html">usize</a>;
+<span class="item-spacer"></span>    fn <a href="#tymethod.max_messages" class="fn">max_messages</a>(&amp;self) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.usize.html">usize</a>;
+<span class="item-spacer"></span>    fn <a href="#tymethod.shutdown_async" class="fn">shutdown_async</a>(&amp;self);
+<span class="item-spacer"></span>    fn <a href="#tymethod.system_path" class="fn">system_path</a>(&amp;self) -&gt; SystemPath;
+<span class="item-spacer"></span>    fn <a href="#tymethod.deadletter_ref" class="fn">deadletter_ref</a>(&amp;self) -&gt; ActorRef&lt;<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.never.html">!</a>&gt;;
+<span class="item-spacer"></span>    fn <a href="#tymethod.spawn" class="fn">spawn</a>&lt;R&gt;(
+        &amp;self,
+        future: impl <a class="trait" href="trait.Future.html" title="trait arc_runtime::prelude::Future">Future</a>&lt;Output = R&gt; + <a class="trait" href="https://doc.rust-lang.org/nightly/core/marker/trait.Send.html" title="trait core::marker::Send">Send</a> + 'static
+    ) -&gt; Receiver&lt;R&gt; <a href="#" class="tooltip" data-notable-ty="Receiver&lt;R&gt;">ⓘ</a>
+       <span class="where">where R: <a class="trait" href="https://doc.rust-lang.org/nightly/core/marker/trait.Send.html" title="trait core::marker::Send">Send</a> + 'static</span>;
+</details>}</code></pre><details class="toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>A limited version of a <a href="struct.KompactSystem.html" title="struct arc_runtime::prelude::KompactSystem">KompactSystem</a></p>
+<p>This is meant for use from within components, where blocking APIs
+are unacceptable.</p>
+</div></details><h2 id="required-methods" class="small-section-header">Required Methods<a href="#required-methods" class="anchor">§</a></h2><div class="methods"><details class="toggle method-toggle" open><summary><section id="tymethod.create" class="method"><h4 class="code-header">fn <a href="#tymethod.create" class="fn">create</a>&lt;C, F&gt;(&amp;self, f: F) -&gt; <a class="struct" href="struct.Arc.html" title="struct arc_runtime::prelude::Arc">Arc</a>&lt;<a class="struct" href="struct.Component.html" title="struct arc_runtime::prelude::Component">Component</a>&lt;C&gt;&gt;<span class="where fmt-newline">where
+    F: <a class="trait" href="https://doc.rust-lang.org/nightly/core/ops/function/trait.FnOnce.html" title="trait core::ops::function::FnOnce">FnOnce</a>() -&gt; C,
+    C: <a class="trait" href="trait.ComponentDefinition.html" title="trait arc_runtime::prelude::ComponentDefinition">ComponentDefinition</a> + 'static,</span></h4></section></summary><div class="docblock"><p>Create a new component</p>
+<p>Uses <code>f</code> to create an instance of a <a href="trait.ComponentDefinition.html" title="trait arc_runtime::prelude::ComponentDefinition">ComponentDefinition</a>,
+which is the initialised to form a <a href="struct.Component.html" title="struct arc_runtime::prelude::Component">Component</a>.
+Since components are shared between threads, the created component
+is wrapped into an <a href="struct.Arc.html" title="struct arc_runtime::prelude::Arc">Arc</a>.</p>
+<p>Newly created components are not started automatically.
+Use <a href="struct.KompactSystem.html#method.start" title="associated function arc_runtime::prelude::KompactSystem::start">start</a> or <a href="struct.KompactSystem.html#method.start_notify" title="associated function arc_runtime::prelude::KompactSystem::start_notify">start_notify</a>
+to start a newly created component, once it is connected properly.</p>
+<p>If you need address this component via the network, see the <a href="struct.KompactSystem.html#method.register" title="associated function arc_runtime::prelude::KompactSystem::register">register</a> function.</p>
+<h5 id="example"><a href="#example">Example</a></h5>
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">let </span>c = system.create(TestComponent1::new);</code></pre></div>
+</div></details><details class="toggle method-toggle" open><summary><section id="tymethod.register" class="method"><h4 class="code-header">fn <a href="#tymethod.register" class="fn">register</a>(
+    &amp;self,
+    c: &amp;dyn UniqueRegistrable
+) -&gt; KFuture&lt;<a class="enum" href="https://doc.rust-lang.org/nightly/core/result/enum.Result.html" title="enum core::result::Result">Result</a>&lt;ActorPath, RegistrationError&gt;&gt; <a href="#" class="tooltip" data-notable-ty="KFuture&lt;Result&lt;ActorPath, RegistrationError&gt;&gt;">ⓘ</a></h4></section></summary><div class="docblock"><p>Attempts to register <code>c</code> with the dispatcher using its unique id</p>
+<p>The returned future will contain the unique id <a href="ActorPath">ActorPath</a>
+for the given component, once it is completed by the dispatcher.</p>
+<p>Once the future completes, the component can be addressed via the network,
+even if it has not been started, yet (in which case messages will simply be queued up).</p>
+<h5 id="example-1"><a href="#example-1">Example</a></h5>
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>kompact::prelude::<span class="kw-2">*</span>;
+<span class="kw">use </span>std::time::Duration;
+<span class="kw">let </span><span class="kw-2">mut </span>cfg = KompactConfig::new();
+cfg.system_components(DeadletterBox::new, {
+    <span class="kw">let </span>net_config = NetworkConfig::new(<span class="string">&quot;127.0.0.1:0&quot;</span>.parse().expect(<span class="string">&quot;Address should work&quot;</span>));
+    net_config.build()
+});
+<span class="kw">let </span>system = cfg.build().expect(<span class="string">&quot;KompactSystem&quot;</span>);
+<span class="kw">let </span>c = system.create(TestComponent1::new);
+system.register(<span class="kw-2">&amp;</span>c).wait_expect(Duration::from_millis(<span class="number">1000</span>), <span class="string">&quot;Failed to register TestComponent1&quot;</span>);</code></pre></div>
+</div></details><details class="toggle method-toggle" open><summary><section id="tymethod.create_and_register" class="method"><h4 class="code-header">fn <a href="#tymethod.create_and_register" class="fn">create_and_register</a>&lt;C, F&gt;(
+    &amp;self,
+    f: F
+) -&gt; (<a class="struct" href="struct.Arc.html" title="struct arc_runtime::prelude::Arc">Arc</a>&lt;<a class="struct" href="struct.Component.html" title="struct arc_runtime::prelude::Component">Component</a>&lt;C&gt;&gt;, KFuture&lt;<a class="enum" href="https://doc.rust-lang.org/nightly/core/result/enum.Result.html" title="enum core::result::Result">Result</a>&lt;ActorPath, RegistrationError&gt;&gt;)<span class="where fmt-newline">where
+    F: <a class="trait" href="https://doc.rust-lang.org/nightly/core/ops/function/trait.FnOnce.html" title="trait core::ops::function::FnOnce">FnOnce</a>() -&gt; C,
+    C: <a class="trait" href="trait.ComponentDefinition.html" title="trait arc_runtime::prelude::ComponentDefinition">ComponentDefinition</a> + 'static,</span></h4></section></summary><div class="docblock"><p>Creates a new component and registers it with the dispatcher</p>
+<p>This function is simply a convenience shortcut for
+<a href="struct.KompactSystem.html#method.create" title="associated function arc_runtime::prelude::KompactSystem::create">create</a> followed by <a href="struct.KompactSystem.html#method.register" title="associated function arc_runtime::prelude::KompactSystem::register">register</a>,
+as this combination is very common in networked Kompact systems.</p>
+<h5 id="example-2"><a href="#example-2">Example</a></h5>
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>kompact::prelude::<span class="kw-2">*</span>;
+<span class="kw">use </span>std::time::Duration;
+<span class="kw">let </span><span class="kw-2">mut </span>cfg = KompactConfig::new();
+cfg.system_components(DeadletterBox::new, {
+    <span class="kw">let </span>net_config = NetworkConfig::new(<span class="string">&quot;127.0.0.1:0&quot;</span>.parse().expect(<span class="string">&quot;Address should work&quot;</span>));
+    net_config.build()
+});
+<span class="kw">let </span>system = cfg.build().expect(<span class="string">&quot;KompactSystem&quot;</span>);
+<span class="kw">let </span>(c, registration_future) = system.create_and_register(TestComponent1::new);
+registration_future.wait_expect(Duration::from_millis(<span class="number">1000</span>), <span class="string">&quot;Failed to register TestComponent1&quot;</span>);</code></pre></div>
+</div></details><details class="toggle method-toggle" open><summary><section id="tymethod.register_by_alias" class="method"><h4 class="code-header">fn <a href="#tymethod.register_by_alias" class="fn">register_by_alias</a>&lt;A&gt;(
+    &amp;self,
+    c: &amp;dyn DynActorRefFactory,
+    alias: A
+) -&gt; KFuture&lt;<a class="enum" href="https://doc.rust-lang.org/nightly/core/result/enum.Result.html" title="enum core::result::Result">Result</a>&lt;ActorPath, RegistrationError&gt;&gt; <a href="#" class="tooltip" data-notable-ty="KFuture&lt;Result&lt;ActorPath, RegistrationError&gt;&gt;">ⓘ</a><span class="where fmt-newline">where
+    A: <a class="trait" href="https://doc.rust-lang.org/nightly/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="struct" href="https://doc.rust-lang.org/nightly/alloc/string/struct.String.html" title="struct alloc::string::String">String</a>&gt;,</span></h4></section></summary><div class="docblock"><p>Attempts to register the provided component with a human-readable alias.</p>
+<p>The returned future will contain the named <a href="ActorPath">ActorPath</a>
+for the given alias, once it is completed by the dispatcher.</p>
+<p>Alias registration will fail if a previous registration already exists.
+Use <a href="struct.KompactSystem.html#method.update_alias_registration" title="associated function arc_runtime::prelude::KompactSystem::update_alias_registration">update_alias_registration</a> to override an existing registration.</p>
+<h5 id="note"><a href="#note">Note</a></h5>
+<p>While aliases are easier to read, lookup by unique ids is significantly more efficient.
+However, named aliases allow services to be taken over by another component when the original registrant failed,
+something that is not possible with unique paths. Thus, this kind of addressing lends itself to lookup-service
+style components, for example.</p>
+<h5 id="example-3"><a href="#example-3">Example</a></h5>
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>kompact::prelude::<span class="kw-2">*</span>;
+<span class="kw">use </span>std::time::Duration;
+<span class="kw">let </span><span class="kw-2">mut </span>cfg = KompactConfig::new();
+cfg.system_components(DeadletterBox::new, {
+    <span class="kw">let </span>net_config = NetworkConfig::new(<span class="string">&quot;127.0.0.1:0&quot;</span>.parse().expect(<span class="string">&quot;Address should work&quot;</span>));
+    net_config.build()
+});
+<span class="kw">let </span>system = cfg.build().expect(<span class="string">&quot;KompactSystem&quot;</span>);
+<span class="kw">let </span>(c, unique_registration_future) = system.create_and_register(TestComponent1::new);
+unique_registration_future.wait_expect(Duration::from_millis(<span class="number">1000</span>), <span class="string">&quot;Failed to register TestComponent1&quot;</span>);
+<span class="kw">let </span>alias_registration_future = system.register_by_alias(<span class="kw-2">&amp;</span>c, <span class="string">&quot;test&quot;</span>);
+alias_registration_future.wait_expect(Duration::from_millis(<span class="number">1000</span>), <span class="string">&quot;Failed to register TestComponent1 by alias&quot;</span>);</code></pre></div>
+</div></details><details class="toggle method-toggle" open><summary><section id="tymethod.update_alias_registration" class="method"><h4 class="code-header">fn <a href="#tymethod.update_alias_registration" class="fn">update_alias_registration</a>&lt;A&gt;(
+    &amp;self,
+    c: &amp;dyn DynActorRefFactory,
+    alias: A
+) -&gt; KFuture&lt;<a class="enum" href="https://doc.rust-lang.org/nightly/core/result/enum.Result.html" title="enum core::result::Result">Result</a>&lt;ActorPath, RegistrationError&gt;&gt; <a href="#" class="tooltip" data-notable-ty="KFuture&lt;Result&lt;ActorPath, RegistrationError&gt;&gt;">ⓘ</a><span class="where fmt-newline">where
+    A: <a class="trait" href="https://doc.rust-lang.org/nightly/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="struct" href="https://doc.rust-lang.org/nightly/alloc/string/struct.String.html" title="struct alloc::string::String">String</a>&gt;,</span></h4></section></summary><div class="docblock"><p>Attempts to register the provided component with a human-readable alias.</p>
+<p>The returned future will contain the named <a href="ActorPath">ActorPath</a>
+for the given alias, once it is completed by the dispatcher.</p>
+<p>This registration will replace any previous registration, if it exists.</p>
+<h5 id="note-1"><a href="#note-1">Note</a></h5>
+<p>While aliases are easier to read, lookup by unique ids is significantly more efficient.
+However, named aliases allow services to be taken over by another component when the original registrant failed,
+something that is not possible with unique paths. Thus, this kind of addressing lends itself to lookup-service
+style components, for example.</p>
+<h5 id="example-4"><a href="#example-4">Example</a></h5>
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>kompact::prelude::<span class="kw-2">*</span>;
+<span class="kw">use </span>std::time::Duration;
+<span class="kw">let </span><span class="kw-2">mut </span>cfg = KompactConfig::new();
+cfg.system_components(DeadletterBox::new, {
+    <span class="kw">let </span>net_config = NetworkConfig::new(<span class="string">&quot;127.0.0.1:0&quot;</span>.parse().expect(<span class="string">&quot;Address should work&quot;</span>));
+    net_config.build()
+});
+<span class="kw">let </span>system = cfg.build().expect(<span class="string">&quot;KompactSystem&quot;</span>);
+<span class="kw">let </span>(c, unique_registration_future) = system.create_and_register(TestComponent1::new);
+unique_registration_future.wait_expect(Duration::from_millis(<span class="number">1000</span>), <span class="string">&quot;Failed to register TestComponent1&quot;</span>);
+<span class="kw">let </span>alias_registration_future = system.update_alias_registration(<span class="kw-2">&amp;</span>c, <span class="string">&quot;test&quot;</span>);
+alias_registration_future.wait_expect(Duration::from_millis(<span class="number">1000</span>), <span class="string">&quot;Failed to register TestComponent1 by alias&quot;</span>);
+<span class="kw">let </span>alias_reregistration_future = system.update_alias_registration(<span class="kw-2">&amp;</span>c, <span class="string">&quot;test&quot;</span>);
+alias_reregistration_future.wait_expect(Duration::from_millis(<span class="number">1000</span>), <span class="string">&quot;Failed to override TestComponent1 registration by alias&quot;</span>);</code></pre></div>
+</div></details><details class="toggle method-toggle" open><summary><section id="tymethod.set_routing_policy" class="method"><h4 class="code-header">fn <a href="#tymethod.set_routing_policy" class="fn">set_routing_policy</a>&lt;P&gt;(
+    &amp;self,
+    policy: P,
+    path: &amp;<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.str.html">str</a>,
+    update: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a>
+) -&gt; KFuture&lt;<a class="enum" href="https://doc.rust-lang.org/nightly/core/result/enum.Result.html" title="enum core::result::Result">Result</a>&lt;ActorPath, RegistrationError&gt;&gt; <a href="#" class="tooltip" data-notable-ty="KFuture&lt;Result&lt;ActorPath, RegistrationError&gt;&gt;">ⓘ</a><span class="where fmt-newline">where
+    P: <a class="trait" href="https://doc.rust-lang.org/nightly/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;StorePolicy&gt;,</span></h4></section></summary><div class="docblock"><p>Attempts to set the routing policy at <code>path</code></p>
+<p>Setting a routing policy at a path “a” will include
+all actors paths registered under paths of the form “a/…”
+to be included as members of the routing group that the policy applies to.</p>
+<p>Having an explicit routing policy at a path will cause routing over group
+members, even if no routing marker (e.g., “a/*” or “a/?” is given).</p>
+<p>Overriding an existing actor or policy at the given path will fail,
+unless <code>update</code> is set to <code>true</code>.</p>
+<p>Provided routing policies can be found in the <a href="crate::routing::groups">routing::groups</a> module.</p>
+<h5 id="example-5"><a href="#example-5">Example</a></h5>
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>kompact::prelude::<span class="kw-2">*</span>;
+<span class="kw">use </span>kompact::routing::groups::<span class="kw-2">*</span>;
+<span class="kw">use </span>std::time::Duration;
+<span class="kw">let </span><span class="kw-2">mut </span>cfg = KompactConfig::new();
+cfg.system_components(DeadletterBox::new, {
+    <span class="kw">let </span>net_config = NetworkConfig::new(<span class="string">&quot;127.0.0.1:0&quot;</span>.parse().expect(<span class="string">&quot;Address should work&quot;</span>));
+    net_config.build()
+});
+<span class="kw">let </span>system = cfg.build().expect(<span class="string">&quot;KompactSystem&quot;</span>);
+<span class="kw">let </span>policy_registration_future = system.set_routing_policy(BroadcastRouting::default(), <span class="string">&quot;broadcast-me&quot;</span>, <span class="bool-val">false</span>);
+<span class="kw">let </span>broadcast_path = policy_registration_future.wait_expect(Duration::from_millis(<span class="number">1000</span>), <span class="string">&quot;Failed to set broadcast policy&quot;</span>);
+<span class="kw">let </span>c1 = system.create(TestComponent1::new);
+<span class="kw">let </span>c2 = system.create(TestComponent1::new);
+<span class="kw">let </span>alias_registration_future1 = system.register_by_alias(<span class="kw-2">&amp;</span>c1, <span class="string">&quot;broadcast-me/test1&quot;</span>);
+<span class="kw">let </span>alias_registration_future2 = system.register_by_alias(<span class="kw-2">&amp;</span>c2, <span class="string">&quot;broadcast-me/something/test2&quot;</span>);
+alias_registration_future1.wait_expect(Duration::from_millis(<span class="number">1000</span>), <span class="string">&quot;Failed to register TestComponent1 by alias&quot;</span>);
+alias_registration_future2.wait_expect(Duration::from_millis(<span class="number">1000</span>), <span class="string">&quot;Failed to register TestComponent2 by alias&quot;</span>);
+<span class="comment">// sending to broadcast_path now will send to c1 and c2</span></code></pre></div>
+</div></details><details class="toggle method-toggle" open><summary><section id="tymethod.start" class="method"><h4 class="code-header">fn <a href="#tymethod.start" class="fn">start</a>(&amp;self, c: &amp;<a class="struct" href="struct.Arc.html" title="struct arc_runtime::prelude::Arc">Arc</a>&lt;impl AbstractComponent&gt;)</h4></section></summary><div class="docblock"><p>Start a component</p>
+<p>A component only handles events/messages once it is started.
+In particular, a component that isn’t started shouldn’t be scheduled and thus
+access to its definition should always succeed,
+for example via <a href="struct.Component.html#method.on_definition" title="associated function arc_runtime::prelude::Component::on_definition">on_definition</a>.</p>
+<h5 id="example-6"><a href="#example-6">Example</a></h5>
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">let </span>c = system.create(TestComponent1::new);
+system.start(<span class="kw-2">&amp;</span>c);</code></pre></div>
+</div></details><details class="toggle method-toggle" open><summary><section id="tymethod.start_notify" class="method"><h4 class="code-header">fn <a href="#tymethod.start_notify" class="fn">start_notify</a>(&amp;self, c: &amp;<a class="struct" href="struct.Arc.html" title="struct arc_runtime::prelude::Arc">Arc</a>&lt;impl AbstractComponent&gt;) -&gt; KFuture&lt;<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.unit.html">()</a>&gt; <a href="#" class="tooltip" data-notable-ty="KFuture&lt;()&gt;">ⓘ</a></h4></section></summary><div class="docblock"><p>Start a component and complete a future once it has started</p>
+<p>When the returned future completes, the component is guaranteed to have started.
+However, it is not guaranteed to be in an active state,
+as it could already have been stopped or could have failed since.</p>
+<p>A component only handles events/messages once it is started.
+In particular, a component that isn’t started shouldn’t be scheduled and thus
+access to its definition should always succeed,
+for example via <a href="struct.Component.html#method.on_definition" title="associated function arc_runtime::prelude::Component::on_definition">on_definition</a>.</p>
+<h5 id="example-7"><a href="#example-7">Example</a></h5>
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>std::time::Duration;
+<span class="kw">let </span>c = system.create(TestComponent1::new);
+system.start_notify(<span class="kw-2">&amp;</span>c)
+      .wait_timeout(Duration::from_millis(<span class="number">1000</span>))
+      .expect(<span class="string">&quot;TestComponent1 never started!&quot;</span>);</code></pre></div>
+</div></details><details class="toggle method-toggle" open><summary><section id="tymethod.stop" class="method"><h4 class="code-header">fn <a href="#tymethod.stop" class="fn">stop</a>(&amp;self, c: &amp;<a class="struct" href="struct.Arc.html" title="struct arc_runtime::prelude::Arc">Arc</a>&lt;impl AbstractComponent&gt;)</h4></section></summary><div class="docblock"><p>Stop a component</p>
+<p>A component does not handle any events/messages while it is stopped,
+but it does not get deallocated either. It can be started again later with
+<a href="struct.KompactSystem.html#method.start" title="associated function arc_runtime::prelude::KompactSystem::start">start</a> or <a href="struct.KompactSystem.html#method.start_notify" title="associated function arc_runtime::prelude::KompactSystem::start_notify">start_notify</a>.</p>
+<p>A component that is stopped shouldn’t be scheduled and thus
+access to its definition should always succeed,
+for example via <a href="struct.Component.html#method.on_definition" title="associated function arc_runtime::prelude::Component::on_definition">on_definition</a>.</p>
+<h5 id="example-8"><a href="#example-8">Example</a></h5>
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>std::time::Duration;
+<span class="kw">let </span>c = system.create(TestComponent1::new);
+system.start_notify(<span class="kw-2">&amp;</span>c)
+      .wait_timeout(Duration::from_millis(<span class="number">1000</span>))
+      .expect(<span class="string">&quot;TestComponent1 never started!&quot;</span>);
+system.stop(<span class="kw-2">&amp;</span>c);</code></pre></div>
+</div></details><details class="toggle method-toggle" open><summary><section id="tymethod.stop_notify" class="method"><h4 class="code-header">fn <a href="#tymethod.stop_notify" class="fn">stop_notify</a>(&amp;self, c: &amp;<a class="struct" href="struct.Arc.html" title="struct arc_runtime::prelude::Arc">Arc</a>&lt;impl AbstractComponent&gt;) -&gt; KFuture&lt;<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.unit.html">()</a>&gt; <a href="#" class="tooltip" data-notable-ty="KFuture&lt;()&gt;">ⓘ</a></h4></section></summary><div class="docblock"><p>Stop a component and complete a future once it has stopped</p>
+<p>When the returned future completes, the component is guaranteed to have stopped.
+However, it is not guaranteed to be in a passive state,
+as it could already have been started again since.</p>
+<p>A component does not handle any events/messages while it is stopped,
+but it does not get deallocated either. It can be started again later with
+<a href="struct.KompactSystem.html#method.start" title="associated function arc_runtime::prelude::KompactSystem::start">start</a> or <a href="struct.KompactSystem.html#method.start_notify" title="associated function arc_runtime::prelude::KompactSystem::start_notify">start_notify</a>.</p>
+<p>A component that is stopped shouldn’t be scheduled and thus
+access to its definition should always succeed,
+for example via <a href="struct.Component.html#method.on_definition" title="associated function arc_runtime::prelude::Component::on_definition">on_definition</a>.</p>
+<h5 id="example-9"><a href="#example-9">Example</a></h5>
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>std::time::Duration;
+<span class="kw">let </span>c = system.create(TestComponent1::new);
+system.start_notify(<span class="kw-2">&amp;</span>c)
+      .wait_timeout(Duration::from_millis(<span class="number">1000</span>))
+      .expect(<span class="string">&quot;TestComponent1 never started!&quot;</span>);
+system.stop_notify(<span class="kw-2">&amp;</span>c)
+      .wait_timeout(Duration::from_millis(<span class="number">1000</span>))
+      .expect(<span class="string">&quot;TestComponent1 never stopped!&quot;</span>);
+system.start_notify(<span class="kw-2">&amp;</span>c)
+      .wait_timeout(Duration::from_millis(<span class="number">1000</span>))
+      .expect(<span class="string">&quot;TestComponent1 never re-started!&quot;</span>);</code></pre></div>
+</div></details><details class="toggle method-toggle" open><summary><section id="tymethod.kill" class="method"><h4 class="code-header">fn <a href="#tymethod.kill" class="fn">kill</a>(&amp;self, c: <a class="struct" href="struct.Arc.html" title="struct arc_runtime::prelude::Arc">Arc</a>&lt;impl AbstractComponent&gt;)</h4></section></summary><div class="docblock"><p>Stop and deallocate a component</p>
+<p>The supervisor will attempt to deallocate <code>c</code> once it is stopped.
+However, if there are still outstanding references somewhere else in the system
+this will fail, of course. In that case the supervisor leaves a debug message
+in the logging output, so that this circumstance can be discovered if necessary.</p>
+<h5 id="example-10"><a href="#example-10">Example</a></h5>
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>std::time::Duration;
+<span class="kw">let </span>c = system.create(TestComponent1::new);
+system.start_notify(<span class="kw-2">&amp;</span>c)
+      .wait_timeout(Duration::from_millis(<span class="number">1000</span>))
+      .expect(<span class="string">&quot;TestComponent1 never started!&quot;</span>);
+system.kill(c);</code></pre></div>
+</div></details><details class="toggle method-toggle" open><summary><section id="tymethod.kill_notify" class="method"><h4 class="code-header">fn <a href="#tymethod.kill_notify" class="fn">kill_notify</a>(&amp;self, c: <a class="struct" href="struct.Arc.html" title="struct arc_runtime::prelude::Arc">Arc</a>&lt;impl AbstractComponent&gt;) -&gt; KFuture&lt;<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.unit.html">()</a>&gt; <a href="#" class="tooltip" data-notable-ty="KFuture&lt;()&gt;">ⓘ</a></h4></section></summary><div class="docblock"><p>Stop and deallocate a component, and complete a future once it has stopped</p>
+<p>The supervisor will attempt to deallocate <code>c</code> once it is stopped.
+However, if there are still outstanding references somewhere else in the system
+this will fail, of course. In that case the supervisor leaves a debug message
+in the logging output, so that this circumstance can be discovered if necessary.</p>
+<h5 id="note-2"><a href="#note-2">Note</a></h5>
+<p>The completion of the future indicates that the component has been stopped,
+<em>not</em> that it has been deallocated.</p>
+<p>If, for some reason, you really need to know when it has been deallocated,
+you need to hold on to a copy of the component, use <a href="struct.Arc.html#method.try_unwrap" title="associated function arc_runtime::prelude::Arc::try_unwrap">try_unwrap</a>
+and then call <code>drop</code> once you are successful.</p>
+<h5 id="example-11"><a href="#example-11">Example</a></h5>
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>std::time::Duration;
+<span class="kw">let </span>c = system.create(TestComponent1::new);
+system.start_notify(<span class="kw-2">&amp;</span>c)
+      .wait_timeout(Duration::from_millis(<span class="number">1000</span>))
+      .expect(<span class="string">&quot;TestComponent1 never started!&quot;</span>);
+system.kill_notify(c)
+      .wait_timeout(Duration::from_millis(<span class="number">1000</span>))
+      .expect(<span class="string">&quot;TestComponent1 never stopped!&quot;</span>);</code></pre></div>
+</div></details><details class="toggle method-toggle" open><summary><section id="tymethod.throughput" class="method"><h4 class="code-header">fn <a href="#tymethod.throughput" class="fn">throughput</a>(&amp;self) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.usize.html">usize</a></h4></section></summary><div class="docblock"><p>Return the configured thoughput value</p>
+<p>See also <a href="struct.KompactConfig.html#method.throughput" title="associated function arc_runtime::prelude::KompactConfig::throughput">throughput</a>.</p>
+</div></details><details class="toggle method-toggle" open><summary><section id="tymethod.max_messages" class="method"><h4 class="code-header">fn <a href="#tymethod.max_messages" class="fn">max_messages</a>(&amp;self) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.usize.html">usize</a></h4></section></summary><div class="docblock"><p>Return the configured maximum number of messages per scheduling</p>
+<p>This value is based on <a href="struct.KompactConfig.html#method.throughput" title="associated function arc_runtime::prelude::KompactConfig::throughput">throughput</a>
+and <a href="struct.KompactConfig.html#method.msg_priority" title="associated function arc_runtime::prelude::KompactConfig::msg_priority">msg_priority</a>.</p>
+</div></details><details class="toggle method-toggle" open><summary><section id="tymethod.shutdown_async" class="method"><h4 class="code-header">fn <a href="#tymethod.shutdown_async" class="fn">shutdown_async</a>(&amp;self)</h4></section></summary><div class="docblock"><p>Shutdown the Kompact system from within a component</p>
+<p>Stops all components and then stops the scheduler.</p>
+<p>This function may fail to stop in time (or at all),
+if components hang on to scheduler threads indefinitely.</p>
+<h5 id="example-12"><a href="#example-12">Example</a></h5>
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>kompact::prelude::<span class="kw-2">*</span>;
+
+<span class="attr">#[derive(ComponentDefinition, Actor)]
+</span><span class="kw">struct </span>Stopper {
+   ctx: ComponentContext&lt;<span class="self">Self</span>&gt;,
+}
+<span class="kw">impl </span>Stopper {
+    <span class="kw">fn </span>new() -&gt; Stopper {
+        Stopper {
+            ctx: ComponentContext::uninitialised(),
+        }
+    }    
+}
+<span class="kw">impl </span>ComponentLifecycle <span class="kw">for </span>Stopper {
+   <span class="kw">fn </span>on_start(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; Handled {
+       <span class="self">self</span>.ctx().system().shutdown_async();
+       Handled::Ok
+    }
+}
+<span class="kw">let </span>system = KompactConfig::default().build().expect(<span class="string">&quot;system&quot;</span>);
+<span class="kw">let </span>c = system.create(Stopper::new);
+system.start(<span class="kw-2">&amp;</span>c);
+system.await_termination();</code></pre></div>
+</div></details><details class="toggle method-toggle" open><summary><section id="tymethod.system_path" class="method"><h4 class="code-header">fn <a href="#tymethod.system_path" class="fn">system_path</a>(&amp;self) -&gt; SystemPath</h4></section></summary><div class="docblock"><p>Return the system path of this Kompact system</p>
+<p>The system path forms a prefix for every <a href="prelude::ActorPath">ActorPath</a>.</p>
+</div></details><details class="toggle method-toggle" open><summary><section id="tymethod.deadletter_ref" class="method"><h4 class="code-header">fn <a href="#tymethod.deadletter_ref" class="fn">deadletter_ref</a>(&amp;self) -&gt; ActorRef&lt;<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.never.html">!</a>&gt;</h4></section></summary><div class="docblock"><p>Returns a reference to the system’s deadletter box</p>
+</div></details><details class="toggle method-toggle" open><summary><section id="tymethod.spawn" class="method"><h4 class="code-header">fn <a href="#tymethod.spawn" class="fn">spawn</a>&lt;R&gt;(
+    &amp;self,
+    future: impl <a class="trait" href="trait.Future.html" title="trait arc_runtime::prelude::Future">Future</a>&lt;Output = R&gt; + <a class="trait" href="https://doc.rust-lang.org/nightly/core/marker/trait.Send.html" title="trait core::marker::Send">Send</a> + 'static
+) -&gt; Receiver&lt;R&gt; <a href="#" class="tooltip" data-notable-ty="Receiver&lt;R&gt;">ⓘ</a><span class="where fmt-newline">where
+    R: <a class="trait" href="https://doc.rust-lang.org/nightly/core/marker/trait.Send.html" title="trait core::marker::Send">Send</a> + 'static,</span></h4></section></summary><div class="docblock"><p>Run a Future on this system’s executor pool and return a handle to the result</p>
+<p>Handles can be awaited like any other future.</p>
+</div></details></div><h2 id="implementors" class="small-section-header">Implementors<a href="#implementors" class="anchor">§</a></h2><div id="implementors-list"><section id="impl-SystemHandle-for-ContextSystemHandle" class="impl"><a href="#impl-SystemHandle-for-ContextSystemHandle" class="anchor">§</a><h3 class="code-header">impl <a class="trait" href="trait.SystemHandle.html" title="trait arc_runtime::prelude::SystemHandle">SystemHandle</a> for ContextSystemHandle</h3></section></div><script src="../../implementors/kompact/runtime/system/trait.SystemHandle.js" data-ignore-extern-crates="kompact" async></script><script type="text/json" id="notable-traits-data">{"KFuture<()>":"<h3>Notable traits for <code>KFuture&lt;T&gt;</code></h3><pre><code><span class=\"where fmt-newline\">impl&lt;T&gt; <a class=\"trait\" href=\"trait.Future.html\" title=\"trait arc_runtime::prelude::Future\">Future</a> for KFuture&lt;T&gt;<span class=\"where fmt-newline\">where\n    T: <a class=\"trait\" href=\"https://doc.rust-lang.org/nightly/core/marker/trait.Send.html\" title=\"trait core::marker::Send\">Send</a>,</span></span><span class=\"where fmt-newline\">    type <a href=\"trait.Future.html#associatedtype.Output\" class=\"associatedtype\">Output</a> = <a class=\"enum\" href=\"https://doc.rust-lang.org/nightly/core/result/enum.Result.html\" title=\"enum core::result::Result\">Result</a>&lt;T, PromiseDropped&gt;;</span>","KFuture<Result<ActorPath, RegistrationError>>":"<h3>Notable traits for <code>KFuture&lt;T&gt;</code></h3><pre><code><span class=\"where fmt-newline\">impl&lt;T&gt; <a class=\"trait\" href=\"trait.Future.html\" title=\"trait arc_runtime::prelude::Future\">Future</a> for KFuture&lt;T&gt;<span class=\"where fmt-newline\">where\n    T: <a class=\"trait\" href=\"https://doc.rust-lang.org/nightly/core/marker/trait.Send.html\" title=\"trait core::marker::Send\">Send</a>,</span></span><span class=\"where fmt-newline\">    type <a href=\"trait.Future.html#associatedtype.Output\" class=\"associatedtype\">Output</a> = <a class=\"enum\" href=\"https://doc.rust-lang.org/nightly/core/result/enum.Result.html\" title=\"enum core::result::Result\">Result</a>&lt;T, PromiseDropped&gt;;</span>","Receiver<R>":"<h3>Notable traits for <code>Receiver&lt;T&gt;</code></h3><pre><code><span class=\"where fmt-newline\">impl&lt;T&gt; <a class=\"trait\" href=\"trait.Future.html\" title=\"trait arc_runtime::prelude::Future\">Future</a> for Receiver&lt;T&gt;</span><span class=\"where fmt-newline\">    type <a href=\"trait.Future.html#associatedtype.Output\" class=\"associatedtype\">Output</a> = <a class=\"enum\" href=\"https://doc.rust-lang.org/nightly/core/result/enum.Result.html\" title=\"enum core::result::Result\">Result</a>&lt;T, Canceled&gt;;</span>"}</script></section></div></main><div id="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="arc_runtime" data-themes="" data-resource-suffix="" data-rustdoc-version="1.69.0-nightly (5243ea5c2 2023-02-20)" data-search-js="search-14421e1532aead08.js" data-settings-js="settings-f0c5c39777a9a2f6.js" data-settings-css="settings-0bcba95ff279c1db.css" ></div></body></html>

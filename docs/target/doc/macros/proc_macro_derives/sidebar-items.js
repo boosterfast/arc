@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"fn":["derive_abstract","derive_alloc","derive_collectable","derive_finalize","derive_garbage","derive_nodebug","derive_noserde","derive_notrace","derive_send","derive_sync","derive_trace","derive_unpin"]};

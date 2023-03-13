@@ -1,0 +1,4 @@
+(function() {var implementors = {
+"arc_runtime":[["impl <a class=\"trait\" href=\"https://doc.rust-lang.org/nightly/core/default/trait.Default.html\" title=\"trait core::default::Default\">Default</a> for <a class=\"struct\" href=\"arc_runtime/runtime/struct.Runtime.html\" title=\"struct arc_runtime::runtime::Runtime\">Runtime</a>"]],
+"macros":[["impl <a class=\"trait\" href=\"https://doc.rust-lang.org/nightly/core/default/trait.Default.html\" title=\"trait core::default::Default\">Default</a> for <a class=\"struct\" href=\"macros/proc_macro_attrs/rewrite/functions/struct.Visitor.html\" title=\"struct macros::proc_macro_attrs::rewrite::functions::Visitor\">Visitor</a>"]]
+};if (window.register_implementors) {window.register_implementors(implementors);} else {window.pending_implementors = implementors;}})()

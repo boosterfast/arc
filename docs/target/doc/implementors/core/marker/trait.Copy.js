@@ -1,0 +1,4 @@
+(function() {var implementors = {
+"arc_runtime":[["impl <a class=\"trait\" href=\"https://doc.rust-lang.org/nightly/core/marker/trait.Copy.html\" title=\"trait core::marker::Copy\">Copy</a> for <a class=\"struct\" href=\"arc_runtime/context/struct.Context.html\" title=\"struct arc_runtime::context::Context\">Context</a>"]],
+"macros":[["impl <a class=\"trait\" href=\"https://doc.rust-lang.org/nightly/core/marker/trait.Copy.html\" title=\"trait core::marker::Copy\">Copy</a> for <a class=\"enum\" href=\"macros/proc_macro_attrs/rewrite/functions/enum.MemKind.html\" title=\"enum macros::proc_macro_attrs::rewrite::functions::MemKind\">MemKind</a>"]]
+};if (window.register_implementors) {window.register_implementors(implementors);} else {window.pending_implementors = implementors;}})()

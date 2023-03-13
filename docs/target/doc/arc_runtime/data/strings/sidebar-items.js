@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"fn":["String_clear","String_concat","String_eq","String_from_i32","String_from_str","String_insert_char","String_is_empty","String_len","String_new","String_push_char","String_push_str","String_remove","String_split_off","String_with_capacity"],"mod":["sendable","sharable"]};

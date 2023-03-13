@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"enum":["MemKind"],"fn":["get_path_ident","is_primitive","rewrite"],"struct":["Visitor"]};

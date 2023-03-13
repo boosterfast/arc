@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"macro":["_vector","access","convert_reflexive","declare","declare_functions","function","letroot","val"],"mod":["context","control","data","macros","operators","prelude","runtime","task"]};
